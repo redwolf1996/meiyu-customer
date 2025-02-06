@@ -1,0 +1,76 @@
+:root,
+page {
+  background-color: #f6f6fd;
+  --wot-input-icon-margin: 5px;
+  --wot-input-icon-color: rgba(0, 0, 0, 0.25);
+  --wot-button-primary-bg-color: #1a66ff;
+  --wot-upload-size: 120rpx;
+  --wot-size-side-padding: 20px;
+  --wot-search-side-padding: 32rpx;
+  --wot-search-input-radius: 4px;
+  --wot-steps-dot-size: 16px;
+  --wot-steps-line-color: #e5e5e5;
+}
+view,
+text {
+  box-sizing: border-box;
+}
+.wd-picker.is-border .wd-picker__cell::after {
+  width: calc(100% - 80rpx) !important;
+}
+.wd-input.is-cell.is-border::after {
+  width: calc(100% - 80rpx) !important;
+  left: 40rpx !important;
+}
+.wd-cell.is-border .wd-cell__wrapper::after {
+  width: calc(100% - 40rpx) !important;
+}
+.wd-navbar__title {
+  max-width: 100% !important;
+}
+.wd-input__placeholder {
+  color: #b6bdbd !important;
+}
+.wd-button.is-large {
+  border-radius: 0 !important;
+}
+.wd-button.is-disabled {
+  background: #d5d5d5 !important;
+}
+.wd-calendar__value{
+  text-align: right;
+}
+.wd-form {
+  .wd-input__inner {
+    text-align: right !important;
+  }
+  .wd-cell__left {
+    flex: none !important;
+  }
+  .wd-cell__left,
+  .wd-input__label,
+  .wd-calendar__label,
+  .wd-select-picker__label,
+  .wd-picker__label {
+    padding-left: 0px !important;
+    // min-width: 20% !important;
+    // max-width: 20% !important;
+  }
+  .wd-calendar__label.is-required::after,
+  .wd-cell__left.is-required::after,
+  .wd-input__label.is-required::after,
+  .wd-select-picker__label.is-required::after,
+  .wd-picker__label.is-required::after {
+    position: relative !important;
+    left: 4px !important;
+    top: 3px !important;
+  }
+  .wd-input__label-inner,
+  .wd-picker__label-inner {
+    color: #303030;
+  }
+}
+
+.wd-sidebar-item {
+  display: block !important;
+}

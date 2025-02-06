@@ -1,0 +1,625 @@
+{
+  "pages": [
+    {
+      "path": "pages/index",
+      "type": "home",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationStyle": "default",
+    "navigationBarTitleText": "my-booking",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFFFFF"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+    }
+  },
+  "preloadRule": {
+    "pages/index": {
+      "network": "all",
+      "packages": [
+        "pagesA",
+        "pagesB"
+      ]
+    }
+  },
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        {
+          "path": "cats",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "选择分类"
+          }
+        },
+        {
+          "path": "prod-servs",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "选择服务和产品"
+          }
+        },
+        {
+          "path": "protocol",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "协议"
+          }
+        },
+        {
+          "path": "rich-edit",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "编辑说明"
+          }
+        },
+        {
+          "path": "billing/index",
+          "type": "page",
+          "layout": false,
+          "style": {
+            "navigationBarTitleText": "开单"
+          }
+        },
+        {
+          "path": "billing/pay-success",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "支付结果"
+          }
+        },
+        {
+          "path": "billing/pay",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "支付"
+          }
+        },
+        {
+          "path": "billing/select-card-billing",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "选择卡项"
+          }
+        },
+        {
+          "path": "book/add",
+          "type": "page",
+          "layout": false,
+          "style": {
+            "navigationBarTitleText": "添加预约"
+          }
+        },
+        {
+          "path": "book/detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "预约详情"
+          },
+          "layout": false
+        },
+        {
+          "path": "book/servs",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "选择服务"
+          }
+        },
+        {
+          "path": "book/submit",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "预约服务"
+          }
+        },
+        {
+          "path": "book/time",
+          "type": "page",
+          "layout": "common",
+          "style": {
+            "navigationBarTitleText": "预约时间"
+          }
+        },
+        {
+          "path": "booking/d2dTime",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "上门服务时间"
+          }
+        },
+        {
+          "path": "booking/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "预约管理"
+          }
+        },
+        {
+          "path": "booking/storeTime",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "门店营业时间"
+          }
+        },
+        {
+          "path": "card/card-add-chongzhika",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加充值卡"
+          }
+        },
+        {
+          "path": "card/card-add-cika",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加次卡"
+          }
+        },
+        {
+          "path": "card/card-add-zhekouka",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加折扣卡"
+          }
+        },
+        {
+          "path": "card/cus-detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "会员购卡详情"
+          }
+        },
+        {
+          "path": "card/cus-list",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "会员购卡列表"
+          }
+        },
+        {
+          "path": "card/detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "查看详情"
+          }
+        },
+        {
+          "path": "card/list",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "卡项管理"
+          }
+        },
+        {
+          "path": "card/make",
+          "type": "page",
+          "layout": false,
+          "style": {
+            "navigationBarTitleText": "开卡充值"
+          }
+        },
+        {
+          "path": "card/select-card-common",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "选择卡项"
+          }
+        },
+        {
+          "path": "customer/add",
+          "type": "page",
+          "layout": "common",
+          "style": {
+            "navigationBarTitleText": "添加客户"
+          }
+        },
+        {
+          "path": "customer/detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "客户详情"
+          }
+        },
+        {
+          "path": "customer/list",
+          "type": "page",
+          "layout": "common",
+          "style": {
+            "navigationBarTitleText": "选择或添加客户"
+          }
+        },
+        {
+          "path": "customer/points",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "积分账单"
+          }
+        },
+        {
+          "path": "dashboard/cash-apply",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "提现申请"
+          }
+        },
+        {
+          "path": "dashboard/cashing-records",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "提现记录"
+          }
+        },
+        {
+          "path": "dashboard/income-detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "收支明细"
+          }
+        },
+        {
+          "path": "dashboard/pay-ways",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "支付管理"
+          }
+        },
+        {
+          "path": "dashboard/store",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "店务管理"
+          }
+        },
+        {
+          "path": "dashboard/wallet",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "我的钱包"
+          }
+        },
+        {
+          "path": "login/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "登录-商家端"
+          }
+        },
+        {
+          "path": "login/info",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "完善登录信息"
+          }
+        },
+        {
+          "path": "login/role-select",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "角色选择"
+          }
+        },
+        {
+          "path": "msg/detail-expire",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "会员到期提醒"
+          }
+        },
+        {
+          "path": "msg/detail-renew",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "续费消息"
+          }
+        },
+        {
+          "path": "msg/list",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "消息"
+          }
+        },
+        {
+          "path": "my/about",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "关于我们"
+          }
+        },
+        {
+          "path": "my/feedback",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "意见反馈"
+          }
+        },
+        {
+          "path": "my/invite",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "邀请朋友",
+            "navigationBarBackgroundColor": "#fff9e6"
+          }
+        },
+        {
+          "path": "my/my-invite",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "我的邀请"
+          }
+        },
+        {
+          "path": "my/new-store",
+          "type": "page",
+          "layout": "common",
+          "style": {
+            "navigationBarTitleText": "我要开新店"
+          }
+        },
+        {
+          "path": "my/protocal",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "隐私协议"
+          }
+        },
+        {
+          "path": "my/qiwei",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "企业微信"
+          }
+        },
+        {
+          "path": "my/renew",
+          "type": "page",
+          "layout": "common",
+          "style": {
+            "navigationBarTitleText": "会员续费"
+          }
+        },
+        {
+          "path": "my/service",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "联系客服"
+          }
+        },
+        {
+          "path": "my/settings",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "设置"
+          }
+        },
+        {
+          "path": "my/store",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "门店信息"
+          }
+        },
+        {
+          "path": "order/detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "订单详情"
+          }
+        },
+        {
+          "path": "order/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "订单列表"
+          }
+        },
+        {
+          "path": "order/refund-detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "退款详情"
+          }
+        },
+        {
+          "path": "order/refund",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "主动退款"
+          }
+        },
+        {
+          "path": "product/add",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加产品"
+          }
+        },
+        {
+          "path": "product/list",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "产品管理"
+          }
+        },
+        {
+          "path": "service/add",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加服务"
+          }
+        },
+        {
+          "path": "service/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "服务管理"
+          }
+        },
+        {
+          "path": "staff/add",
+          "type": "page",
+          "layout": "common",
+          "style": {
+            "navigationBarTitleText": "添加员工"
+          }
+        },
+        {
+          "path": "staff/detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "员工详情"
+          }
+        },
+        {
+          "path": "staff/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "员工列表"
+          }
+        },
+        {
+          "path": "staff/work-time",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "工作时间"
+          }
+        },
+        {
+          "path": "tabs/MyTabBar",
+          "type": "page"
+        },
+        {
+          "path": "tabs/tab-business-book",
+          "type": "page",
+          "layout": false,
+          "style": {
+            "navigationBarTitleText": "预约看板",
+            "navigationStyle": "custom",
+            "disableScroll": true
+          }
+        },
+        {
+          "path": "tabs/tab-business-customer",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "客户",
+            "navigationBarBackgroundColor": "#ffffff",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "tabs/tab-business-dashboard",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "工作台",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "tabs/tab-business-my",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "我的",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/done",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "完成基础设置"
+          }
+        },
+        {
+          "path": "init/steps/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "欢迎来到美预预约"
+          }
+        },
+        {
+          "path": "init/steps/step1",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加店铺信息"
+          }
+        },
+        {
+          "path": "init/steps/step2",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加服务",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/step3-1",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加次卡",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/step3-2",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "折扣卡",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/step3-3",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "充值卡",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/step3",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加卡项",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/step4",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加产品",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "init/steps/step5",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加员工",
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pagesB",
+      "pages": [
+        {
+          "path": "index",
+          "type": "page"
+        }
+      ]
+    }
+  ]
+}
