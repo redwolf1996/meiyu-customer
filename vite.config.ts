@@ -58,6 +58,6 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 7788,
+    port: 80,
   },
 })

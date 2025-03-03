@@ -47,10 +47,5 @@
   "uniStatistics": {
     "enable": false
   },
-  "vueVersion": "3",
-  "h5": {
-    "router": {
-      "base": "/myh5/"
-    }
-  }
+  "vueVersion": "3"
 }
