@@ -60,8 +60,8 @@ function showCityPicker() {
 
 function getCurrentLocation() {
   // 获取当前位置并定位到当前城市
-  uni.getLocation({
-    type: 'gcj02',
+  wx.getLocation({
+    type: 'wgs84',
     success: (res) => {
       // 根据经纬度获取城市信息
       reverseGeocode(res.longitude, res.latitude)

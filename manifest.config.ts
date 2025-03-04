@@ -23,5 +23,10 @@ export default defineManifestConfig({
   'uniStatistics': {
     enable: false,
   },
+  'permission': {
+    'scope.userLocation': {
+      desc: '你的位置信息将用于小程序中位置接口的效果展示',
+    },
+  },
   'vueVersion': '3',
 })

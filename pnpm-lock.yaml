@@ -83,6 +83,9 @@ importers:
       vue-i18n:
         specifier: ^9.13.1
         version: 9.14.0(vue@3.4.38(typescript@5.5.4))
+      weixin-js-sdk:
+        specifier: ^1.6.5
+        version: 1.6.5
       wot-design-uni:
         specifier: ^1.5.1
         version: 1.5.1(vue@3.4.38(typescript@5.5.4))
@@ -5649,6 +5652,9 @@ packages:
 
   webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
+
+  weixin-js-sdk@1.6.5:
+    resolution: {integrity: sha512-Gph1WAWB2YN/lMOFB/ymb+hbU/wYazzJgu6PMMktCy9cSCeW5wA6Zwt0dpahJbJ+RJEwtTv2x9iIu0U4enuVSQ==}
 
   whatwg-encoding@1.0.5:
     resolution: {integrity: sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==}
@@ -12607,6 +12613,8 @@ snapshots:
   webpack-sources@3.2.3: {}
 
   webpack-virtual-modules@0.6.2: {}
+
+  weixin-js-sdk@1.6.5: {}
 
   whatwg-encoding@1.0.5:
     dependencies:

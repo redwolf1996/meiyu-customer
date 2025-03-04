@@ -47,5 +47,10 @@
   "uniStatistics": {
     "enable": false
   },
-  "vueVersion": "3"
+  "vueVersion": "3",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序中位置接口的效果展示"
+    }
+  }
 }
