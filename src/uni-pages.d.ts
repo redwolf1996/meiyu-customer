@@ -5,6 +5,9 @@
 
 interface NavigateToOptions {
   url: "/pages/index" |
+       "/pages/login/index" |
+       "/pages/login/info" |
+       "/pages/store-list/index" |
        "/pagesA/cats" |
        "/pagesA/prod-servs" |
        "/pagesA/protocol" |

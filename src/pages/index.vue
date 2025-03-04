@@ -13,11 +13,11 @@ else {
 }
 
 function toBusinessDashboard() {
-  uni.reLaunch({ url: '/pagesA/tabs/tab-business-dashboard' })
+  uni.reLaunch({ url: '/pages/store-list/index' })
 }
 
 function toBusinessLogin() {
-  uni.navigateTo({ url: '/pagesA/login/index' })
+  uni.navigateTo({ url: '/pages/login/index' })
 }
 </script>
 

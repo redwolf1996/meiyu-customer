@@ -6,6 +6,27 @@
       "style": {
         "navigationBarTitleText": "首页"
       }
+    },
+    {
+      "path": "pages/login/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "登录-商家端"
+      }
+    },
+    {
+      "path": "pages/login/info",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "完善登录信息"
+      }
+    },
+    {
+      "path": "pages/store-list/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "选择门店"
+      }
     }
   ],
   "globalStyle": {
