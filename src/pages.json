@@ -22,8 +22,35 @@
       }
     },
     {
-      "path": "pages/my/index",
-      "type": "page"
+      "path": "pages/my/bookings",
+      "type": "page",
+      "layout": false,
+      "style": {
+        "navigationBarTitleText": "预约列表",
+        "navigationStyle": "custom",
+        "disableScroll": true
+      }
+    },
+    {
+      "path": "pages/my/cards",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "会员购卡列表"
+      }
+    },
+    {
+      "path": "pages/my/orders",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "订单列表"
+      }
+    },
+    {
+      "path": "pages/my/points",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "积分账单"
+      }
     },
     {
       "path": "pages/servs/add",
