@@ -10,11 +10,11 @@ const role = ref<'business' | 'staff'>('business')
 const form = reactive<{
   userName: string
   phone: string
-  othersInviteCode: string
+  // othersInviteCode: string
 }>({
   userName: '',
   phone: '',
-  othersInviteCode: '',
+  // othersInviteCode: '',
 })
 
 onLoad((payload) => {
@@ -27,7 +27,7 @@ function handleSubmit() {
     .validate()
     .then(async ({ valid }) => {
       if (valid) {
-        const url = role.value === 'business' ? '/business/info' : '/business/staff-info'
+        const url = '/customer/info'
         const res = await request.post<{ token: string, isRegister: 0 | 1 }>(url, form)
         const { token, isRegister } = res.data
         useUserStore().setUserInfo({ token, isRegister })
@@ -63,13 +63,13 @@ function handleSubmit() {
         :maxlength="11"
         :rules="[{ required: true, message: '请填写手机号' }]"
       />
-      <wd-input
+      <!-- <wd-input
         v-model="form.othersInviteCode"
         label="邀请码"
         :maxlength="11"
         suffix-icon="arrow-right"
         placeholder="请输入"
-      />
+      /> -->
     </wd-cell-group>
     <view px-20px pt-80px>
       <view f14 color-F7CD24>
@@ -78,12 +78,12 @@ function handleSubmit() {
       <view pt-10px f12 color-333>
         <text fb>
           姓名：
-        </text>如果您是服务者，请填写客户熟知的姓名，方便客户预约时指定您的服务
+        </text>建议填写商家熟知的姓名，方便商家进行服务
       </view>
       <view pt-10px f12 color-333>
         <text fb>
           手机号：
-        </text>请填写真实手机号，方便客户联系到你
+        </text>请填写真实手机号，方便商家联系到你
       </view>
     </view>
     <view p-20px>

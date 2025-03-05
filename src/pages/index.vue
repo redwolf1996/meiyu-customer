@@ -13,7 +13,7 @@ else {
 }
 
 function toBusinessDashboard() {
-  uni.reLaunch({ url: '/pages/store-list/index' })
+  uni.reLaunch({ url: '/pages/tabs/home' })
 }
 
 function toBusinessLogin() {

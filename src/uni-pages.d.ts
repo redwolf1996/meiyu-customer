@@ -7,7 +7,13 @@ interface NavigateToOptions {
   url: "/pages/index" |
        "/pages/login/index" |
        "/pages/login/info" |
-       "/pages/store-list/index" |
+       "/pages/my/index" |
+       "/pages/servs/add" |
+       "/pages/servs/index" |
+       "/pages/servs/time" |
+       "/pages/tabs/MyTabBar" |
+       "/pages/tabs/tab-home" |
+       "/pages/tabs/tab-my" |
        "/pagesA/cats" |
        "/pagesA/prod-servs" |
        "/pagesA/protocol" |

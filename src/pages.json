@@ -22,10 +22,49 @@
       }
     },
     {
-      "path": "pages/store-list/index",
+      "path": "pages/my/index",
+      "type": "page"
+    },
+    {
+      "path": "pages/servs/add",
+      "type": "page",
+      "layout": false,
+      "style": {
+        "navigationBarTitleText": "添加预约"
+      }
+    },
+    {
+      "path": "pages/servs/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "选择服务"
+      }
+    },
+    {
+      "path": "pages/servs/time",
+      "type": "page",
+      "layout": "common",
+      "style": {
+        "navigationBarTitleText": "预约时间"
+      }
+    },
+    {
+      "path": "pages/tabs/MyTabBar",
+      "type": "page"
+    },
+    {
+      "path": "pages/tabs/tab-home",
       "type": "page",
       "style": {
         "navigationBarTitleText": "选择门店"
+      }
+    },
+    {
+      "path": "pages/tabs/tab-my",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
       }
     }
   ],
