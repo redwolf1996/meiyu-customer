@@ -690,7 +690,7 @@ function confirm() {
   <MyTabBar :tab-index="1" />
 </template>
 
-  <style>
+<style>
   page {
   overflow-y: hidden !important;
 }
