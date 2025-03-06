@@ -99,30 +99,6 @@ async function getCountsAll() {
 </script>
 
 <template>
-  <view id="head">
-    <view bg-white h-20rpx />
-    <view flex flex-ac flex-cc gap-100rpx flex-rd f12 h-54rpx lh-54rpx bg-white class="status">
-      <view flex flex-ac>
-        <MySquare color="#FFCBE2" />
-        <text lh-24rpx pl-8rpx>
-          待服务({{ countInfo.wait }})
-        </text>
-      </view>
-      <view flex flex-ac>
-        <MySquare color="#FEE7D7" />
-        <text lh-24rpx pl-8rpx>
-          服务中({{ countInfo.underway }})
-        </text>
-      </view>
-      <view flex flex-ac>
-        <MySquare color="#D4D4D6" />
-        <text lh-24rpx pl-8rpx>
-          已完成({{ countInfo.finish }})
-        </text>
-      </view>
-    </view>
-  </view>
-
   <z-paging
     ref="paging"
     v-model="dataList"
