@@ -1,8 +1,9 @@
+import { useCustomerStore } from '@/stores/modules/customer'
+
 const baseUrl = import.meta.env.VITE_BASE_URL
 const envVersion = import.meta.env.VITE_ENV_VERSION
-const userStore = useUserStore()
+const customerStore = useCustomerStore()
 
-// const accountInfo = uni.getAccountInfoSync()
 const httpInterceptor = {
   invoke(options: UniApp.RequestOptions) {
     const urls = [
@@ -17,10 +18,9 @@ const httpInterceptor = {
       ...options?.header,
       'client': 'minapp',
       'envVersion': envVersion,
-      'B-Store-Id': storeId.value,
+      'B-Store-Id': customerStore.customerInfo?.storeId,
     }
-    console.log(options.header.envVersion)
-    const token = userStore.userInfo?.token
+    const token = customerStore.customerInfo?.token
     if (token) {
       options.header.Authorization = token
     }
@@ -44,7 +44,7 @@ export function http<T>(options: UniApp.RequestOptions) {
         if (statusCode >= 200 && statusCode < 300) {
           const data = res.data as Data<T>
           if (data.code === 20001) {
-            userStore.clearUserInfo()
+            customerStore.clearCustomerInfo()
             uni.navigateTo({ url: '/pagesA/login/index' })
             return reject(res)
           }

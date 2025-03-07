@@ -59,6 +59,9 @@ importers:
       '@vant/area-data':
         specifier: ^1.5.2
         version: 1.5.2
+      '@wtto00/jweixin-esm':
+        specifier: 1.6.0-5
+        version: 1.6.0-5
       big.js:
         specifier: ^6.2.2
         version: 6.2.2
@@ -2544,6 +2547,9 @@ packages:
 
   '@vue/tsconfig@0.5.1':
     resolution: {integrity: sha512-VcZK7MvpjuTPx2w6blwnwZAu5/LgBUtejFOi3pPGQFXQN5Ela03FUtd2Qtg4yWGGissVL0dr6Ro1LfOFh+PCuQ==}
+
+  '@wtto00/jweixin-esm@1.6.0-5':
+    resolution: {integrity: sha512-HE9snjv5ImRw9+QqHe8X5KxG0RFXhZ4Yf4ScFkB7vv8nR8By0MiHmjPlIBt8P/u0RMtlCBBjoMx+FbbAd2Bjow==}
 
   abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
@@ -9067,6 +9073,8 @@ snapshots:
   '@vue/shared@3.4.38': {}
 
   '@vue/tsconfig@0.5.1': {}
+
+  '@wtto00/jweixin-esm@1.6.0-5': {}
 
   abab@2.0.6: {}
 

@@ -4,7 +4,31 @@ style:
 </route>
 
 <script lang="ts" setup>
+import weixin from '@wtto00/jweixin-esm'
+// import '@wtto00/jweixin-esm'
 import { onMounted, ref } from 'vue'
+
+onLoad(() => {
+  console.log(weixin) // 导入的名称
+  console.log(window.wx) // wx已挂载全局window
+  console.log(window.jWeixin) // jWeixin已挂载全局window
+  const configData: WX.ConfigOptions = {
+    debug: true,
+    appId: 'wx4523c84aefbd91d2',
+    timestamp: '',
+    nonceStr: '',
+    signature: '',
+    jsApiList: ['getLocation'], // WX.JsApi[]
+    openTagList: [], // WX.OpenTag[]
+  }
+  weixin.config(configData)
+  weixin.ready(() => {
+    console.log('ready')
+  })
+  weixin.error((err) => {
+    console.log('error', err)
+  })
+})
 
 interface StoreInfo {
   name: string
@@ -47,7 +71,7 @@ const storeList = ref<StoreInfo[]>([
 ])
 
 onMounted(() => {
-  getCurrentLocation()
+  // getCurrentLocation()
 })
 
 function showCityPicker() {

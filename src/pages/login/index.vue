@@ -1,20 +1,39 @@
 <route lang="yaml">
 style:
-  navigationBarTitleText: 登录-商家端
+  navigationBarTitleText: 登录-客户端
 </route>
 
 <script lang="ts" setup>
-import type { UserInfo } from '@/stores/modules/user'
+import { useCustomerStore } from '@/stores/modules/customer'
 
 const checked = ref(false)
 const code = ref('')
 function select(e: UniHelper.CheckboxGroupOnChangeEvent) {
   checked.value = !!e.detail.value.includes('cb')
 }
+const customerStore = useCustomerStore()
+const token = computed(() => customerStore.customerInfo?.token)
 
 function login(p: { code: string }) {
   return request.post<{ token: string, isRegister: 0 | 1 }>('/business/wx-login', p)
 }
+
+onLoad(async () => {
+  if (token.value)
+    return uni.reLaunch({ url: '/pages/tabs/tab-home' })
+
+  const code = new URLSearchParams(window.location.search).get('code')
+  if (!code) {
+    const appid = 'wx4523c84aefbd91d2'
+    const redirect_uri = encodeURIComponent('http://m.meiyux.com/#/pages/login/index')
+    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
+  }
+  else {
+    const res = await request.post('/customer/wx-login', { code })
+    customerStore.setCustomerInfo(res.data)
+    uni.reLaunch({ url: '/pages/tabs/tab-home' })
+  }
+})
 
 function wxlogin() {
   uni.login({
@@ -25,12 +44,8 @@ function wxlogin() {
         const { token, isRegister } = (await login({ code: res.code })).data
         useUserStore().setUserInfo({ token, isRegister })
         if (isRegister) {
-          await setUserBaseInfo()
-          uni.reLaunch({ url: '/pagesA/tabs/tab-business-dashboard' })
-        }
-        else {
-          // 身份选择（商家/员工）
-          uni.navigateTo({ url: '/pagesA/login/role-select' })
+          // await setUserBaseInfo()
+          uni.reLaunch({ url: '/pages/tabs/tab-business-dashboard' })
         }
       }
       else {

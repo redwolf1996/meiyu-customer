@@ -11,7 +11,7 @@
       "path": "pages/login/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "登录-商家端"
+        "navigationBarTitleText": "登录-客户端"
       }
     },
     {
@@ -24,11 +24,8 @@
     {
       "path": "pages/my/bookings",
       "type": "page",
-      "layout": false,
       "style": {
-        "navigationBarTitleText": "预约列表",
-        "navigationStyle": "custom",
-        "disableScroll": true
+        "navigationBarTitleText": "会员购卡列表"
       }
     },
     {
