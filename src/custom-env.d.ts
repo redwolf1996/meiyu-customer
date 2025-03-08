@@ -6,7 +6,9 @@ interface ImportMetaEnv {
   readonly VITE_APP_URL_YSZC: string
   readonly VITE_ENV: string
   readonly VITE_BASE_URL: string
+  readonly VITE_HOST: string
   /**
+   * VITE_HOST = http://m.test.meiyux.com
    * VITE_BASE_URL = https://api.meiyux.com/kivi-beauty
    * VITE_ENV_VERSION = release
    */

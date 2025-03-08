@@ -7,16 +7,12 @@ style:
 import { useCustomerStore } from '@/stores/modules/customer'
 
 const checked = ref(false)
-const code = ref('')
 function select(e: UniHelper.CheckboxGroupOnChangeEvent) {
   checked.value = !!e.detail.value.includes('cb')
 }
 const customerStore = useCustomerStore()
 const token = computed(() => customerStore.customerInfo?.token)
-
-function login(p: { code: string }) {
-  return request.post<{ token: string, isRegister: 0 | 1 }>('/business/wx-login', p)
-}
+const baseHost = import.meta.env.VITE_HOST
 
 onLoad(async () => {
   if (token.value)
@@ -25,7 +21,7 @@ onLoad(async () => {
   const code = new URLSearchParams(window.location.search).get('code')
   if (!code) {
     const appid = 'wx4523c84aefbd91d2'
-    const redirect_uri = encodeURIComponent('http://m.meiyux.com/#/pages/login/index')
+    const redirect_uri = encodeURIComponent(`${baseHost}/#/pages/login/index`)
     location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
   }
   else {
@@ -34,30 +30,6 @@ onLoad(async () => {
     uni.reLaunch({ url: '/pages/tabs/tab-home' })
   }
 })
-
-function wxlogin() {
-  uni.login({
-    provider: 'weixin',
-    async success(res) {
-      code.value = res.code
-      if (res.code) {
-        const { token, isRegister } = (await login({ code: res.code })).data
-        useUserStore().setUserInfo({ token, isRegister })
-        if (isRegister) {
-          // await setUserBaseInfo()
-          uni.reLaunch({ url: '/pages/tabs/tab-business-dashboard' })
-        }
-      }
-      else {
-        uni.showToast({
-          title: '登录失败',
-          icon: 'error',
-          mask: true,
-        })
-      }
-    },
-  })
-}
 
 // 1:服务协议 2:隐私政策
 function toProtocol(type: 1 | 2) {
@@ -81,7 +53,7 @@ function toProtocol(type: 1 | 2) {
       走近千家万户，共享轻松生活
     </view>
     <view mx-60rpx mt-112rpx color-white>
-      <wd-button :disabled="!checked" size="large" :block="true" @click="wxlogin">
+      <wd-button :disabled="!checked" size="large" :block="true">
         <view flex flex-cc>
           <text i-tdesign-logo-wechat fs-36 />
           <text>&nbsp;微信一键登录</text>

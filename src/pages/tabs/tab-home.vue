@@ -8,24 +8,26 @@ import weixin from '@wtto00/jweixin-esm'
 // import '@wtto00/jweixin-esm'
 import { onMounted, ref } from 'vue'
 
-onLoad(() => {
-  console.log(weixin) // 导入的名称
-  console.log(window.wx) // wx已挂载全局window
-  console.log(window.jWeixin) // jWeixin已挂载全局window
+onLoad(async () => {
+  const res = await request.get('/customer/jsapi-config', {
+    url: window.location.origin + window.location.pathname + window.location.search,
+  }) as any
+
   const configData: WX.ConfigOptions = {
-    debug: true,
+    debug: false,
     appId: 'wx4523c84aefbd91d2',
-    timestamp: '',
-    nonceStr: '',
-    signature: '',
+    timestamp: res.data.timestamp.toString(),
+    nonceStr: res.data.nonceStr,
+    signature: res.data.signature,
     jsApiList: ['getLocation'], // WX.JsApi[]
     openTagList: [], // WX.OpenTag[]
   }
   weixin.config(configData)
   weixin.ready(() => {
     console.log('ready')
+    getCurrentLocation()
   })
-  weixin.error((err) => {
+  weixin.error((err: any) => {
     console.log('error', err)
   })
 })
@@ -87,6 +89,7 @@ function getCurrentLocation() {
   wx.getLocation({
     type: 'wgs84',
     success: (res) => {
+      console.log('res', res)
       // 根据经纬度获取城市信息
       reverseGeocode(res.longitude, res.latitude)
     },
@@ -99,10 +102,41 @@ function getCurrentLocation() {
   })
 }
 
-function reverseGeocode(_longitude: number, _latitude: number) {
-  // 这里可以调用地图API进行逆地理编码，获取城市名称
-  // 示例中默认使用青岛
-  currentCity.value = '青岛'
+async function reverseGeocode(longitude: number, latitude: number) {
+  try {
+    // 腾讯地图API密钥 - 请替换为你自己的密钥
+    const key = 'YOUR_TENCENT_MAP_KEY'
+    const url = `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${key}`
+
+    const response = await uni.request({
+      url,
+      method: 'GET',
+    })
+
+    if (response.statusCode === 200) {
+      const data = response.data as any
+      if (data.status === 0) {
+        // 更新城市名称
+        currentCity.value = data.result.address_component.city
+      }
+      else {
+        uni.showToast({
+          title: '获取城市信息失败',
+          icon: 'none',
+        })
+      }
+    }
+    else {
+      throw new Error('请求失败')
+    }
+  }
+  catch (error) {
+    console.error('逆地理编码错误:', error)
+    uni.showToast({
+      title: '获取城市信息失败',
+      icon: 'none',
+    })
+  }
 }
 
 function selectStore(store: StoreInfo) {

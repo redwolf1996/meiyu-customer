@@ -45,7 +45,7 @@ export function http<T>(options: UniApp.RequestOptions) {
           const data = res.data as Data<T>
           if (data.code === 20001) {
             customerStore.clearCustomerInfo()
-            uni.navigateTo({ url: '/pagesA/login/index' })
+            uni.navigateTo({ url: '/pages/login/index' })
             return reject(res)
           }
           else if (data.code !== 200) {
