@@ -5,7 +5,6 @@ style:
 
 <script lang="ts" setup>
 import weixin from '@wtto00/jweixin-esm'
-// import '@wtto00/jweixin-esm'
 import { onMounted, ref } from 'vue'
 
 onLoad(async () => {
@@ -102,32 +101,62 @@ function getCurrentLocation() {
   })
 }
 
+interface QQMapResult {
+  status: number
+  result: {
+    address_component: {
+      city: string
+    }
+  }
+}
+
+function jsonp(url: string, callbackName: string) {
+  return new Promise<QQMapResult>((resolve, reject) => {
+    const script = document.createElement('script')
+
+    // 清理函数
+    const cleanup = () => {
+      delete (window as any)[callbackName]
+      document.body.removeChild(script)
+    }
+
+    // 检查URL是否已经包含查询参数
+    const separator = url.includes('?') ? '&' : '?'
+    script.src = `${url}${separator}output=jsonp&callback=${callbackName}`
+
+    // 错误处理
+    script.onerror = () => {
+      reject(new Error('JSONP 请求失败'))
+      cleanup()
+    }
+
+    // 设置回调
+    ;(window as any)[callbackName] = (data: QQMapResult) => {
+      resolve(data)
+      cleanup()
+    }
+
+    document.body.appendChild(script)
+  })
+}
+
 async function reverseGeocode(longitude: number, latitude: number) {
   try {
     // 腾讯地图API密钥 - 请替换为你自己的密钥
-    const key = 'YOUR_TENCENT_MAP_KEY'
+    const key = '2QZBZ-7MPKU-745VI-GIAMT-HI5UK-6TBB5'
     const url = `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${key}`
 
-    const response = await uni.request({
-      url,
-      method: 'GET',
-    })
+    const data = await jsonp(url, `QQmap_${Date.now()}`)
 
-    if (response.statusCode === 200) {
-      const data = response.data as any
-      if (data.status === 0) {
-        // 更新城市名称
-        currentCity.value = data.result.address_component.city
-      }
-      else {
-        uni.showToast({
-          title: '获取城市信息失败',
-          icon: 'none',
-        })
-      }
+    if (data.status === 0) {
+      // 更新城市名称
+      currentCity.value = data.result.address_component.city
     }
     else {
-      throw new Error('请求失败')
+      uni.showToast({
+        title: '获取城市信息失败',
+        icon: 'none',
+      })
     }
   }
   catch (error) {
