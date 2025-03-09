@@ -7,11 +7,6 @@ interface ImportMetaEnv {
   readonly VITE_ENV: string
   readonly VITE_BASE_URL: string
   readonly VITE_HOST: string
-  /**
-   * VITE_HOST = http://m.test.meiyux.com
-   * VITE_BASE_URL = https://api.meiyux.com/kivi-beauty
-   * VITE_ENV_VERSION = release
-   */
   readonly VITE_ENV_VERSION: string
   readonly VITE_CJS_IGNORE_WARNING: boolean
   readonly VITE_ROOT_DIR: string
