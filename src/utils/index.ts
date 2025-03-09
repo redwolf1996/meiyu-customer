@@ -299,3 +299,29 @@ export function generateArray(start, end) {
   }
   return result
 }
+
+/**
+ * 格式化营业时间
+ * @param workWeek 工作日数组 1-7代表周一到周日
+ * @param workStime 营业开始时间
+ * @param workEtime 营业结束时间
+ * @returns 格式化后的营业时间字符串
+ */
+export function formatWorkTime(workWeek: number[] | null, workStime: string, workEtime: string): string {
+  // 处理工作日
+  let weekText = ''
+  if (!workWeek || workWeek.length === 0 || workWeek.length === 7) {
+    weekText = '周一到周日'
+  }
+  else {
+    // 对工作日进行排序
+    const sortedWeek = [...workWeek].sort((a, b) => a - b)
+    weekText = sortedWeek.map(day => `周${WeekMap[day]}`).join('、')
+  }
+
+  // 处理时间，去掉秒
+  const startTime = workStime.slice(0, -3)
+  const endTime = workEtime.slice(0, -3)
+
+  return `${weekText} ${startTime}-${endTime}`
+}

@@ -6,8 +6,38 @@ style:
 <script lang="ts" setup>
 import weixin from '@wtto00/jweixin-esm'
 import { onMounted, ref } from 'vue'
+import { formatWorkTime } from '@/utils'
+
+const currentCity = ref<string>('青岛')
+const storeList = ref<any[]>([])
+const paging = ref<any>(null)
 
 onLoad(async () => {
+  initJssdk()
+})
+
+onMounted(() => {
+  // 组件会自动调用 queryList
+})
+
+async function queryList(pageNo: number, pageSize: number) {
+  try {
+    const res = await request.get<any>('/customer/store-list-all', {
+      params: {
+        pageNo,
+        pageSize,
+      },
+    })
+    // 通过total判断是否有更多数据
+    paging.value.completeByTotal(res.data.list, res.data.total)
+  }
+  catch {
+    // 请求失败
+    paging.value.complete(false)
+  }
+}
+
+async function initJssdk() {
   const res = await request.get('/customer/jsapi-config', {
     url: window.location.origin + window.location.pathname + window.location.search,
   }) as any
@@ -29,51 +59,7 @@ onLoad(async () => {
   weixin.error((err: any) => {
     console.log('error', err)
   })
-})
-
-interface StoreInfo {
-  name: string
-  address: string
-  hours: string
-  image: string
-  phone: string
 }
-
-const currentCity = ref<string>('青岛')
-const storeList = ref<StoreInfo[]>([
-  {
-    name: '可诺丹婷（深圳路店）',
-    address: '青岛市市北区深圳路123号',
-    hours: '周一至周日 9:00-21:00',
-    image: 'https://img.yzcdn.cn/vant/ipad.png',
-    phone: '12345678901',
-  },
-  {
-    name: '可诺丹婷（厦门路店）',
-    address: '青岛市市北区深圳路123号',
-    hours: '周一至周日 9:00-21:00',
-    image: 'https://img.yzcdn.cn/vant/ipad.png',
-    phone: '12345678902',
-  },
-  {
-    name: '可诺丹婷（台东路店）',
-    address: '青岛市市北区深圳路123号',
-    hours: '周一至周日 9:00-21:00',
-    image: 'https://img.yzcdn.cn/vant/ipad.png',
-    phone: '12345678903',
-  },
-  {
-    name: '可诺丹婷（大连路店）',
-    address: '青岛市市北区深圳路123号',
-    hours: '周一至周日 9:00-21:00',
-    image: 'https://img.yzcdn.cn/vant/ipad.png',
-    phone: '12345678904',
-  },
-])
-
-onMounted(() => {
-  // getCurrentLocation()
-})
 
 function showCityPicker() {
   // 显示城市选择器
@@ -168,7 +154,7 @@ async function reverseGeocode(longitude: number, latitude: number) {
   }
 }
 
-function selectStore(store: StoreInfo) {
+function selectStore(store: any) {
   // 选择门店
   uni.showToast({
     title: `已选择${store.name}`,
@@ -176,7 +162,7 @@ function selectStore(store: StoreInfo) {
   })
 }
 
-function contactStore(store: StoreInfo) {
+function contactStore(store: any) {
   // 联系门店
   uni.makePhoneCall({
     phoneNumber: store.phone,
@@ -191,34 +177,43 @@ function contactStore(store: StoreInfo) {
 </script>
 
 <template>
-  <view class="store-page">
-    <!-- 地址选择和搜索栏 -->
-    <view class="search-container">
-      <view class="location-selector" @click="showCityPicker">
-        <text>{{ currentCity }}</text>
-        <wd-icon name="arrow-down" size="14" />
+  <z-paging
+    ref="paging"
+    v-model="storeList"
+    lower-threshold="100"
+    auto-show-back-to-top
+    :default-page-size="10"
+    @query="queryList"
+  >
+    <template #top>
+      <!-- 地址选择和搜索栏 -->
+      <view class="search-container">
+        <!-- <view class="location-selector">
+          <text>{{ currentCity }}</text>
+          <wd-icon name="arrow-down" size="14" />
+        </view> -->
+        <view class="search-box">
+          <wd-icon name="search" size="18" />
+          <input type="text" placeholder="搜索">
+        </view>
       </view>
-      <view class="search-box">
-        <wd-icon name="search" size="18" />
-        <input type="text" placeholder="搜索">
-      </view>
-    </view>
+    </template>
 
     <!-- 门店列表 -->
     <view class="store-list">
       <view v-for="(store, index) in storeList" :key="index" class="store-item" @click="selectStore(store)">
-        <image class="store-image" :src="store.image" mode="aspectFill" />
+        <image class="store-image" :src="store?.logo" mode="aspectFill" />
         <view class="store-info">
           <view class="store-name">
-            {{ store.name }}
+            {{ store?.storeName || '--' }}
           </view>
           <view class="store-address">
             <wd-icon name="location" size="14" />
-            <text>{{ store.address }}</text>
+            <text>{{ store?.address || '--' }}</text>
           </view>
           <view class="store-hours">
             <wd-icon name="time" size="14" />
-            <text>{{ store.hours }}</text>
+            <text>{{ formatWorkTime(store?.workWeek, store?.workStime, store?.workEtime) }}</text>
           </view>
           <view class="contact-btn" @click.stop="contactStore(store)">
             <wd-icon name="phone" size="14" />
@@ -227,7 +222,11 @@ function contactStore(store: StoreInfo) {
         </view>
       </view>
     </view>
-  </view>
+
+    <template #bottom>
+      <view class="h50px" />
+    </template>
+  </z-paging>
 </template>
 
 <style>
