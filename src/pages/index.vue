@@ -6,17 +6,17 @@ style:
 <script lang="ts" setup>
 const userInfo = useUserStore().userInfo
 if (userInfo.token && userInfo.isRegister) {
-  toBusinessDashboard()
+  toDashboard()
 }
 else {
-  toBusinessLogin()
+  toLogin()
 }
 
-function toBusinessDashboard() {
-  uni.reLaunch({ url: '/pages/tabs/home' })
+function toDashboard() {
+  uni.reLaunch({ url: '/pages/tabs/tab-home' })
 }
 
-function toBusinessLogin() {
+function toLogin() {
   uni.navigateTo({ url: '/pages/login/index' })
 }
 </script>

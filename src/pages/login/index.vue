@@ -16,7 +16,7 @@ const baseHost = import.meta.env.VITE_HOST
 
 onLoad(async () => {
   if (token.value)
-    return uni.reLaunch({ url: '/pages/tabs/tab-home' })
+    return uni.reLaunch({ url: '/pages/login/store-list' })
 
   const code = new URLSearchParams(window.location.search).get('code')
   if (!code) {
@@ -27,7 +27,7 @@ onLoad(async () => {
   else {
     const res = await request.post('/customer/wx-login', { code })
     customerStore.setCustomerInfo(res.data)
-    uni.reLaunch({ url: '/pages/tabs/tab-home' })
+    uni.reLaunch({ url: '/pages/login/store-list' })
   }
 })
 

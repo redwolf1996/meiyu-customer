@@ -19,7 +19,7 @@ const httpInterceptor = {
       ...options?.header,
       'client': 'minapp',
       'envVersion': envVersion,
-      'B-Store-Id': customerStore.customerInfo?.storeId,
+      'C-Store-Id': customerStore.customerInfo?.lastStoreId || customerStoreId.value,
     }
     const token = customerStore.customerInfo?.token
     if (token) {
