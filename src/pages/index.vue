@@ -4,15 +4,18 @@ style:
 </route>
 
 <script lang="ts" setup>
-const userInfo = useUserStore().userInfo
-if (userInfo.token && userInfo.isRegister) {
-  toDashboard()
+import { useCustomerStore } from '@/stores/modules/customer'
+
+const customerStore = useCustomerStore()
+
+if (customerStore.customerInfo?.token && customerStore.customerInfo?.phone) {
+  toHome()
 }
 else {
   toLogin()
 }
 
-function toDashboard() {
+function toHome() {
   uni.reLaunch({ url: '/pages/tabs/tab-home' })
 }
 

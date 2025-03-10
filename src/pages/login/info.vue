@@ -4,21 +4,15 @@ style:
 </route>
 
 <script lang="ts" setup>
-import type { UserInfo } from '@/stores/modules/user'
+import { useCustomerStore } from '@/stores/modules/customer'
 
-const role = ref<'business' | 'staff'>('business')
+const customerStore = useCustomerStore()
 const form = reactive<{
-  userName: string
+  name: string
   phone: string
-  // othersInviteCode: string
 }>({
-  userName: '',
+  name: '',
   phone: '',
-  // othersInviteCode: '',
-})
-
-onLoad((payload) => {
-  role.value = payload?.role
 })
 
 const formRef = ref()
@@ -27,12 +21,14 @@ function handleSubmit() {
     .validate()
     .then(async ({ valid }) => {
       if (valid) {
-        const url = '/customer/info'
-        const res = await request.post<{ token: string, isRegister: 0 | 1 }>(url, form)
-        const { token, isRegister } = res.data
-        useUserStore().setUserInfo({ token, isRegister })
-        await setUserBaseInfo()
-        uni.reLaunch({ url: '/pagesA/tabs/tab-business-dashboard' })
+        await request.post<any>('/customer/info', form)
+        const originInfo = customerStore.customerInfo
+        customerStore.setCustomerInfo({
+          ...originInfo,
+          name: form.name,
+          phone: form.phone,
+        })
+        uni.redirectTo({ url: '/pages/login/index' })
       }
     })
     .catch((error) => {
@@ -46,9 +42,9 @@ function handleSubmit() {
   <wd-form ref="formRef" :model="form">
     <wd-cell-group :border="true">
       <wd-input
-        v-model="form.userName"
+        v-model="form.name"
         label="姓名"
-        prop="userName"
+        prop="name"
         placeholder="请输入"
         suffix-icon="arrow-right"
         :rules="[{ required: true, message: '请填写用户名' }]"
@@ -63,13 +59,6 @@ function handleSubmit() {
         :maxlength="11"
         :rules="[{ required: true, message: '请填写手机号' }]"
       />
-      <!-- <wd-input
-        v-model="form.othersInviteCode"
-        label="邀请码"
-        :maxlength="11"
-        suffix-icon="arrow-right"
-        placeholder="请输入"
-      /> -->
     </wd-cell-group>
     <view px-20px pt-80px>
       <view f14 color-F7CD24>

@@ -17,7 +17,7 @@ const baseHost = import.meta.env.VITE_HOST
 onLoad(async () => {
   if (token.value) {
     customerStoreId.value = customerStore.customerInfo.lastStoreId
-    return uni.reLaunch({ url: '/pages/login/store-list' })
+    return uni.reLaunch({ url: '/pages/tabs/tab-home' })
   }
 
   const code = new URLSearchParams(window.location.search).get('code')
@@ -27,9 +27,20 @@ onLoad(async () => {
     location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
   }
   else {
-    const res = await request.post('/customer/wx-login', { code })
+    const res = await request.post<any>('/customer/wx-login', { code })
     customerStore.setCustomerInfo(res.data)
-    uni.reLaunch({ url: '/pages/login/store-list' })
+
+    if (!res.data?.phone) {
+      uni.reLaunch({ url: '/pages/login/info' })
+    }
+    else {
+      if (!res.data?.lastStoreId) {
+        uni.reLaunch({ url: '/pages/login/store-list' })
+      }
+      else {
+        uni.reLaunch({ url: '/pages/tabs/tab-home' })
+      }
+    }
   }
 })
 

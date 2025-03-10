@@ -154,8 +154,10 @@ async function reverseGeocode(longitude: number, latitude: number) {
   }
 }
 
-function selectStore(store: any) {
+async function selectStore(store: any) {
   customerStoreId.value = store.id
+  // 上报当前门店id
+  await request.post(`/customer/current-store-id/${store.id}`)
   uni.navigateTo({
     url: '/pages/tabs/tab-home',
   })

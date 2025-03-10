@@ -8,7 +8,9 @@
 import { bookInfo } from '@/stores/book-info'
 import type { BookForm, CustomerDetail, ListStaff, Service } from './types'
 import qs from 'qs'
+import { useCustomerStore } from '@/stores/modules/customer'
 
+const customerStore = useCustomerStore()
 const toast = useToast()
 const curIndex = ref(0) // 预约服务列表当前选择项的索引
 const columns = ref<SelItem[]>([
@@ -56,16 +58,18 @@ function toSelCus() {
   uni.navigateTo({ url: '/pagesA/customer/list' })
 }
 
-onLoad(async (option) => {
-  if (option?.customerId) {
-    model.storeCustomerId = option.customerId
-    fromCustomer.value = true
-    const res = await request.get<CustomerDetail>(`/business/store-customer/${option.customerId}`)
-    model.storeCustomerName = res.data.name
-    model.storeCustomerPhone = res.data.phone
-  }
+onLoad(async () => {
+  const userInfo = customerStore.customerInfo
+  model.storeCustomerName = userInfo.name
+  model.storeCustomerPhone = userInfo.phone
   getStaff()
+  recordStoreJoin()
 })
+
+// 进入店铺记录一条记录
+function recordStoreJoin() {
+  request.post(`/customer/store-join/${customerStoreId.value}`)
+}
 
 async function getStaff() {
   // jobCode 职务,1店长，2手艺人，3销售
@@ -108,7 +112,7 @@ function toSelServTime() {
     ...model,
     artName: artName.value,
   }
-  uni.navigateTo({ url: '/pagesA/book/time' })
+  uni.navigateTo({ url: '/pages/servs/time' })
 }
 
 async function save() {
@@ -147,7 +151,7 @@ function delServ(index) {
   checkedServs.value.splice(index, 1)
 }
 
-watch(() => checkedServs.value, () => {
+onShow(() => {
   model.service = checkedServs.value.map((v) => {
     return {
       storeServiceId: v.id,
@@ -173,6 +177,33 @@ watch(() => checkedServs.value, () => {
     })
   })
 })
+
+// watch(() => checkedServs.value, () => {
+//   model.service = checkedServs.value.map((v) => {
+//     return {
+//       storeServiceId: v.id,
+//       name: v.name,
+//       duration: v.duration,
+//       price: v.price,
+//       price2: v.price2,
+//       coverImg: v.coverImg,
+//       goodsCount: v?.goodsCount || 1, // 数量
+//       totalAmount: v?.totalAmount || 0, // 商品原价总价
+//       amount: v?.amount || 0, // 商品优惠后总价
+//       cardReduceAmount: v?.cardReduceAmount || 0, // 卡项优惠金额
+//       cardShowName: v?.cardShowName || '', // 卡项展示的名称 例如：洗发次卡 -1次
+//     }
+//   })
+//   model.service.forEach((item: Partial<Service>) => {
+//     const cost = item.price2 || item.price
+//     item.totalAmount = computed(() => {
+//       return func_mul(cost, item.goodsCount)
+//     })
+//     item.amount = computed(() => {
+//       return func_mul(func_sub(cost, item.cardReduceAmount), item.goodsCount)
+//     })
+//   })
+// })
 
 // 选择卡项
 watch(() => curSelectedCardToCash.value, () => {
