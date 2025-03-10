@@ -1,7 +1,7 @@
 <route lang="yaml">
   layout: false
   style:
-    navigationBarTitleText: 添加预约
+    navigationBarTitleText: 预约服务
   </route>
 
 <script lang="ts" setup>
@@ -22,7 +22,7 @@ const columns = ref<SelItem[]>([
   },
 ])
 const model = reactive<BookForm>({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   storeCustomerPhone: computed(() => curCustomer.value?.phone),
   storeCustomerName: computed(() => curCustomer.value?.name),
   storeCustomerId: computed(() => curCustomer.value?.storeCustomerId),
@@ -69,7 +69,7 @@ onLoad(async (option) => {
 
 async function getStaff() {
   // jobCode 职务,1店长，2手艺人，3销售
-  const res = await request.get<ListRes<ListStaff>>('/business/staff', { storeId: storeId.value, jobCode: 2 })
+  const res = await request.get<ListRes<ListStaff>>('/business/staff', { storeId: customerStoreId.value, jobCode: 2 })
   listStaff.value = res.data.list.map((v) => {
     return {
       ...v,

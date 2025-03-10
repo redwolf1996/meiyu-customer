@@ -22,7 +22,7 @@ const tabs = [{
 }]
 const tab = ref(0)
 const reqParams = reactive({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   pageNum: 1,
   pageSize: 10,
   searchStatus: computed(() => valMap[tab.value]),

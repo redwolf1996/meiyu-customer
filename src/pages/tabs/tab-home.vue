@@ -65,7 +65,9 @@ function confirm() {
       prodType: 2,
     }
   })
-  uni.navigateBack()
+  uni.navigateTo({
+    url: '/pages/servs/add',
+  })
 }
 </script>
 
@@ -129,7 +131,7 @@ function confirm() {
     <view w120px>
       <wd-button size="large" custom-class="theme-bg" block @click="confirm()">
         <view flex flex-cc>
-          <text>确定</text>
+          <text>选好了</text>
         </view>
       </wd-button>
     </view>

@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
     finish: 0,
   },
   searchForm: {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
     status: 1, // 1待服务，2服务中，3已完成，4已取消
     artisanId: '', // 手艺人id
     sTime: null, // 服务开始时间

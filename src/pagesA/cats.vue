@@ -25,7 +25,7 @@ const curItem = ref<CatItem>(null)
 const form = reactive({
   id: null,
   name: null,
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
 })
 
 async function dialogInputConfirm() {
@@ -73,7 +73,7 @@ async function openAdd() {
 }
 
 async function getList() {
-  const res = await request.get<CatItem[]>(`${typeUrl.value}?storeId=${storeId.value}`)
+  const res = await request.get<CatItem[]>(`${typeUrl.value}?storeId=${customerStoreId.value}`)
   if (res.data.length) {
     if (!curClassify.value.multiple) { // 单选
       list.value = res.data.map((v) => {
@@ -116,7 +116,7 @@ function toggleCheck(item: CatItem) {
   curClassify.value.name = !curClassify.value.multiple
     ? item.name
     : list.value?.filter(v0 => v0.checked).map(v => v.name).join('、')
-  curClassify.value.storeId = storeId.value
+  curClassify.value.storeId = customerStoreId.value
 }
 
 function selCat() {

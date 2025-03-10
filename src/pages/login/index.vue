@@ -15,8 +15,10 @@ const token = computed(() => customerStore.customerInfo?.token)
 const baseHost = import.meta.env.VITE_HOST
 
 onLoad(async () => {
-  if (token.value)
+  if (token.value) {
+    customerStoreId.value = customerStore.customerInfo.lastStoreId
     return uni.reLaunch({ url: '/pages/login/store-list' })
+  }
 
   const code = new URLSearchParams(window.location.search).get('code')
   if (!code) {

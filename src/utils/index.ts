@@ -162,7 +162,7 @@ export function formatMsgTimeShow(timestr: string) {
  * 设置员工列表，用于表单选择手艺人、销售等
  */
 export async function setStaffList() {
-  const res = await request.get<StaffModel>('/business/staff', { storeId: storeId.value })
+  const res = await request.get<StaffModel>('/business/staff', { storeId: customerStoreId.value })
   const artList = res.data.list?.filter(v => v.jobCode.includes('2'))
   const salesList = res.data.list?.filter(v => v.jobCode.includes('3'))
   artistListStore.value = artList?.map((v) => {

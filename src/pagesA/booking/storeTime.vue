@@ -22,7 +22,7 @@ const value1 = ref<string>('09:00')
 const value2 = ref<string>('21:00')
 
 onShow(async () => {
-  const res = await request.get<Data>(`/business/store/${storeId.value}`)
+  const res = await request.get<Data>(`/business/store/${customerStoreId.value}`)
   info.value = res.data
   val.value = info.value.workWeek
   value1.value = info.value.workStime?.slice(0, -3)
@@ -52,7 +52,7 @@ watch(
 
 async function save() {
   await request.put(`/business/store-work-time`, {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
     start: `${value1.value}:00`,
     end: `${value2.value}:00`,
     week: val.value,

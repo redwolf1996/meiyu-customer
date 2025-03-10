@@ -20,7 +20,7 @@ const isOvertime = ref(false)
 const showCardRecharge = ref(false) // 显示开卡充值弹窗
 
 onShow(() => {
-  if (storeId.value)
+  if (customerStoreId.value)
     setStaffList()
   initStore()
   const menuButtonInfo = getMenuButtonInfo()
@@ -49,7 +49,7 @@ async function initStore() {
 
 // 获取工作台信息
 async function getDashboardInfo() {
-  const res = await request.get<DashBoardData>(`/business/workbench/${storeId.value}`)
+  const res = await request.get<DashBoardData>(`/business/workbench/${customerStoreId.value}`)
   info.value = res.data
 
   // 判断是否过期

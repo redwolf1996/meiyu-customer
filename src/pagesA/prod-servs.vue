@@ -28,7 +28,7 @@ onLoad((options) => {
 })
 
 onShow(async () => {
-  const res = await request.get<AllItems>('/business/goods_all', { storeId: storeId.value })
+  const res = await request.get<AllItems>('/business/goods_all', { storeId: customerStoreId.value })
   const serviceCats = res.data.serviceCategory!
   const services = res.data.serviceList
   const productCats = res.data.productCategory!

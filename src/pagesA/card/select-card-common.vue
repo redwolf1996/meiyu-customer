@@ -43,7 +43,7 @@ onLoad(async (option) => {
     if (curCardRechargeType.value === 4) { cType.value = 1; cSecondType.value = 1 }
     if (curCardRechargeType.value === 5) { cType.value = 1; cSecondType.value = 2 }
 
-    const res = await request.get<AllItems>('/business/goods_all', { storeId: storeId.value })
+    const res = await request.get<AllItems>('/business/goods_all', { storeId: customerStoreId.value })
     const cardCats = res.data.cardCategory!
     cardCats.unshift({
       id: 0,

@@ -17,7 +17,7 @@ const visibleStaff = ref(false)
 const curIndex = ref(0) // 商品和服务列表当前选择项的索引
 const orderTime = ref(dayjs().valueOf())
 const form = ref<BillModel>({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   orderTime: computed(() => {
     return orderTime.value ? dayjs(orderTime.value).format('YYYY-MM-DD HH:mm:ss') : ''
   }),
@@ -212,7 +212,7 @@ function clickItem(item: ListStaff) {
 }
 
 async function getStaff() {
-  const res = await request.get<ListRes<ListStaff>>('/business/staff', { storeId: storeId.value, jobCode: 2 })
+  const res = await request.get<ListRes<ListStaff>>('/business/staff', { storeId: customerStoreId.value, jobCode: 2 })
   listStaff.value = res.data.list.map((v) => {
     return {
       ...v,

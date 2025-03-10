@@ -81,7 +81,7 @@ const sources2: any = [
 ]
 
 const reqParams = reactive({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   status: 1, // 1待服务，2服务中，3已完成，4已取消
   artisanId: null, // 手艺人id
   // sTime: computed(() => `${value1.value}:00`), // 服务开始时间
@@ -175,7 +175,7 @@ onMounted(async () => {
 })
 
 function storeInfo() {
-  request.get<Data>(`/business/store/${storeId.value}`).then((res) => {
+  request.get<Data>(`/business/store/${customerStoreId.value}`).then((res) => {
     value1.value = tmpValue1.value = res.data.workStime.slice(0, -3)
     value2.value = tmpValue2.value = res.data.workEtime.slice(0, -3)
   })
@@ -196,7 +196,7 @@ const restHeight = computed(() => {
 
 async function getBookDashboard(cDate: string) {
   const res = await request.get<Books[]>('/business/booking-dashboard', {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
     cDate,
   })
   tableData.value = res.data.map((item) => {
@@ -210,7 +210,7 @@ async function getBookDashboard(cDate: string) {
 async function getBookCount(cDate?: string) {
   if (cDate) {
     const res = await request.get<BookCount>('/business/booking-count', {
-      storeId: storeId.value,
+      storeId: customerStoreId.value,
       cDate,
     })
     countInfo.value = res.data
@@ -222,7 +222,7 @@ async function getBookCount(cDate?: string) {
 
 async function getCountsAll() {
   const res = await request.get<BookCount>('/business/booking-count', {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
   })
   bookCountsAll.value = res.data
 }

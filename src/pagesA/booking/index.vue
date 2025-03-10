@@ -10,7 +10,7 @@ const info = ref<Data>(null)
 const checked = ref(false)
 
 onShow(async () => {
-  const res = await request.get<Data>(`/business/store/${storeId.value}`)
+  const res = await request.get<Data>(`/business/store/${customerStoreId.value}`)
   info.value = res.data
   if (info.value.status === 1) {
     checked.value = true
@@ -34,7 +34,7 @@ function toStoreTime() {
 
 async function change({ value }) {
   await request.put('/business/store-status', {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
     status: value ? 1 : 2,
   })
 }

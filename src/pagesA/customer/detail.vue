@@ -43,13 +43,13 @@ const instance = getCurrentInstance()
 const query = uni.createSelectorQuery().in(instance.proxy)
 
 const reqParams1 = reactive({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   pageNum: 1,
   pageSize: 10,
   storeCustomerId: computed(() => id.value),
 })
 const reqParams2 = reactive({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   pageNum: 1,
   pageSize: 10,
   storeCustomerId: computed(() => id.value),

@@ -41,14 +41,14 @@ function setTotalDuration() {
 }
 
 async function init() {
-  const re = await request.get<BookingData>(`/business/store/${storeId.value}`)
+  const re = await request.get<BookingData>(`/business/store/${customerStoreId.value}`)
   workStime.value = re.data.workStime.slice(0, -3)
   workEtime.value = re.data.workEtime.slice(0, -3)
   workWeeks.value = re.data.workWeek
   times.value = generateTimeSlots(workStime.value, workEtime.value)
 
   const params = {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
     artisanId: bookInfo.value?.artisanId,
     cDate: day.value,
   }

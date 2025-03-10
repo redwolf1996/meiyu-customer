@@ -43,7 +43,7 @@ const dataList = ref<BookListAll[]>([])
 const navHeight = getMenuButtonInfo().navHeight // 只能通过系统方法获取navHeight，通过dom获取不到
 
 const reqParams = reactive({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   status: 1, // 1待服务，2服务中，3已完成，4已取消
   artisanId: null, // 手艺人id
   sDate: null, // 服务开始日期
@@ -80,7 +80,7 @@ onShow(() => {
 async function getBookCount(cDate?: string) {
   if (cDate) {
     const res = await request.get<BookCount>('/business/booking-count', {
-      storeId: storeId.value,
+      storeId: customerStoreId.value,
       cDate,
     })
     countInfo.value = res.data
@@ -92,7 +92,7 @@ async function getBookCount(cDate?: string) {
 
 async function getCountsAll() {
   const res = await request.get<BookCount>('/business/booking-count', {
-    storeId: storeId.value,
+    storeId: customerStoreId.value,
   })
   bookCountsAll.value = res.data
 }

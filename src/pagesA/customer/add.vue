@@ -13,7 +13,7 @@ const { area, addressValue, columnChange, handleConfirmAddress } = useArea()
 const formRef = ref()
 const calendar = ref()
 const form = reactive<Customer>({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   name: '',
   phone: '',
   noteName: '',

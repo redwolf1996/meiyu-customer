@@ -7,7 +7,7 @@ style:
 import type { CusList as List } from './types'
 
 const reqParams = reactive({
-  storeId: storeId.value,
+  storeId: customerStoreId.value,
   pageNum: 1,
   pageSize: 10,
   keyword: '',
