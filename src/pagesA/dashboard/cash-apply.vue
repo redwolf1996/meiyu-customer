@@ -39,7 +39,7 @@ style:
     </view>
     <view mx-40rpx color-white>
       <wd-button size="large" type="text" block>
-        <view flex flex-cc color-1A66FF>
+        <view flex flex-cc color-FF5A5F>
           <text>取消</text>
         </view>
       </wd-button>

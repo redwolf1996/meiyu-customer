@@ -1,5 +1,5 @@
 :deep(.theme-bg) {
-  background-color: #1a66ff !important;
+  background-color: #FF5A5F !important;
 }
 :deep(.color-black) {
   color: #5a5a5a;
@@ -38,8 +38,8 @@
   margin-left: 0;
   margin-right: 0;
   &.complete {
-    border: 1px solid #1a66ff;
-    color: #1a66ff;
+    border: 1px solid #FF5A5F;
+    color: #FF5A5F;
   }
   &.cancel {
     border: 1px solid #e81616;
@@ -54,13 +54,13 @@
     color: #232220;
   }
   &.theme{
-    border: 1px solid #1A66FF;
+    border: 1px solid #FF5A5F;
     color:#fff;
-    background-color: #1A66FF;
+    background-color: #FF5A5F;
   }
   &.theme-out{
-    border: 1px solid #1A66FF;
-    color:#1A66FF;
+    border: 1px solid #FF5A5F;
+    color:#FF5A5F;
     background-color: #fff;
   }
   &.rd0{

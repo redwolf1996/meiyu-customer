@@ -65,13 +65,6 @@
       }
     },
     {
-      "path": "pages/servs/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "选择服务"
-      }
-    },
-    {
       "path": "pages/servs/time",
       "type": "page",
       "layout": "common",
@@ -100,7 +93,7 @@
     }
   ],
   "globalStyle": {
-    "navigationStyle": "default",
+    "navigationStyle": "custom",
     "navigationBarTitleText": "my-booking",
     "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTextStyle": "black",

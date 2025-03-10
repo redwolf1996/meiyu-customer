@@ -17,7 +17,6 @@ const httpInterceptor = {
     options.timeout = 30000
     options.header = {
       ...options?.header,
-      'client': 'minapp',
       'envVersion': envVersion,
       'C-Store-Id': customerStore.customerInfo?.lastStoreId || customerStoreId.value,
     }

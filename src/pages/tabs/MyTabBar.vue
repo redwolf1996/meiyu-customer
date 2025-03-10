@@ -22,7 +22,7 @@ function changeBar(index: number) {
 <template>
   <uv-tabbar
     :zIndex="99999"
-    :value="tabbar" active-color="#1A66FF" inactive-color="#A7A8AC"
+    :value="tabbar" active-color="#FF5A5F" inactive-color="#A7A8AC"
     @change="changeBar"
   >
     <uv-tabbar-item text="首页">

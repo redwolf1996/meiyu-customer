@@ -55,7 +55,7 @@ const servMap = {
 </script>
 
 <template>
-  <wd-tabs v-if="props.showTabs" v-model="tab" :lineHeight="2" :lineWidth="24" color="#1A66FF">
+  <wd-tabs v-if="props.showTabs" v-model="tab" :lineHeight="2" :lineWidth="24" color="#FF5A5F">
     <block v-for="item in items" :key="`t${item.value}`">
       <wd-tab :title="`${item.label}(${item.count})`" />
     </block>

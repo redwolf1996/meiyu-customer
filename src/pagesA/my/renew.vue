@@ -115,7 +115,7 @@ function toProtocol(type: 1 | 2) {
           ￥{{ curItem?.price ?? '--' }}
         </view>
         <!-- <view>
-          <radio style="transform:scale(0.7) translate(-10px, 0)" value="3" color="#1a66ff" />
+          <radio style="transform:scale(0.7) translate(-10px, 0)" value="3" color="#FF5A5F" />
           <text dib c-999999 f12 style="transform: translateX(-8px);">
             积分100抵扣￥10.00
           </text>
@@ -126,18 +126,18 @@ function toProtocol(type: 1 | 2) {
       </view>
     </view>
     <view flex mt10px>
-      <!-- <radio style="transform:scale(0.7) translate(-10px, 0)" value="3" color="#1a66ff" /> -->
+      <!-- <radio style="transform:scale(0.7) translate(-10px, 0)" value="3" color="#FF5A5F" /> -->
       <wd-checkbox v-model="protocalChecked" />
       <text dib f12 pl5px style="transform: translateX(-8px);">
         <text>开通前请确认</text>
-        <text c-1A66FF @click="toProtocol(1)">
+        <text c-FF5A5F @click="toProtocol(1)">
           《用户协议》
         </text>
-        <!-- <text c-1A66FF>
+        <!-- <text c-FF5A5F>
           《缴费协议》
         </text> -->
         <text>及</text>
-        <text c-1A66FF @click="toProtocol(2)">
+        <text c-FF5A5F @click="toProtocol(2)">
           《隐私政策》
         </text>
       </text>
@@ -147,7 +147,7 @@ function toProtocol(type: 1 | 2) {
 
 <style lang='scss' scoped>
 .btn {
-  background-color: #1a66ff;
+  background-color: #ff5a5f;
   color: #fff;
   width: 158px;
   height: 48px;

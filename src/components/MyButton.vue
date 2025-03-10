@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{
   fontSize?: string
 }>(), {
   color: '#fff',
-  bgColor: '#1A66FF',
+  bgColor: '#FF5A5F',
   border: 'none',
   borderWidth: 1,
   radius: '0rpx',

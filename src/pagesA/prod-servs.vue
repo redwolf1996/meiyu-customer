@@ -127,7 +127,7 @@ function confirm() {
 </script>
 
 <template>
-  <wd-tabs v-model="tab" :lineHeight="2" :lineWidth="24" color="#1A66FF">
+  <wd-tabs v-model="tab" :lineHeight="2" :lineWidth="24" color="#FF5A5F">
     <wd-tab title="服务">
       <view class="wrapper">
         <wd-sidebar v-model="active1" @change="handleChange1">

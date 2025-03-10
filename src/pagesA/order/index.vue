@@ -65,7 +65,7 @@ async function handleClick({ index }) {
     @query="queryList"
   >
     <template #top>
-      <wd-tabs v-model="tab" :lineHeight="2" :lineWidth="24" color="#1A66FF" swipeable @change="handleClick">
+      <wd-tabs v-model="tab" :lineHeight="2" :lineWidth="24" color="#FF5A5F" swipeable @change="handleClick">
         <block v-for="(item, index) in tabs" :key="`k-${index}`">
           <wd-tab :title="item.label" />
         </block>

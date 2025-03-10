@@ -220,7 +220,7 @@ function select({ item }) {
       确定退款
     </wd-button> -->
 
-    <view bg-white tc h40px w136px flex flex-cc c-#1A66FF style="border: 1px solid #1A66FF;" @click="confirmRefund()">
+    <view bg-white tc h40px w136px flex flex-cc c-#FF5A5F style="border: 1px solid #FF5A5F;" @click="confirmRefund()">
       确定退款
     </view>
   </view>
@@ -272,8 +272,8 @@ function select({ item }) {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  color: #1a66ff;
-  border: 1px solid #1a66ff;
+  color: #ff5a5f;
+  border: 1px solid #ff5a5f;
   border-radius: 4px;
 }
 </style>

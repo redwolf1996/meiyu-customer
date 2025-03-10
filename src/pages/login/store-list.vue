@@ -155,25 +155,24 @@ async function reverseGeocode(longitude: number, latitude: number) {
 }
 
 function selectStore(store: any) {
-  // 选择门店
-  uni.showToast({
-    title: `已选择${store.name}`,
-    icon: 'none',
-  })
   customerStoreId.value = store.id
+  uni.navigateTo({
+    url: '/pages/tabs/tab-home',
+  })
 }
 
 function contactStore(store: any) {
   // 联系门店
-  uni.makePhoneCall({
-    phoneNumber: store.phone,
-    fail: () => {
-      uni.showToast({
-        title: '拨打电话失败',
-        icon: 'none',
-      })
-    },
-  })
+  // uni.makePhoneCall({
+  //   phoneNumber: store.phone,
+  //   fail: () => {
+  //     uni.showToast({
+  //       title: '拨打电话失败',
+  //       icon: 'none',
+  //     })
+  //   },
+  // })
+  window.location.href = `tel:${store.phone}`
 }
 </script>
 

@@ -167,9 +167,9 @@ onShow(() => {
               持有卡项
             </view>
             <radio-group mb12rpx flex gap-20rpx transform-translate-x--5px>
-              <label f12><radio style="transform:scale(0.7)" value="1" color="#1a66ff" :checked="true" />任意卡项</label>
-              <label f12><radio style="transform:scale(0.7)" value="2" color="#1a66ff" />指定卡项</label>
-              <label f12><radio style="transform:scale(0.7)" value="3" color="#1a66ff" />指定类型卡</label>
+              <label f12><radio style="transform:scale(0.7)" value="1" color="#FF5A5F" :checked="true" />任意卡项</label>
+              <label f12><radio style="transform:scale(0.7)" value="2" color="#FF5A5F" />指定卡项</label>
+              <label f12><radio style="transform:scale(0.7)" value="3" color="#FF5A5F" />指定类型卡</label>
             </radio-group>
             <MyCell label="请选择" noBorder @click="show2 = true">
               <text f14 c-3B3D3D>09:00-21:00</text>
@@ -219,7 +219,7 @@ onShow(() => {
                         <text f16 fb>
                           7980面部精雕30次
                         </text>
-                        <radio style="transform:scale(0.7)" value="3" color="#1a66ff" />
+                        <radio style="transform:scale(0.7)" value="3" color="#FF5A5F" />
                       </view>
                       <view f12 c-9A9FA5>
                         永久有效
@@ -247,7 +247,7 @@ onShow(() => {
                         <text f16 fb>
                           7980面部精雕30次
                         </text>
-                        <radio style="transform:scale(0.7)" value="3" color="#1a66ff" />
+                        <radio style="transform:scale(0.7)" value="3" color="#FF5A5F" />
                       </view>
                       <view f12 c-9A9FA5>
                         永久有效
@@ -370,7 +370,7 @@ label {
   font-size: 14px;
 }
 .tag {
-  color: #1a66ff;
+  color: #ff5a5f;
   background-color: #eff2ff;
   padding: 5rpx 16rpx;
   height: 32rpx;

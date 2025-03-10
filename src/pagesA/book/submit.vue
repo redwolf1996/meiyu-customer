@@ -193,7 +193,7 @@ async function submitDirect() {
   </view>
 
   <view :class="[safeBottom() ? 'py20px' : 'py10px']" bg-white px20px flex flex-bt flex-ac pf wp100 bottom-0px>
-    <view f12 c-1A66FF>
+    <view f12 c-FF5A5F>
       {{ fdt(bookInfo?.startTime) }}&nbsp;{{ bookInfo.storeServiceType === 1 ? '到店' : '上门' }}
     </view>
     <MyButton width="200rpx" @click="doSubmit()">

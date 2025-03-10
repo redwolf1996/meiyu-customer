@@ -379,8 +379,8 @@ async function submitDirect() {
   height: 45px;
   line-height: 45px;
   text-align: center;
-  color: #1a66ff;
-  border: 1px solid #1a66ff;
+  color: #ff5a5f;
+  border: 1px solid #ff5a5f;
   border-radius: 4px;
   width: 80%;
 }

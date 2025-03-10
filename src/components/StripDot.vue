@@ -16,7 +16,7 @@ const step = toRef(props, 'step')
   width: 28px;
   height: 8px;
   border-radius: 52px;
-  background: #1a66ff;
+  background: #ff5a5f;
 }
 .dot {
   width: 8px;

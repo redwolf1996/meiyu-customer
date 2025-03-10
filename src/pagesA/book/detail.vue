@@ -427,6 +427,6 @@ function getActiveIndex() {
   border: none !important;
 }
 :deep(.wd-step.is-finished > .wd-step__header > .wd-step__line) {
-  background: #1a66ff !important;
+  background: #ff5a5f !important;
 }
 </style>

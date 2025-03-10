@@ -63,10 +63,10 @@ function toMyInvite() {
         </view>
       </view>
       <view mt24px flex flex-cc tc @click="toMyInvite()">
-        <text fs-34 c-1A66FF>
+        <text fs-34 c-FF5A5F>
           我的邀请
         </text>
-        <wd-icon name="arrow-right" size="16px" color="#1A66FF" />
+        <wd-icon name="arrow-right" size="16px" color="#FF5A5F" />
       </view>
     </view>
   </view>
@@ -94,13 +94,13 @@ page {
   border-radius: 80px;
   text-align: center;
   &.b1 {
-    color: #1a66ff;
-    border: 2px solid #1a66ff;
+    color: #ff5a5f;
+    border: 2px solid #ff5a5f;
     background-color: #ffffff;
   }
   &.b2 {
     color: #ffffff;
-    background: linear-gradient(285deg, #1a66ff 0%, #15d48a 100%);
+    background: linear-gradient(285deg, #ff5a5f 0%, #15d48a 100%);
   }
 }
 </style>

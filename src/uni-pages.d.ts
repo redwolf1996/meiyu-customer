@@ -13,7 +13,6 @@ interface NavigateToOptions {
        "/pages/my/orders" |
        "/pages/my/points" |
        "/pages/servs/add" |
-       "/pages/servs/index" |
        "/pages/servs/time" |
        "/pages/tabs/MyTabBar" |
        "/pages/tabs/tab-home" |

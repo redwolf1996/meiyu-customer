@@ -122,7 +122,7 @@ function showItemMenu(item: List) {
               卡项列表
             </view>
             <text f14>
-              （共<text style="color:#1A66FF">
+              （共<text style="color:#FF5A5F">
                 {{ total }}
               </text>项）
             </text>

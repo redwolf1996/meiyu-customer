@@ -58,7 +58,7 @@ function save() {
           <text>
             {{ item.weekName }}
           </text>
-          <wd-switch v-model="item.active" size="24px" active-color="#1A66FF" @change="changeItemActive(item)" />
+          <wd-switch v-model="item.active" size="24px" active-color="#FF5A5F" @change="changeItemActive(item)" />
         </view>
         <view flex flex-ac @click="showPicker(item, index)">
           <view c-3B3D3D pr-10rpx>

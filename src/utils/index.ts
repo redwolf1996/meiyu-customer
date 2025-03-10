@@ -33,7 +33,7 @@ export function getMenuButtonInfo() {
   }
 }
 
-export const themeColor = '#1a66ff'
+export const themeColor = '#FF5A5F'
 
 export function get24Hours() {
   const arr: string[] = []

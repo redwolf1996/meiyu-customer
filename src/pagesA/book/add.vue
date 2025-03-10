@@ -351,7 +351,7 @@ function handleChangeGoodsCount(item: Partial<Service>) {
           <view c-3D3D3D>
             预约服务{{ index + 1 }}
           </view>
-          <view c-1A66FF @click="delServ(index)">
+          <view c-FF5A5F @click="delServ(index)">
             删除
           </view>
         </view>
@@ -417,7 +417,7 @@ function handleChangeGoodsCount(item: Partial<Service>) {
         </MyCellGroup>
       </view>
     </view>
-    <view bg-white f14 c-1A66FF tc pt10px pb20px style="border-top: 1px solid #EBEEF1;" @click="toAddServ()">
+    <view bg-white f14 c-FF5A5F tc pt10px pb20px style="border-top: 1px solid #EBEEF1;" @click="toAddServ()">
       +&nbsp;添加服务
     </view>
 

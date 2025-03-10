@@ -78,8 +78,8 @@ function onClickTag(item: GrigSelectItem, index: number) {
     border: 1px solid transparent;
     background: #f6f6fb;
     &.active {
-      color: #1a66ff;
-      border: 1px solid #1a66ff;
+      color: #ff5a5f;
+      border: 1px solid #ff5a5f;
       background: #eff2ff;
     }
   }

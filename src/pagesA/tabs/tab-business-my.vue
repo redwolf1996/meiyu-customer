@@ -150,8 +150,8 @@ function toFeedBack() {
       </template>
     </MyCell>
   </MyCellGroup>
-  <!-- <view c-1A66FF mt20px tc lh-20px @click="toAddNewStore()">
-    <text style="border-bottom: 1px solid #1A66FF;">
+  <!-- <view c-FF5A5F mt20px tc lh-20px @click="toAddNewStore()">
+    <text style="border-bottom: 1px solid #FF5A5F;">
       我要开新店
     </text>
   </view> -->

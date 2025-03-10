@@ -47,10 +47,10 @@ function toEdit() {
 
 <template>
   <view f14 flex flex-xr gap-40rpx px-50rpx pb-50rpx pt-20rpx>
-    <text c-1A66FF @click="toEdit()">
+    <text c-FF5A5F @click="toEdit()">
       修改
     </text>
-    <!-- <text c-1A66FF>
+    <!-- <text c-FF5A5F>
       邀请登录
     </text> -->
     <text c-F96229 @click="toDelete()">

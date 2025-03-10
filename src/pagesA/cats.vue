@@ -127,8 +127,8 @@ function selCat() {
 <template>
   <view px-20px h-90vh overflow-y-auto pr ma>
     <view flex flex-ac h-56px style="border-bottom: 1px solid #eee;" @click="openAdd()">
-      <wd-icon name="add-circle" size="22px" color="#1A66FF" />
-      <text c-1A66FF pl-10px>
+      <wd-icon name="add-circle" size="22px" color="#FF5A5F" />
+      <text c-FF5A5F pl-10px>
         {{ `添加${typeName}分类` }}
       </text>
     </view>
@@ -137,11 +137,11 @@ function selCat() {
     <template v-else>
       <view v-for="(item, index) in list" :key="`k-${index}`" flex flex-ac flex-bt h56px style="border-bottom: 1px solid #eee;">
         <view flex flex-ac gap-5px @click="toggleCheck(item)">
-          <radio style="transform:scale(1)" value="1" color="#1a66ff" :checked="item.checked" />
+          <radio style="transform:scale(1)" value="1" color="#FF5A5F" :checked="item.checked" />
           <text>{{ item.name }}</text>
         </view>
         <view flex flex-ac gap-12px>
-          <wd-icon name="edit-1" color="#1A66FF" size="22px" @click="openEdit(item)" />
+          <wd-icon name="edit-1" color="#FF5A5F" size="22px" @click="openEdit(item)" />
           <wd-icon name="delete-thin" color="#EC5428" size="22px" @click="openDel(item)" />
         </view>
       </view>

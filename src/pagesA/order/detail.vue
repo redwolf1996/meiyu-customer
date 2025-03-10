@@ -184,7 +184,7 @@ function toRefundDetail() {
         <view v-for="(item, index) in detail?.orderItem" :key="`sp-${index}`" mb20px style="border-bottom: 1px solid #eee;">
           <view fb mb12px flex flex-bt>
             <view>
-              <text c-1A66FF>
+              <text c-FF5A5F>
                 {{ index > 9 ? index + 1 : `0${index + 1}` }}
               </text>
               <text>&nbsp;&nbsp;{{ item?.goodsName }}</text>
@@ -232,7 +232,7 @@ function toRefundDetail() {
       <MyButton
         :borderWidth="2" radius="8rpx" fontSize="32rpx"
         width="208rpx" bgColor="transparent"
-        color="#1A66FF" borderColor="#1A66FF"
+        color="#FF5A5F" borderColor="#FF5A5F"
         @click="toCancel()"
       >
         取消
@@ -240,7 +240,7 @@ function toRefundDetail() {
       <MyButton
         :borderWidth="2" radius="8rpx" fontSize="32rpx"
         width="208rpx" bgColor="transparent"
-        color="#1A66FF" borderColor="#1A66FF"
+        color="#FF5A5F" borderColor="#FF5A5F"
         @click="toPay()"
       >
         去支付
@@ -251,7 +251,7 @@ function toRefundDetail() {
         v-if="!detail?.amount"
         :borderWidth="2" radius="8rpx" fontSize="32rpx"
         width="208rpx" bgColor="transparent"
-        color="#1A66FF" borderColor="#1A66FF"
+        color="#FF5A5F" borderColor="#FF5A5F"
         @click="toCancel()"
       >
         取消
@@ -260,7 +260,7 @@ function toRefundDetail() {
         v-else
         :borderWidth="2" radius="8rpx" fontSize="32rpx"
         width="208rpx" bgColor="transparent"
-        color="#1A66FF" borderColor="#1A66FF"
+        color="#FF5A5F" borderColor="#FF5A5F"
         @click="toRefund()"
       >
         主动退款

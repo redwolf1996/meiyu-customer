@@ -64,7 +64,7 @@ onShow(() => {
               会员卡项记录
             </view>
             <text f14>
-              （共<text style="color:#1A66FF">
+              （共<text style="color:#FF5A5F">
                 {{ total }}
               </text>项）
             </text>
@@ -112,7 +112,7 @@ onShow(() => {
           </view>
           <view flex flex-ac flex-bt fs-12px lh-12px>
             <view>
-              <text v-if="item.cardType === 1" px-12rpx py-7rpx c-#1A66FF pr left--6px>
+              <text v-if="item.cardType === 1" px-12rpx py-7rpx c-#FF5A5F pr left--6px>
                 <!-- 有限次卡和通卡  -->
                 <template v-if="item.cardSecondType === 1 || item.cardSecondType === 3">
                   {{ item?.useCount }}/{{ item?.countLimit }}
@@ -124,12 +124,12 @@ onShow(() => {
               </text>
 
               <!-- 充值卡：显示 [已使用金额]/[总金额] -->
-              <text v-if="item.cardType === 2" px-12rpx py-7rpx c-#1A66FF pr left--6px>
+              <text v-if="item.cardType === 2" px-12rpx py-7rpx c-#FF5A5F pr left--6px>
                 ¥{{ item?.amount }}/¥{{ item?.totalAmount }}
               </text>
 
               <!-- 折扣卡：显示 [已使用次数]/[折扣]起 -->
-              <text v-if="item.cardType === 3" px-12rpx py-7rpx c-#1A66FF pr left--6px>
+              <text v-if="item.cardType === 3" px-12rpx py-7rpx c-#FF5A5F pr left--6px>
                 {{ item?.discountDesc }}
               </text>
             </view>

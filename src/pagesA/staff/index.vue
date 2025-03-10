@@ -75,7 +75,7 @@ async function getList() {
           </view>
         </view>
       </view>
-      <wd-icon name="arrow-right" size="22px" color="#1A66FF" />
+      <wd-icon name="arrow-right" size="22px" color="#FF5A5F" />
     </view>
   </view>
 </template>

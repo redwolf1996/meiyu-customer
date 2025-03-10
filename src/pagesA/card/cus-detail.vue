@@ -203,7 +203,7 @@ function toBilling() {
           <text v-else>
             使用金额
           </text>
-          <text c-#1A66FF>
+          <text c-#FF5A5F>
             {{ detail?.cardType === 2 ? '￥' : '' }}{{ countUse }}
           </text>
         </view>
@@ -217,7 +217,7 @@ function toBilling() {
           <text v-if="detail?.cardType === 3">
             余额
           </text>
-          <text c-#1A66FF>
+          <text c-#FF5A5F>
             {{ detail?.cardType !== 1 ? '￥' : '' }}{{ countSurplus }}
           </text>
         </view>
@@ -286,7 +286,7 @@ function toBilling() {
               卡详情
             </text>
           </view>
-          <view f14 c-1a66ff @click="toBilling">
+          <view f14 c-FF5A5F @click="toBilling">
             去使用
           </view>
         </view>
@@ -508,7 +508,7 @@ function toBilling() {
 .menu {
   display: flex;
   justify-content: center;
-  color: #1a66ff;
+  color: #ff5a5f;
   font-size: 12px;
   align-items: center;
   .item {

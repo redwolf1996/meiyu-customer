@@ -147,13 +147,13 @@ async function save() {
   <view py20px bg-white mt12px px50rpx>
     <view v-for="(itm, idx) in bookInfo?.service" :key="`info-${idx}`" tc>
       <text>{{ itm.name }}</text>
-      <text c-1A66FF pl10px>
+      <text c-FF5A5F pl10px>
         {{ itm.duration }}分钟&nbsp;x{{ itm?.goodsCount }}
       </text>
     </view>
     <view f14 tc mt5px mb50rpx>
       <text>手艺人</text>
-      <text c-1A66FF pl10px>
+      <text c-FF5A5F pl10px>
         {{ bookInfo.artName || '未分配' }}
       </text>
     </view>
@@ -272,7 +272,7 @@ async function save() {
   }
   &.active {
     background: #e3ecfc;
-    color: #1a66ff;
+    color: #ff5a5f;
   }
 }
 :deep(.wu-calendar__weeks-day) {

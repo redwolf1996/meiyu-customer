@@ -53,7 +53,7 @@ onShareTimeline(() => {
 
   <view style="height: calc(100vh - 250px)" bg-white px20px py30px pr>
     <view mb16px flex flex-ac>
-      <view h-40rpx w-3.5px bg-1A66FF rd-8rpx />
+      <view h-40rpx w-3.5px bg-FF5A5F rd-8rpx />
       <view fs-48 pl-10px>
         详细介绍
       </view>
