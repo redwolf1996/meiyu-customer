@@ -61,14 +61,6 @@ async function initJssdk() {
   })
 }
 
-function showCityPicker() {
-  // 显示城市选择器
-  uni.showToast({
-    title: '城市选择功能开发中',
-    icon: 'none',
-  })
-}
-
 function getCurrentLocation() {
   // 获取当前位置并定位到当前城市
   wx.getLocation({

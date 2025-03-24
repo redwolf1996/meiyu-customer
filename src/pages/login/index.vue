@@ -16,8 +16,13 @@ const baseHost = import.meta.env.VITE_HOST
 
 onLoad(async () => {
   if (token.value) {
-    customerStoreId.value = customerStore.customerInfo.lastStoreId
-    return uni.reLaunch({ url: '/pages/tabs/tab-home' })
+    if (!customerStore.customerInfo?.lastStoreId) {
+      uni.reLaunch({ url: '/pages/login/store-list' })
+    }
+    else {
+      customerStoreId.value = customerStore.customerInfo.lastStoreId
+      return uni.reLaunch({ url: '/pages/tabs/tab-home' })
+    }
   }
 
   const code = new URLSearchParams(window.location.search).get('code')

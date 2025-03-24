@@ -6,6 +6,7 @@
 <script lang="ts" setup>
 import type { AllItems, CatsItemsTree, ServiceList } from './types2'
 import { flatten } from 'lodash-es'
+import MyTabBar from './MyTabBar.vue'
 
 const active = ref<number>(0)
 const scrollTop = ref<number>(0)
@@ -136,6 +137,8 @@ function confirm() {
       </wd-button>
     </view>
   </view>
+
+  <MyTabBar :tab-index="0" />
 </template>
 
   <style>

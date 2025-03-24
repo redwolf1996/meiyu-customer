@@ -8,7 +8,7 @@ import { useCustomerStore } from '@/stores/modules/customer'
 
 const customerStore = useCustomerStore()
 
-if (customerStore.customerInfo?.token && customerStore.customerInfo?.phone) {
+if (customerStore.customerInfo?.token && customerStore.customerInfo?.phone && customerStore.customerInfo?.lastStoreId) {
   toHome()
 }
 else {
