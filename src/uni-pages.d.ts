@@ -12,6 +12,8 @@ interface NavigateToOptions {
        "/pages/my/cards" |
        "/pages/my/orders" |
        "/pages/my/points" |
+       "/pages/my/qiwei" |
+       "/pages/my/service" |
        "/pages/servs/add" |
        "/pages/servs/time" |
        "/pages/tabs/MyTabBar" |

@@ -4,43 +4,36 @@ style:
 </route>
 
 <script lang="ts" setup>
+import { useCustomerStore } from '@/stores/modules/customer'
 import MyTabBar from './MyTabBar.vue'
 
-const userInfo = computed(() => useUserStore()?.userInfo)
-const storeInfo = computed(() => userInfo.value?.lastStore || userInfo.value?.storeList?.[0])
+// const customerInfo = computed(() => useCustomerStore()?.customerInfo)
 
-function toRenew() {
-  uni.navigateTo({ url: '/pagesA/my/renew' })
+function toMyOrders() {
+  uni.navigateTo({ url: '/pages/my/orders' })
 }
-function toMyStore() {
-  uni.navigateTo({ url: '/pagesA/my/store' })
+function toMyCards() {
+  uni.navigateTo({ url: '/pages/my/cards' })
 }
-// function toAddNewStore() {
-//   uni.navigateTo({ url: '/pagesA/my/new-store' })
-// }
-function toServ() {
-  uni.navigateTo({ url: '/pagesA/my/service' })
+function toMyPoints() {
+  uni.navigateTo({ url: '/pages/my/points' })
 }
-function toInvite() {
-  uni.navigateTo({ url: '/pagesA/my/invite' })
+function toCallBusiness() {
+  uni.navigateTo({ url: '/pages/my/service' })
 }
-function toSettings() {
-  uni.navigateTo({ url: '/pagesA/my/settings' })
+function toQuit() {
+  useCustomerStore().clearCustomerInfo()
+  uni.redirectTo({ url: '/pages/login/index' })
 }
-function toAbout() {
-  uni.navigateTo({ url: '/pagesA/my/about' })
-}
-function toFeedBack() {
-  // wx.openEmbeddedMiniProgram({
-  //   appId: 'wx8abaf00ee8c3202e',
-  //   extraData: {
-  //     id: '673474',
-  //     customData: {
-  //       clientInfo: `iPhone OS 10.3.1 / 3.2.0.43 / 0`,
-  //     },
-  //   },
-  // })
-  uni.navigateTo({ url: '/pagesA/my/feedback' })
+function toCallMeiyumini() {
+  // 调起美预小程序
+  uni.navigateToMiniProgram({
+    appId: 'wx4523c84aefbd91d2',
+    path: 'pages/index',
+    success: () => {
+      console.log('调起成功')
+    },
+  })
 }
 </script>
 
@@ -90,48 +83,39 @@ function toFeedBack() {
         </view>
       </view>
     </view>
+    <view mt20px>
+      我的订单
+    </view>
+    <view flex flex-ac flex-rd f12 mt20px rd8px>
+      <view flex flex-y flex-cc gap8px>
+        <view>
+          <wd-icon name="money-circle" size="24px" />
+        </view>
+        <view c-#717171>
+          待支付
+        </view>
+      </view>
+      <view flex flex-y flex-cc gap8px>
+        <wd-badge :modelValue="1">
+          <wd-icon name="clock" size="24px" />
+        </wd-badge>
+        <view c-#717171>
+          待服务
+        </view>
+      </view>
+    </view>
   </view>
   <MyCellGroup>
-    <MyCell v-if="storeRole !== 2 && storeRole !== 3" label="我的店铺" noBorder @myclick="toMyStore()">
-      <template #icon>
-        <wd-icon name="home" size="18px" />
-      </template>
-      <text f14 c-3B3D3D>
-        {{ storeInfo?.storeName }}
-      </text>
-    </MyCell>
-    <MyCell label="联系客服" noBorder @myclick="toServ()">
-      <template #icon>
-        <wd-icon name="user-talk" size="18px" />
-      </template>
-    </MyCell>
-    <MyCell label="意见反馈" noBorder @myclick="toFeedBack()">
-      <template #icon>
-        <wd-icon name="evaluation" size="18px" />
-      </template>
-      <text f14 c-B6BDBD>
-        欢迎反馈您使用中遇到的问题
-      </text>
-    </MyCell>
-    <MyCell label="关于我们" noBorder @myclick="toAbout()">
-      <template #icon>
-        <wd-icon name="warning" size="18px" />
-      </template>
-    </MyCell>
+    <MyCell label="我的预约" noBorder @myclick="toMyOrders()" />
+    <MyCell label="我的卡项" noBorder @myclick="toMyCards()" />
+    <MyCell label="积分记录" noBorder @myclick="toMyPoints()" />
+    <MyCell label="联系商家" noBorder @myclick="toCallBusiness()" />
+    <MyCell label="退出登录" noBorder @myclick="toQuit()" />
   </MyCellGroup>
   <view h16px />
   <MyCellGroup>
-    <MyCell label="设置" noBorder @myclick="toSettings()">
-      <template #icon>
-        <wd-icon name="setting" size="18px" />
-      </template>
-    </MyCell>
+    <MyCell label="我需要一个门店收银系统" noBorder @myclick="toCallMeiyumini()" />
   </MyCellGroup>
-  <!-- <view c-FF5A5F mt20px tc lh-20px @click="toAddNewStore()">
-    <text style="border-bottom: 1px solid #FF5A5F;">
-      我要开新店
-    </text>
-  </view> -->
   <view h100px />
   <MyTabBar :tab-index="2" />
 </template>

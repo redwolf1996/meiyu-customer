@@ -57,6 +57,20 @@
       }
     },
     {
+      "path": "pages/my/qiwei",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "企业微信"
+      }
+    },
+    {
+      "path": "pages/my/service",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "联系客服"
+      }
+    },
+    {
       "path": "pages/servs/add",
       "type": "page",
       "layout": false,
