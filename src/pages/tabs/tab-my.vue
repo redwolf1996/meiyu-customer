@@ -53,64 +53,43 @@ function toFeedBack() {
         :height="56"
         :src="DEFAULT_AVATAR"
       />
-      <view flex-1 flex flex-y flex-bt h64px pr>
+      <view flex-1 flex flex-y flex-bt h56px pr>
         <view c-141414 f18>
-          {{ userInfo?.userName }}
+          石美华
         </view>
         <view flex flex-ac gap5px>
-          <text class="yy">
-            营业中
-          </text>
           <text f14 c-969699>
-            {{ userInfo?.phone }}
+            178****1234
           </text>
-        </view>
-        <view c-969699 f14>
-          {{ storeInfo?.isOwner ? '店铺拥有者' : (storeInfo?.roleDesc || '--') }}
-        </view>
-        <view tc pa right-0 top-4px>
-          <view c-969699 fs-20 mb2px>
-            积分
-          </view>
-          <view f18>
-            {{ userInfo.orgInfo?.integration }}
-          </view>
         </view>
       </view>
     </view>
-    <view
-      v-if="storeRole !== 2 && storeRole !== 3"
-      :style="{
-        backgroundImage: `url(${IMG_BASE}/bg-my.png)`,
-      }" px16px py12px flex flex-ac flex-bt mt-12px
-    >
-      <view flex flex-y flex-bt gap-10px>
-        <view flex flex-ac>
-          <wd-img
-            :round="true"
-            :width="18"
-            :height="18"
-            :src="`${IMG_BASE}/icon-v.png`"
-          />
-          <text color-white opacity-50 f12>
-            {{ userInfo.orgInfo?.expiresTime }} 到期
-          </text>
-        </view>
-        <view f12 color-white>
-          最低￥{{ useUserStore()?.userInfo?.renewPrice || '--' }}/月，也可积分抵扣
+    <view flex flex-ac flex-rd f12 mt20px rd8px style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);padding: 16px 0;">
+      <view flex flex-y flex-cc gap8px>
+        <view>¥100</view>
+        <view c-#717171>
+          卡余额
         </view>
       </view>
-      <view class="xf" @click="toRenew()">
-        立即续费
+      <view flex flex-y flex-cc gap8px>
+        <view>100</view>
+        <view c-#717171>
+          次卡
+        </view>
+      </view>
+      <view flex flex-y flex-cc gap8px>
+        <view>100</view>
+        <view c-#717171>
+          折扣卡
+        </view>
+      </view>
+      <view flex flex-y flex-cc gap8px>
+        <view>100</view>
+        <view c-#717171>
+          积分
+        </view>
       </view>
     </view>
-  </view>
-  <view px16px py8px @click="toInvite()">
-    <wd-img
-      height="48px"
-      width="100%"
-      :src="`${IMG_BASE}/banner-my.png`"
-    />
   </view>
   <MyCellGroup>
     <MyCell v-if="storeRole !== 2 && storeRole !== 3" label="我的店铺" noBorder @myclick="toMyStore()">
