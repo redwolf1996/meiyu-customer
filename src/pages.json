@@ -87,8 +87,7 @@
       "path": "pages/tabs/tab-my",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "我的",
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "我的"
       }
     }
   ],

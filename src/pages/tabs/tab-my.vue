@@ -1,7 +1,6 @@
 <route lang="yaml">
 style:
   navigationBarTitleText: 我的
-  navigationStyle: "custom"
 </route>
 
 <script lang="ts" setup>
@@ -46,7 +45,6 @@ function toFeedBack() {
 </script>
 
 <template>
-  <MyNavBar title="我的" :capsule="false" />
   <view p20px bg-white>
     <view flex flex-ac gap12px>
       <wd-img

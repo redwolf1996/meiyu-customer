@@ -1,7 +1,7 @@
 <route lang="yaml">
-  style:
-    navigationBarTitleText: 选择服务
-  </route>
+style:
+  navigationBarTitleText: 选择服务
+</route>
 
 <script lang="ts" setup>
 import type { AllItems, CatsItemsTree, ServiceList } from './types2'
