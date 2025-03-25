@@ -83,7 +83,7 @@ function toCallMeiyumini() {
         </view>
       </view>
     </view>
-    <view mt20px>
+    <!-- <view mt20px>
       我的订单
     </view>
     <view flex flex-ac flex-rd f12 mt20px rd8px>
@@ -103,7 +103,7 @@ function toCallMeiyumini() {
           待服务
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
   <MyCellGroup>
     <MyCell label="我的预约" noBorder @myclick="toMyOrders()" />
@@ -113,9 +113,16 @@ function toCallMeiyumini() {
     <MyCell label="退出登录" noBorder @myclick="toQuit()" />
   </MyCellGroup>
   <view h16px />
-  <MyCellGroup>
-    <MyCell label="我需要一个门店收银系统" noBorder @myclick="toCallMeiyumini()" />
-  </MyCellGroup>
+
+  <view px16px>
+    <wd-img
+      width="100%"
+      :height="104"
+      mode="aspectFill"
+      :src="`${IMG_BASE}/i-need-a-store.png`"
+      @click="toCallMeiyumini()"
+    />
+  </view>
   <view h100px />
   <MyTabBar :tab-index="2" />
 </template>
