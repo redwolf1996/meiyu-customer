@@ -176,7 +176,7 @@ function confirm() {
   position: fixed;
   padding: 0 20px;
   width: 100%;
-  bottom: 0;
+  bottom: 72px;
   background-color: #fff;
 }
 .this-tab {
