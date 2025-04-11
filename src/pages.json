@@ -43,6 +43,13 @@
       }
     },
     {
+      "path": "pages/my/minapp",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "打开小程序"
+      }
+    },
+    {
       "path": "pages/my/orders",
       "type": "page",
       "style": {

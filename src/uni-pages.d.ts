@@ -10,6 +10,7 @@ interface NavigateToOptions {
        "/pages/login/store-list" |
        "/pages/my/bookings" |
        "/pages/my/cards" |
+       "/pages/my/minapp" |
        "/pages/my/orders" |
        "/pages/my/points" |
        "/pages/my/qiwei" |

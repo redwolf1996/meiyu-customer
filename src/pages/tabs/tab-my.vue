@@ -27,13 +27,15 @@ function toQuit() {
 }
 function toCallMeiyumini() {
   // 调起美预小程序
-  uni.navigateToMiniProgram({
-    appId: 'wx4523c84aefbd91d2',
-    path: 'pages/index',
-    success: () => {
-      console.log('调起成功')
-    },
-  })
+  // uni.navigateToMiniProgram({
+  //   appId: 'wx4523c84aefbd91d2',
+  //   path: 'pages/index',
+  //   success: () => {
+  //     console.log('调起成功')
+  //   },
+  // })
+
+  uni.navigateTo({ url: '/pages/my/minapp' })
 }
 </script>
 
@@ -108,7 +110,7 @@ function toCallMeiyumini() {
   <MyCellGroup>
     <MyCell label="我的预约" noBorder @myclick="toMyOrders()" />
     <MyCell label="我的卡项" noBorder @myclick="toMyCards()" />
-    <MyCell label="积分记录" noBorder @myclick="toMyPoints()" />
+    <!-- <MyCell label="积分记录" noBorder @myclick="toMyPoints()" /> -->
     <MyCell label="联系商家" noBorder @myclick="toCallBusiness()" />
     <MyCell label="退出登录" noBorder @myclick="toQuit()" />
   </MyCellGroup>
