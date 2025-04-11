@@ -138,6 +138,8 @@ function confirm() {
     </view>
   </view>
 
+  <view h100 />
+
   <MyTabBar :tab-index="0" />
 </template>
 
