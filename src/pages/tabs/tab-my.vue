@@ -15,9 +15,9 @@ function toMyOrders() {
 function toMyCards() {
   uni.navigateTo({ url: '/pages/my/cards' })
 }
-function toMyPoints() {
-  uni.navigateTo({ url: '/pages/my/points' })
-}
+// function toMyPoints() {
+//   uni.navigateTo({ url: '/pages/my/points' })
+// }
 function toCallBusiness() {
   uni.navigateTo({ url: '/pages/my/service' })
 }
@@ -126,7 +126,7 @@ function toCallMeiyumini() {
     />
   </view>
   <view h100px />
-  <MyTabBar :tab-index="2" />
+  <MyTabBar :tab-index="1" />
 </template>
 
 <style lang='scss' scoped>

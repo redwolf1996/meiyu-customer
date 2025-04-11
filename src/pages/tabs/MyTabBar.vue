@@ -22,10 +22,10 @@ function changeBar(index: number) {
 <template>
   <uv-tabbar
     :zIndex="99999"
-    :value="tabbar" active-color="#FF5A5F" inactive-color="#A7A8AC"
+    :value="tabbar" active-color="#1A66FF" inactive-color="#A7A8AC"
     @change="changeBar"
   >
-    <uv-tabbar-item text="首页">
+    <uv-tabbar-item text="预约">
       <template #active-icon>
         <image class="icon" src="./icons/icon-tab-dashboard-act.png" />
       </template>
