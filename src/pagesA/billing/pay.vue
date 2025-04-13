@@ -242,7 +242,7 @@ async function payLater() {
     </view>
 
     <view v-else mx-40rpx mt-164rpx color-white flex flex-cc gap10px>
-      <view w120px @click="payLater()">
+      <view w140px @click="payLater()">
         <wd-button size="large" :plain="true" block>
           <view flex flex-cc>
             <text>稍后付款</text>

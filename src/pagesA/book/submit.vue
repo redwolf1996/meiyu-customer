@@ -60,7 +60,7 @@ async function submitDirect() {
           {{ fdt(bookInfo.startTime) ?? '--' }}
         </text>
       </view>
-      <view flex flex-ac>
+      <!-- <view flex flex-ac>
         <text c-818181>
           预约人：
         </text>
@@ -75,7 +75,7 @@ async function submitDirect() {
         <text pl10px>
           {{ bookInfo.storeCustomerPhone ?? '--' }}
         </text>
-      </view>
+      </view> -->
       <view flex flex-ac>
         <text c-818181>
           手艺人：
