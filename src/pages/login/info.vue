@@ -32,7 +32,7 @@ function handleSubmit() {
       }
     })
     .catch((error) => {
-      toast().error(error)
+      console.error(error)
     })
 }
 </script>

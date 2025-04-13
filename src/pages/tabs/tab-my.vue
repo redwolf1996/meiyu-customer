@@ -7,7 +7,9 @@ style:
 import { useCustomerStore } from '@/stores/modules/customer'
 import MyTabBar from './MyTabBar.vue'
 
-// const customerInfo = computed(() => useCustomerStore()?.customerInfo)
+const customerInfo = computed(() => useCustomerStore()?.customerInfo)
+
+console.log(customerInfo.value)
 
 function toMyOrders() {
   uni.navigateTo({ url: '/pages/my/orders' })
@@ -55,11 +57,11 @@ function toProtocol(type: 1 | 2) {
       />
       <view flex-1 flex flex-y flex-bt h56px pr>
         <view c-141414 f18>
-          石美华
+          {{ customerInfo?.name }}
         </view>
         <view flex flex-ac gap5px>
           <text f14 c-969699>
-            178****1234
+            {{ customerInfo?.phone }}
           </text>
         </view>
       </view>
