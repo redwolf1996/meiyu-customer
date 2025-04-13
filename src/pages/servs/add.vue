@@ -10,7 +10,8 @@ import type { BookForm, CustomerDetail, ListStaff, Service } from './types'
 import qs from 'qs'
 import { useCustomerStore } from '@/stores/modules/customer'
 
-// const customerStore = useCustomerStore()
+const customerStore = useCustomerStore()
+const customerStoreId = computed(() => customerStore.customerInfo?.lastStoreId)
 const toast = useToast()
 const curIndex = ref(0) // 预约服务列表当前选择项的索引
 const columns = ref<SelItem[]>([
@@ -83,7 +84,7 @@ function clickItem(item: ListStaff) {
 }
 
 function toAddServ() {
-  uni.navigateTo({ url: '/pagesA/book/servs' })
+  uni.navigateTo({ url: '/pages/tabs/tab-home' })
 }
 
 function toSelServTime() {
@@ -121,10 +122,8 @@ async function save() {
 }
 
 function toSelCard(item, index: number) {
-  if (!model.storeCustomerId)
-    return toast.warning('请先选择客户')
   curIndex.value = index
-  const storeCustomerId = model.storeCustomerId
+  const storeCustomerId = customerStoreId.value
   const goodsId = item.storeServiceId
   const goodsType = 1
   const params = qs.stringify({ storeCustomerId, goodsId, goodsType })
