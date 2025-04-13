@@ -60,6 +60,13 @@ function changeCheck() {
 }
 
 function confirm() {
+  if (checkedCount.value === 0) {
+    uni.showToast({
+      title: '请选择服务',
+      icon: 'none',
+    })
+    return
+  }
   checkedServs.value = tmpCheckedServs.value.map((v) => {
     return {
       ...v,

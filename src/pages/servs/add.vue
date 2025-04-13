@@ -1,8 +1,8 @@
 <route lang="yaml">
-  layout: false
-  style:
-    navigationBarTitleText: 预约服务
-  </route>
+layout: false
+style:
+  navigationBarTitleText: 预约服务
+</route>
 
 <script lang="ts" setup>
 import { bookInfo } from '@/stores/book-info'
@@ -10,7 +10,7 @@ import type { BookForm, CustomerDetail, ListStaff, Service } from './types'
 import qs from 'qs'
 import { useCustomerStore } from '@/stores/modules/customer'
 
-const customerStore = useCustomerStore()
+// const customerStore = useCustomerStore()
 const toast = useToast()
 const curIndex = ref(0) // 预约服务列表当前选择项的索引
 const columns = ref<SelItem[]>([
@@ -23,11 +23,7 @@ const columns = ref<SelItem[]>([
     value: 2,
   },
 ])
-const model = reactive<BookForm>({
-  storeId: customerStoreId.value,
-  storeCustomerPhone: computed(() => curCustomer.value?.phone),
-  storeCustomerName: computed(() => curCustomer.value?.name),
-  storeCustomerId: computed(() => curCustomer.value?.storeCustomerId),
+const model = reactive<any>({
   storeServiceType: 1,
   customerAddress: null,
   startTime: computed(() => `${bookStime.value}:00`),
@@ -41,8 +37,6 @@ const model = reactive<BookForm>({
 const artName = ref('')
 const listStaff = ref<ListStaff[]>([])
 const visibleStaff = ref(false)
-const fromCustomer = ref(false)
-const cusName = computed(() => `${curCustomer.value?.name} ${curCustomer.value?.phone}` || '')
 
 watch(
   () => model.storeServiceType,
@@ -52,16 +46,7 @@ watch(
   },
 )
 
-function toSelCus() {
-  if (fromCustomer.value)
-    return false
-  uni.navigateTo({ url: '/pagesA/customer/list' })
-}
-
 onLoad(async () => {
-  const userInfo = customerStore.customerInfo
-  model.storeCustomerName = userInfo.name
-  model.storeCustomerPhone = userInfo.phone
   getStaff()
   recordStoreJoin()
 })
@@ -335,7 +320,7 @@ function handleChangeGoodsCount(item: Partial<Service>) {
   </wd-popup>
   <wd-form :model="model">
     <wd-cell-group :border="true">
-      <wd-cell title="客户" required :is-link="!fromCustomer" @click="toSelCus()">
+      <!-- <wd-cell title="客户" required :is-link="!fromCustomer" @click="toSelCus()">
         <view>
           <text v-if="!curCustomer?.storeCustomerId" c-#B6BDBD>
             请选择或添加
@@ -347,7 +332,7 @@ function handleChangeGoodsCount(item: Partial<Service>) {
         <template #icon>
           <wd-icon name="user" size="16px" />
         </template>
-      </wd-cell>
+      </wd-cell> -->
       <wd-picker
         v-model="model.storeServiceType"
         :rules="[{ required: true, message: '请选择服务方式' }]"
