@@ -8,7 +8,10 @@ style:
 import type { Times } from '@/utils'
 import { flatten } from 'lodash-es'
 import type { BookingData, TimeOccupy } from './types'
+import { useCustomerStore } from '@/stores/modules/customer'
 
+const customerStore = useCustomerStore()
+const customerStoreId = computed(() => customerStore.customerInfo?.lastStoreId)
 const curWeek = ref(+new Date().getDay() + 1)
 const instance = getCurrentInstance()
 const query = uni.createSelectorQuery().in(instance.proxy)
@@ -48,11 +51,10 @@ async function init() {
   times.value = generateTimeSlots(workStime.value, workEtime.value)
 
   const params = {
-    storeId: customerStoreId.value,
     artisanId: bookInfo.value?.artisanId,
     cDate: day.value,
   }
-  const res = await request.get<TimeOccupy[]>('/business/booking-artisan', params)
+  const res = await request.get<TimeOccupy[]>('/customer/booking-artisan', params)
   const employIndexes = flatten(res.data.map(v => v.employIndex)) // 后端计算的disabled时间点index
 
   setTotalDuration()
