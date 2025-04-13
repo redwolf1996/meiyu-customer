@@ -37,6 +37,11 @@ function toCallMeiyumini() {
 
   uni.navigateTo({ url: '/pages/my/minapp' })
 }
+
+// 1:服务协议 2:隐私政策
+function toProtocol(type: 1 | 2) {
+  uni.navigateTo({ url: `/pagesA/protocol?type=${type}` })
+}
 </script>
 
 <template>
@@ -112,6 +117,8 @@ function toCallMeiyumini() {
     <MyCell label="我的卡项" noBorder @myclick="toMyCards()" />
     <!-- <MyCell label="积分记录" noBorder @myclick="toMyPoints()" /> -->
     <MyCell label="联系商家" noBorder @myclick="toCallBusiness()" />
+    <MyCell label="用户协议" noBorder @myclick="toProtocol(1)" />
+    <MyCell label="隐私政策" noBorder @myclick="toProtocol(2)" />
     <MyCell label="退出登录" noBorder @myclick="toQuit()" />
   </MyCellGroup>
   <view h16px />
