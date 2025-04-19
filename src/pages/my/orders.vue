@@ -4,8 +4,10 @@ style:
 </route>
 
 <script lang="ts" setup>
+import { useCustomerStore } from '@/stores/modules/customer'
 import type { List } from './types'
 
+const customerStore = useCustomerStore()
 const valMap = [null, 101, 103, 104]
 const tabs = [{
   label: '全部',
@@ -22,7 +24,7 @@ const tabs = [{
 }]
 const tab = ref(0)
 const reqParams = reactive({
-  storeId: customerStoreId.value,
+  storeId: customerStore.customerInfo?.lastStoreId,
   pageNum: 1,
   pageSize: 10,
   searchStatus: computed(() => valMap[tab.value]),

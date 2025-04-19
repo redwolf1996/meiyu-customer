@@ -9,8 +9,6 @@ import MyTabBar from './MyTabBar.vue'
 
 const customerInfo = computed(() => useCustomerStore()?.customerInfo)
 
-console.log(customerInfo.value)
-
 function toMyOrders() {
   uni.navigateTo({ url: '/pages/my/orders' })
 }

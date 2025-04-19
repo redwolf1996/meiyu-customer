@@ -84,7 +84,7 @@ function clickItem(item: ListStaff) {
 }
 
 function toAddServ() {
-  uni.navigateTo({ url: '/pages/tabs/tab-home' })
+  uni.reLaunch({ url: '/pages/tabs/tab-home' })
 }
 
 function toSelServTime() {

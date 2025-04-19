@@ -4,6 +4,7 @@ style:
 </route>
 
 <script lang="ts" setup>
+import weixin from '@wtto00/jweixin-esm'
 import qs from 'qs'
 
 const toast = useToast()
@@ -20,19 +21,46 @@ const totalToPayAmount = sumArray(bookInfo.value.service.map(v => v.amount))
 // 商品优惠金额合计
 // const discountAmount = func_sub(totalOriAmount, totalToPayAmount)
 
+// 提交预约
 async function doSubmit() {
-  if (!totalToPayAmount) { // 总金额为0直接预约成功，不需要支付
-    submitDirect()
+  // if (!totalToPayAmount) { // 总金额为0直接预约成功，不需要支付
+  //   submitDirect()
+  // }
+  bookInfo.value.amount = totalToPayAmount
+  const res = await request.post<any>('/customer/booking', { ...bookInfo.value, payType: 3 })
+  console.log(res)
+
+  if (typeof window.WeixinJSBridge === 'undefined') {
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false)
+    }
+    // attachEvent is deprecated and not supported in modern browsers
+    // We only need addEventListener for modern browsers
   }
   else {
-    bookInfo.value.amount = totalToPayAmount
-    uni.navigateTo({ url: '/pagesA/billing/pay?createSource=4' }) // 预约单支付（包含了预约信息和支付信息）
+    onBridgeReady(res.data.wxPay)
   }
+}
+function onBridgeReady(wxPay: any) {
+  const wx = window.WeixinJSBridge
+  wx.invoke('getBrandWCPayRequest', {
+    appId: wxPay.appId, // 公众号ID
+    timeStamp: wxPay.timeStamp, // 时间戳
+    nonceStr: wxPay.nonceStr, // 随机串
+    package: wxPay.packageVal, // 预支付交易会话标识
+    signType: wxPay.signType, // 微信签名方式：
+    paySign: wxPay.paySign, // 微信签名
+  }, (res) => {
+    if (res.err_msg == 'get_brand_wcpay_request:ok') {
+      // 使用以上方式判断前端返回,微信团队郑重提示：
+      // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠，商户需进一步调用后端查单确认支付结果。
+    }
+  })
 }
 
 // 待付款金额为0，不去结账，直接提交成功
 async function submitDirect() {
-  const res = await request.post<any>('/business/booking', { ...bookInfo.value, payType: null })
+  const res = await request.post<any>('/business/booking', { ...bookInfo.value, payType: 3 })
   toast.info('预约成功')
   const params = {
     orderId: res.data.orderId,
@@ -42,6 +70,29 @@ async function submitDirect() {
   }
   await sleep(1000)
   uni.redirectTo({ url: `/pagesA/billing/pay-success?${qs.stringify(params)}` })
+}
+
+async function initJssdk() {
+  const res = await request.get('/customer/jsapi-config', {
+    url: window.location.origin + window.location.pathname + window.location.search,
+  }) as any
+
+  const configData: WX.ConfigOptions = {
+    debug: false,
+    appId: 'wx4523c84aefbd91d2',
+    timestamp: res.data.timestamp.toString(),
+    nonceStr: res.data.nonceStr,
+    signature: res.data.signature,
+    jsApiList: ['getLocation'], // WX.JsApi[]
+    openTagList: [], // WX.OpenTag[]
+  }
+  weixin.config(configData)
+  weixin.ready(() => {
+    console.log('ready')
+  })
+  weixin.error((err: any) => {
+    console.log('error', err)
+  })
 }
 </script>
 

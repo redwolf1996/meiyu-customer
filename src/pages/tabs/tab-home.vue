@@ -42,6 +42,14 @@ onShow(async () => {
   changeCheck() // 初始化tmpCheckedServs
 })
 
+onMounted(() => {
+  // 去掉uniapp左上角返回箭头
+  const a = document.getElementsByClassName('uni-page-head-hd')[0]
+  if (a) {
+    (a as any).style.display = 'none'
+  }
+})
+
 function handleChange({ value }) {
   active.value = value
   scrollTop.value = -1
@@ -80,6 +88,16 @@ function confirm() {
 </script>
 
 <template>
+  <!-- <wd-navbar
+    placeholder pr
+    custom-class="custom-nav"
+    :safeAreaInsetTop="true"
+    :fixed="true"
+  >
+    <template #title>
+      <text>选择服务</text>
+    </template>
+  </wd-navbar> -->
   <view class="wrapper">
     <wd-sidebar v-model="active" @change="handleChange">
       <wd-sidebar-item
@@ -150,15 +168,18 @@ function confirm() {
   <MyTabBar :tab-index="0" />
 </template>
 
-  <style>
-  page {
+<style>
+page {
   height: 100vh;
   background: #fff;
   overflow-y: hidden;
 }
+.uni-page-head-hd {
+  display: none !important;
+}
 </style>
 
-  <style lang='scss' scoped>
+<style lang='scss' scoped>
   .wrapper {
   display: flex;
   height: calc(100vh - 90px);

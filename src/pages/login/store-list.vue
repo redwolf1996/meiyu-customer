@@ -150,7 +150,7 @@ async function selectStore(store: any) {
   customerStoreId.value = store.id
   // 上报当前门店id
   await request.post(`/customer/current-store-id/${store.id}`)
-  uni.navigateTo({
+  uni.reLaunch({
     url: '/pages/tabs/tab-home',
   })
 }

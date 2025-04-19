@@ -4,13 +4,14 @@ style:
 </route>
 
 <script lang="ts" setup>
+import { useCustomerStore } from '@/stores/modules/customer'
 import type { CusList as List } from './types'
 
+const customerStore = useCustomerStore()
 const reqParams = reactive({
-  storeId: customerStoreId.value,
+  storeId: customerStore.customerInfo?.lastStoreId,
   pageNum: 1,
   pageSize: 10,
-  keyword: '',
 })
 const paging = ref<ZPagingInstance<List> | null>(null)
 const dataList = ref<List[]>([])
@@ -54,7 +55,7 @@ onShow(() => {
     @query="queryList"
   >
     <template #top>
-      <TopSearch v-model="reqParams.keyword" placeholder="请输入客户姓名或手机号" @search="search()" />
+      <!-- <TopSearch v-model="reqParams.keyword" placeholder="请输入客户姓名或手机号" @search="search()" /> -->
       <view class="h16px" />
       <view mx-14px p-16px pb6px bg-white rd-t-8px>
         <view class="title">
