@@ -7,13 +7,14 @@ style:
 import weixin from '@wtto00/jweixin-esm'
 import { onMounted, ref } from 'vue'
 import { formatWorkTime } from '@/utils'
+import { useCustomerStore } from '@/stores/modules/customer'
 
 const currentCity = ref<string>('青岛')
 const storeList = ref<any[]>([])
 const paging = ref<any>(null)
 
 onLoad(async () => {
-  // initJssdk()
+  initJssdk()
 })
 
 onMounted(() => {
@@ -126,6 +127,8 @@ async function reverseGeocode(longitude: number, latitude: number) {
 
     const data = await jsonp(url, `QQmap_${Date.now()}`)
 
+    console.log('data', data)
+
     if (data.status === 0) {
       // 更新城市名称
       currentCity.value = data.result.address_component.city
@@ -150,9 +153,10 @@ async function selectStore(store: any) {
   customerStoreId.value = store.id
   // 上报当前门店id
   await request.post(`/customer/current-store-id/${store.id}`)
-  uni.reLaunch({
-    url: '/pages/tabs/tab-home',
-  })
+  const res = await request.get('/customer/info')
+  const customerStore = useCustomerStore()
+  customerStore.setCustomerInfo(res.data)
+  uni.reLaunch({ url: '/pages/tabs/tab-home' })
 }
 
 function contactStore(store: any) {
@@ -182,10 +186,10 @@ function contactStore(store: any) {
     <template #top>
       <!-- 地址选择和搜索栏 -->
       <view class="search-container">
-        <!-- <view class="location-selector">
-            <text>{{ currentCity }}</text>
-            <wd-icon name="arrow-down" size="14" />
-          </view> -->
+        <view class="location-selector">
+          <text>{{ currentCity }}</text>
+          <wd-icon name="arrow-down" size="14" />
+        </view>
         <view class="search-box">
           <wd-icon name="search" size="18" />
           <input type="text" placeholder="搜索">

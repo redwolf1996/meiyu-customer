@@ -42,6 +42,7 @@ async function doSubmit() {
   }
 }
 function onBridgeReady(wxPay: any) {
+  console.log('wxPay', wxPay)
   const wx = window.WeixinJSBridge
   wx.invoke('getBrandWCPayRequest', {
     appId: wxPay.appId, // 公众号ID

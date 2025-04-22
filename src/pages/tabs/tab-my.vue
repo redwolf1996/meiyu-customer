@@ -21,8 +21,10 @@ function toMyCards() {
 function toCallBusiness() {
   uni.navigateTo({ url: '/pages/my/service' })
 }
-function toQuit() {
+
+async function toQuit() {
   useCustomerStore().clearCustomerInfo()
+  await request.post(`/customer/current-store-id/0`)
   uni.redirectTo({ url: '/pages/login/index' })
 }
 function toCallMeiyumini() {
