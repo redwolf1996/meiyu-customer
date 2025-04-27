@@ -9,10 +9,15 @@ import { onMounted, ref } from 'vue'
 import { formatWorkTime } from '@/utils'
 import { useCustomerStore } from '@/stores/modules/customer'
 
+interface City {
+  code: string
+  name: string
+}
+
 const currentCity = ref<string>('')
 const storeList = ref<any[]>([])
 const paging = ref<any>(null)
-
+const cityList = ref<City[]>([])
 onLoad(async () => {
   initJssdk()
 })
@@ -23,8 +28,10 @@ onMounted(() => {
 
 async function queryList(pageNo: number, pageSize: number) {
   try {
-    const cityList = await request.get<any>('/customer/city')
-    console.log('cityList', cityList)
+    if (!cityList.value.length) {
+      const res = await request.get<City[]>('/customer/city')
+      cityList.value = res.data
+    }
     const res = await request.get<any>('/customer/store-list-all', {
       params: {
         pageNo,

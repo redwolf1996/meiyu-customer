@@ -1,5 +1,3 @@
-import type { PayModeEnum } from '@/utils/consts'
-
 export interface GrigSelectItem {
   label: string
   value: number | string | null
