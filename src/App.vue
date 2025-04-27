@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import VConsole from 'vconsole'
 import { onHide, onLaunch, onShow } from '@dcloudio/uni-app'
 
-onLaunch(() => {})
+onLaunch(() => {
+})
 onShow(() => {})
 onHide(() => {})
 </script>
