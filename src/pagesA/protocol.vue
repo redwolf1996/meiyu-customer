@@ -15,8 +15,8 @@ onLoad((options) => {
     title: protocolMap[type],
   })
   url.value = type === 1
-    ? 'https://api.meiyux.com/beauty/yhxy.html?v=2'
-    : 'https://api.meiyux.com/beauty/yszc.html?v=2'
+    ? 'https://m.meiyux.com/myonghu.html?v=2'
+    : 'https://m.meiyux.com/myinsi.html?v=2'
 })
 </script>
 
