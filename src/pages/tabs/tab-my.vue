@@ -7,6 +7,7 @@ style:
 import { useCustomerStore } from '@/stores/modules/customer'
 import MyTabBar from './MyTabBar.vue'
 
+const baseHost = import.meta.env.VITE_HOST
 const customerInfo = computed(() => useCustomerStore()?.customerInfo)
 
 function toMyOrders() {
@@ -25,8 +26,11 @@ function toCallBusiness() {
 async function toQuit() {
   await request.post(`/customer/current-store-id/0`)
   useCustomerStore().clearCustomerInfo()
-  uni.redirectTo({ url: '/pages/login/index' })
+
+  // 修改重定向方式，使用完整的URL而不是相对路径
+  location.href = `${baseHost}/#/pages/login/index`
 }
+
 function toCallMeiyumini() {
   // 调起美预小程序
   // uni.navigateToMiniProgram({
