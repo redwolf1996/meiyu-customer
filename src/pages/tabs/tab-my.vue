@@ -23,8 +23,8 @@ function toCallBusiness() {
 }
 
 async function toQuit() {
-  useCustomerStore().clearCustomerInfo()
   await request.post(`/customer/current-store-id/0`)
+  useCustomerStore().clearCustomerInfo()
   uni.redirectTo({ url: '/pages/login/index' })
 }
 function toCallMeiyumini() {
