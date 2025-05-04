@@ -33,9 +33,6 @@ function search() {
   paging.value?.reload()
 }
 
-onLoad(() => {
-})
-
 onShow(() => {
   search()
 })
