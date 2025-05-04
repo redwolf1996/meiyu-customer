@@ -4,12 +4,9 @@ style:
 </route>
 
 <script lang="ts" setup>
-import { useCustomerStore } from '@/stores/modules/customer'
 import type { CusList as List } from './types'
 
-const customerStore = useCustomerStore()
 const reqParams = reactive({
-  storeId: customerStore.customerInfo?.lastStoreId,
   pageNum: 1,
   pageSize: 10,
 })
@@ -20,7 +17,7 @@ const total = ref(0)
 async function queryList(page: number, pageSize: number) {
   reqParams.pageNum = page
   reqParams.pageSize = pageSize
-  const res = await request.get<ListRes<List>>('/business/store-customer-card', reqParams)
+  const res = await request.get<ListRes<List>>('/customer/card', reqParams)
   total.value = res.data.total
   paging.value.complete(res.data.list)
 }
@@ -36,10 +33,7 @@ function search() {
   paging.value?.reload()
 }
 
-onLoad((option) => {
-  if (option?.phone) {
-    reqParams.keyword = option.phone
-  }
+onLoad(() => {
 })
 
 onShow(() => {
