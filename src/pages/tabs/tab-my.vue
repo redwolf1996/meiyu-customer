@@ -9,6 +9,13 @@ import MyTabBar from './MyTabBar.vue'
 
 const baseHost = import.meta.env.VITE_HOST
 const customerInfo = computed(() => useCustomerStore()?.customerInfo)
+const cusEquity = ref<any>(null)
+
+onLoad(async () => {
+  await request.get('/customer/store-customer').then((res) => {
+    cusEquity.value = res.data
+  })
+})
 
 function toMyOrders() {
   uni.navigateTo({ url: '/pages/my/orders' })
@@ -72,25 +79,25 @@ function toProtocol(type: 1 | 2) {
     </view>
     <view flex flex-ac flex-rd f12 mt20px rd8px style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);padding: 16px 0;">
       <view flex flex-y flex-cc gap8px>
-        <view>¥100</view>
+        <view>¥{{ cusEquity?.amount }}</view>
         <view c-#717171>
           卡余额
         </view>
       </view>
       <view flex flex-y flex-cc gap8px>
-        <view>100</view>
+        <view>{{ cusEquity?.timesCardCount }}</view>
         <view c-#717171>
           次卡
         </view>
       </view>
       <view flex flex-y flex-cc gap8px>
-        <view>100</view>
+        <view>{{ cusEquity?.discountCardCount }}</view>
         <view c-#717171>
           折扣卡
         </view>
       </view>
       <view flex flex-y flex-cc gap8px>
-        <view>100</view>
+        <view>{{ cusEquity?.integration }}</view>
         <view c-#717171>
           积分
         </view>
