@@ -96,7 +96,7 @@ onLoad(async (option) => {
 // 过滤用户可用的储值卡，如果其中有一张可用则开启储值卡支付
 const cashCards = ref<CashCard[]>([])
 async function getAvailableCashCards(storeCustomerId, amount) {
-  const res = await request.get<CashCard[]>('/business/store-customer-value-card', { storeCustomerId })
+  const res = await request.get<CashCard[]>('/customer/store-customer-value-card', { storeCustomerId })
   cashCards.value = res.data.filter(v => v.amount >= amount).map((v, i) => {
     return {
       ...v,
