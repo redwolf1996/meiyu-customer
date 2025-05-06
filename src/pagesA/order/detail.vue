@@ -25,7 +25,7 @@ onLoad(async (option) => {
 })
 
 async function getDetail() {
-  const res = await request.get<Detail>(`/business/order/${id.value}`)
+  const res = await request.get<Detail>(`/customer/order/${id.value}`)
   detail.value = res.data
 }
 
@@ -41,7 +41,7 @@ function toPay() {
   })
 }
 async function toCancel() {
-  await request.post('/business/order/cancel', { orderId: id.value })
+  await request.post('/customer/order/cancel', { orderId: id.value })
   uni.showToast({ title: '取消成功' })
   await sleep(1000)
   uni.navigateBack()
@@ -53,7 +53,7 @@ async function toRefund() {
 }
 
 function toRefundDetail() {
-  uni.navigateTo({ url: `/pagesA/order/refund-detail?refundId=${detail?.value.refundId}` })
+  // uni.navigateTo({ url: `/pagesA/order/refund-detail?refundId=${detail?.value.refundId}` })
 }
 </script>
 
@@ -256,7 +256,7 @@ function toRefundDetail() {
       >
         取消
       </MyButton>
-      <MyButton
+      <!-- <MyButton
         v-else
         :borderWidth="2" radius="8rpx" fontSize="32rpx"
         width="208rpx" bgColor="transparent"
@@ -264,7 +264,7 @@ function toRefundDetail() {
         @click="toRefund()"
       >
         主动退款
-      </MyButton>
+      </MyButton> -->
     </template>
   </view>
   <view class="h50px" />

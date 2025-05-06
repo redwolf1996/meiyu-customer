@@ -39,7 +39,7 @@ function toOrderDetail(id) {
 async function queryList(page: number, pageSize: number) {
   reqParams.pageNum = page
   reqParams.pageSize = pageSize
-  const res = await request.get<ListRes<List>>('/business/order', reqParams)
+  const res = await request.get<ListRes<List>>('/customer/order', reqParams)
   paging.value.complete(res.data.list)
 }
 
