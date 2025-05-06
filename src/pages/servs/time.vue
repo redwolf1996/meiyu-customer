@@ -44,7 +44,7 @@ function setTotalDuration() {
 }
 
 async function init() {
-  const re = await request.get<BookingData>(`/business/store/${customerStoreId.value}`)
+  const re = await request.get<BookingData>(`/customer/store/${customerStoreId.value}`)
   workStime.value = re.data.workStime.slice(0, -3)
   workEtime.value = re.data.workEtime.slice(0, -3)
   workWeeks.value = re.data.workWeek
@@ -130,7 +130,7 @@ function clickItem(item: Times) {
 async function save() {
   bookStime.value = `${day.value} ${stime.value}`
   if (bookInfo.value?.bookId) {
-    await request.put('/business/booking/time', {
+    await request.put('/customer/booking/time', {
       id: bookInfo.value.bookId,
       stime: `${bookStime.value}:00`,
     })

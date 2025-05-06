@@ -63,7 +63,7 @@ const countInfo = ref<BookCount>({
 async function queryList(page: number, pageSize: number) {
   reqParams.pageNum = page
   reqParams.pageSize = pageSize
-  const res = await request.get<ListRes<BookListAll>>('/business/booking', reqParams)
+  const res = await request.get<ListRes<BookListAll>>('/customer/booking', reqParams)
   paging.value.complete(res.data.list)
 }
 
@@ -79,7 +79,7 @@ onShow(() => {
 
 async function getBookCount(cDate?: string) {
   if (cDate) {
-    const res = await request.get<BookCount>('/business/booking-count', {
+    const res = await request.get<BookCount>('/customer/booking-count', {
       storeId: customerStoreId.value,
       cDate,
     })
@@ -91,7 +91,7 @@ async function getBookCount(cDate?: string) {
 }
 
 async function getCountsAll() {
-  const res = await request.get<BookCount>('/business/booking-count', {
+  const res = await request.get<BookCount>('/customer/booking-count', {
     storeId: customerStoreId.value,
   })
   bookCountsAll.value = res.data

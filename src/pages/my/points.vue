@@ -37,7 +37,7 @@ watch(
 async function queryList(page: number, pageSize: number) {
   reqParams.pageNum = page
   reqParams.pageSize = pageSize
-  const res = await request.get<ListRes<ListPoints>>('/business/store-customer/integration', reqParams)
+  const res = await request.get<ListRes<ListPoints>>('/customer/store-customer/integration', reqParams)
   total.value = res.data.total
   paging.value.complete(res.data.list)
 }

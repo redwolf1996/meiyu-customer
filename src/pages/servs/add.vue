@@ -12,7 +12,6 @@ import { useCustomerStore } from '@/stores/modules/customer'
 
 const customerStore = useCustomerStore()
 const customerStoreId = computed(() => customerStore.customerInfo?.lastStoreId)
-const toast = useToast()
 const curIndex = ref(0) // 预约服务列表当前选择项的索引
 const columns = ref<SelItem[]>([
   {
@@ -59,7 +58,7 @@ function recordStoreJoin() {
 
 async function getStaff() {
   // jobCode 职务,1店长，2手艺人，3销售
-  const res = await request.get<ListRes<ListStaff>>('/business/staff', { storeId: customerStoreId.value, jobCode: 2 })
+  const res = await request.get<ListRes<ListStaff>>('/customer/staff', { storeId: customerStoreId.value, jobCode: 2 })
   listStaff.value = res.data.list.map((v) => {
     return {
       ...v,
