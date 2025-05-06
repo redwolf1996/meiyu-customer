@@ -46,7 +46,7 @@ function onBridgeReady(wxPay: any) {
   const wx = window.WeixinJSBridge
   wx.invoke('getBrandWCPayRequest', {
     appId: wxPay.appId, // 公众号ID
-    timeStamp: wxPay.timeStamp, // 时间戳
+    timeStamp: wxPay.timestamp, // 时间戳
     nonceStr: wxPay.nonceStr, // 随机串
     package: wxPay.packageVal, // 预支付交易会话标识
     signType: wxPay.signType, // 微信签名方式：
