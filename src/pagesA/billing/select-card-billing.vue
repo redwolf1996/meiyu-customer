@@ -18,7 +18,7 @@ onLoad(async (option) => {
   const storeCustomerId = option?.storeCustomerId
   const goodsId = option?.goodsId
   const goodsType = option?.goodsType
-  const res = await request.get<AvailableCard[]>('/business/store-customer-card-valid', { storeCustomerId, goodsId, goodsType })
+  const res = await request.get<AvailableCard[]>('/customer/store-customer-card-match', { storeCustomerId, goodsId, goodsType })
   customerCashCardList.value = res.data
 })
 
