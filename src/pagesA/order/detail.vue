@@ -29,28 +29,28 @@ async function getDetail() {
   detail.value = res.data
 }
 
-function toPay() {
-  const params = qs.stringify({
-    orderId: id.value,
-    createSource: detail.value?.createSource,
-    repayAmount: detail.value?.amount,
-    storeCustomerId: detail.value?.storeCustomerId,
-  })
-  uni.navigateTo({
-    url: `/pagesA/billing/pay?${params}`,
-  })
-}
+// function toPay() {
+//   const params = qs.stringify({
+//     orderId: id.value,
+//     createSource: detail.value?.createSource,
+//     repayAmount: detail.value?.amount,
+//     storeCustomerId: detail.value?.storeCustomerId,
+//   })
+//   uni.navigateTo({
+//     url: `/pagesA/billing/pay?${params}`,
+//   })
+// }
 async function toCancel() {
   await request.post('/customer/order/cancel', { orderId: id.value })
   uni.showToast({ title: '取消成功' })
   await sleep(1000)
   uni.navigateBack()
 }
-async function toRefund() {
-  uni.navigateTo({
-    url: `/pagesA/order/refund?id=${id.value}`,
-  })
-}
+// async function toRefund() {
+//   uni.navigateTo({
+//     url: `/pagesA/order/refund?id=${id.value}`,
+//   })
+// }
 
 function toRefundDetail() {
   // uni.navigateTo({ url: `/pagesA/order/refund-detail?refundId=${detail?.value.refundId}` })

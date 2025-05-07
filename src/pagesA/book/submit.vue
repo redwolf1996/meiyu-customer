@@ -17,6 +17,7 @@ const toast = useToast()
 
 // 商品优惠后合计
 const totalToPayAmount = sumArray(bookInfo.value.service.map(v => v.amount))
+const orderId = ref(0)
 
 // 商品优惠金额合计
 // const discountAmount = func_sub(totalOriAmount, totalToPayAmount)
@@ -29,6 +30,7 @@ async function doSubmit() {
   bookInfo.value.amount = totalToPayAmount
   const res = await request.post<any>('/customer/booking', { ...bookInfo.value, payType: 3 })
   console.log(res)
+  orderId.value = res.data.orderId
 
   if (typeof window.WeixinJSBridge === 'undefined') {
     if (document.addEventListener) {
@@ -56,47 +58,47 @@ function onBridgeReady(wxPay: any) {
       // 使用以上方式判断前端返回,微信团队郑重提示：
       // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠，商户需进一步调用后端查单确认支付结果。
       toast.info('预约成功')
-      uni.redirectTo({ url: `/pages/servs/order-success?orderId=${res.data.orderId}` })
+      uni.redirectTo({ url: `/pages/servs/order-success?orderId=${orderId.value}` })
     }
   })
 }
 
 // 待付款金额为0，不去结账，直接提交成功
-async function submitDirect() {
-  const res = await request.post<any>('/business/booking', { ...bookInfo.value, payType: 3 })
-  toast.info('预约成功')
-  const params = {
-    orderId: res.data.orderId,
-    mode: PayModeEnum.Booking, // mode  1 开单 2开卡 3充值 4预约
-    amount: res.data.payAmount,
-    points: res.data.gainIntegral,
-  }
-  await sleep(1000)
-  uni.redirectTo({ url: `/pagesA/billing/pay-success?${qs.stringify(params)}` })
-}
+// async function submitDirect() {
+//   const res = await request.post<any>('/business/booking', { ...bookInfo.value, payType: 3 })
+//   toast.info('预约成功')
+//   const params = {
+//     orderId: res.data.orderId,
+//     mode: PayModeEnum.Booking, // mode  1 开单 2开卡 3充值 4预约
+//     amount: res.data.payAmount,
+//     points: res.data.gainIntegral,
+//   }
+//   await sleep(1000)
+//   uni.redirectTo({ url: `/pagesA/billing/pay-success?${qs.stringify(params)}` })
+// }
 
-async function initJssdk() {
-  const res = await request.get('/customer/jsapi-config', {
-    url: window.location.origin + window.location.pathname + window.location.search,
-  }) as any
+// async function initJssdk() {
+//   const res = await request.get('/customer/jsapi-config', {
+//     url: window.location.origin + window.location.pathname + window.location.search,
+//   }) as any
 
-  const configData: WX.ConfigOptions = {
-    debug: false,
-    appId: 'wx4523c84aefbd91d2',
-    timestamp: res.data.timestamp.toString(),
-    nonceStr: res.data.nonceStr,
-    signature: res.data.signature,
-    jsApiList: ['getLocation'], // WX.JsApi[]
-    openTagList: [], // WX.OpenTag[]
-  }
-  weixin.config(configData)
-  weixin.ready(() => {
-    console.log('ready')
-  })
-  weixin.error((err: any) => {
-    console.log('error', err)
-  })
-}
+//   const configData: WX.ConfigOptions = {
+//     debug: false,
+//     appId: 'wx4523c84aefbd91d2',
+//     timestamp: res.data.timestamp.toString(),
+//     nonceStr: res.data.nonceStr,
+//     signature: res.data.signature,
+//     jsApiList: ['getLocation'], // WX.JsApi[]
+//     openTagList: [], // WX.OpenTag[]
+//   }
+//   weixin.config(configData)
+//   weixin.ready(() => {
+//     console.log('ready')
+//   })
+//   weixin.error((err: any) => {
+//     console.log('error', err)
+//   })
+// }
 </script>
 
 <template>
