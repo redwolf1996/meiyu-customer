@@ -16,6 +16,7 @@ interface NavigateToOptions {
        "/pages/my/qiwei" |
        "/pages/my/service" |
        "/pages/servs/add" |
+       "/pages/servs/order-success" |
        "/pages/servs/time" |
        "/pages/tabs/MyTabBar" |
        "/pages/tabs/tab-home" |

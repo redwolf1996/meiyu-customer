@@ -86,6 +86,13 @@
       }
     },
     {
+      "path": "pages/servs/order-success",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "预约结果"
+      }
+    },
+    {
       "path": "pages/servs/time",
       "type": "page",
       "layout": "common",

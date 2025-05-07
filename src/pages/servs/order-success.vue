@@ -1,6 +1,6 @@
 <route lang="yaml">
 style:
-  navigationBarTitleText: 支付结果
+  navigationBarTitleText: 预约结果
 </route>
 
 <script lang="ts" setup>
@@ -12,7 +12,7 @@ onLoad((options) => {
 
 // 返回首页
 function toDashboard() {
-  uni.reLaunch({ url: '/pagesA/tabs/tab-business-dashboard' })
+  uni.reLaunch({ url: '/pages/tabs/tab-home' })
 }
 
 // 查看订单(预约)详情
@@ -23,16 +23,17 @@ function toOrderDetail() {
 
 <template>
   <view p20px>
-    <view tc fb fs-14px>
-      支付成功
-    </view>
-    <view class="h25px" />
     <view class="h40px" />
+    <view tc fb fs-24px>
+      预约成功
+    </view>
+    <view class="h20px" />
+    <view class="tc fs-14px" c-#3B3D3D>
+      到店凭手机号享受服务
+    </view>
+    <view class="h50px" />
     <view bg-white px12px py16px>
-      <view c-#969696 fs-12px tc>
-        客户获得
-      </view>
-      <view mt10px bg-#FEF6F3 rd-10px py10px px16px flex flex-ac gap16px>
+      <view bg-#FEF6F3 rd-10px py10px px16px flex flex-ac gap16px>
         <wd-img
           :width="30"
           :height="30"
@@ -40,18 +41,21 @@ function toOrderDetail() {
           :src="`${IMG_BASE}/pay-star.png`"
         />
         <view flex flex-y flex-bt h46px>
-          <view c-#6C6666 fs-12px>
-            当前已到账
+          <view c-#FF5A5F fs-12px>
+            预约时间
+          </view>
+          <view c-#3B3D3D fs-16px fb>
+            05-22 10:00
           </view>
         </view>
       </view>
     </view>
     <view class="menu" mt40px>
       <view class="item" @click="toOrderDetail()">
-        查看订单
+        查看预约详情
       </view>
       <view class="item" @click="toDashboard()">
-        返回工作台
+        返回首页
       </view>
     </view>
   </view>
