@@ -230,41 +230,14 @@ function toRefundDetail() {
   <view v-if="detail?.payStatus === 1 || detail?.payStatus === 2" flex flex-cc gap12px>
     <template v-if="detail?.payStatus === 1">
       <MyButton
-        :borderWidth="2" radius="8rpx" fontSize="32rpx"
-        width="208rpx" bgColor="transparent"
-        color="#FF5A5F" borderColor="#FF5A5F"
-        @click="toCancel()"
-      >
-        取消
-      </MyButton>
-      <MyButton
-        :borderWidth="2" radius="8rpx" fontSize="32rpx"
-        width="208rpx" bgColor="transparent"
-        color="#FF5A5F" borderColor="#FF5A5F"
-        @click="toPay()"
-      >
-        去支付
-      </MyButton>
-    </template>
-    <template v-if="detail?.payStatus === 2">
-      <MyButton
         v-if="!detail?.amount"
         :borderWidth="2" radius="8rpx" fontSize="32rpx"
-        width="208rpx" bgColor="transparent"
+        bgColor="transparent"
         color="#FF5A5F" borderColor="#FF5A5F"
         @click="toCancel()"
       >
         取消
       </MyButton>
-      <!-- <MyButton
-        v-else
-        :borderWidth="2" radius="8rpx" fontSize="32rpx"
-        width="208rpx" bgColor="transparent"
-        color="#FF5A5F" borderColor="#FF5A5F"
-        @click="toRefund()"
-      >
-        主动退款
-      </MyButton> -->
     </template>
   </view>
   <view class="h50px" />
