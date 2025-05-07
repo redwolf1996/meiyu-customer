@@ -244,7 +244,7 @@ async function submitDirect() {
       <template v-if="curCardRechargeType === 6">
         <wd-input
           v-model="form.amount"
-          type="number"
+          type="digit"
           label="充值金额"
           placeholder="请输入"
           align-right
@@ -252,7 +252,7 @@ async function submitDirect() {
         />
         <wd-input
           v-model="form.gift"
-          type="number"
+          type="digit"
           label="赠送金额"
           placeholder="请输入"
           align-right

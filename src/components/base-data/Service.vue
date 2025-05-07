@@ -254,7 +254,7 @@ function toCats() {
         prop="duration"
         placeholder="请输入"
         :use-suffix-slot="true"
-        type="number"
+        type="digit"
         :rules="[{ required: true, message: '填写服务时长' }]"
       >
         <template #suffix>
@@ -287,7 +287,7 @@ function toCats() {
     <wd-cell-group :border="true">
       <wd-input
         v-model="form.price"
-        type="number"
+        type="digit"
         label="原价"
         placeholder="请输入"
         suffix-icon="arrow-right"
@@ -295,7 +295,7 @@ function toCats() {
       />
       <wd-input
         v-model="form.price2"
-        type="number"
+        type="digit"
         label="优惠价"
         placeholder="若不填，则客户按原价购买"
         suffix-icon="arrow-right"
