@@ -55,7 +55,7 @@ async function init() {
     cDate: day.value,
   }
   const res = await request.get<TimeOccupy[]>('/customer/booking-artisan', params)
-  const employIndexes = flatten(res.data.map(v => v.employIndex)) // 后端计算的disabled时间点index
+  const employIndexes = res.data.length ? flatten(res.data.map(v => v?.employIndex)) : [] // 后端计算的disabled时间点index
 
   setTotalDuration()
 

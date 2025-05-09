@@ -32,6 +32,11 @@ async function doSubmit() {
   console.log(res)
   orderId.value = res.data.orderId
 
+  if (bookInfo.value.amount === 0) { // 总金额为0或者预约支付方式为到店支付时直接预约成功，不需要支付
+    toast.info('预约成功')
+    return uni.redirectTo({ url: `/pages/servs/order-success?orderId=${orderId.value}` })
+  }
+
   if (typeof window.WeixinJSBridge === 'undefined') {
     if (document.addEventListener) {
       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false)
