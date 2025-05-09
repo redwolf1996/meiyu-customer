@@ -239,7 +239,9 @@ export function isTimeExceeding(startTime, endTime, durationMinutes, mode = 1) {
 
   const start = parseTime(startTime)
   const end = parseTime(endTime)
+  console.log(start, end)
   const totalMinutes = start + durationMinutes
+  console.log(totalMinutes)
 
   // 判断是否跨天
   const isCrossDay = totalMinutes >= 1440 // 1440 分钟 = 24 小时
@@ -258,7 +260,7 @@ export function isTimeExceeding(startTime, endTime, durationMinutes, mode = 1) {
   }
   else {
     // 正常情况，直接比较
-    return totalMinutes >= end
+    return totalMinutes >= (end - 15)
   }
 }
 

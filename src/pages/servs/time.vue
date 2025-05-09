@@ -91,7 +91,7 @@ async function init() {
     }
   }
 
-  console.log(curWeek.value, lastSelectableIndex, disabledIndexedFront)
+  // console.log(curWeek.value, lastSelectableIndex, disabledIndexedFront)
   times.value = times.value.map((v, i) => {
     return {
       selected: v.selected,
@@ -101,7 +101,7 @@ async function init() {
       value: v.value,
     }
   })
-  console.log(times.value)
+  // console.log(times.value)
 }
 
 onMounted(() => {
