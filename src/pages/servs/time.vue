@@ -12,7 +12,8 @@ import { useCustomerStore } from '@/stores/modules/customer'
 
 const customerStore = useCustomerStore()
 const customerStoreId = computed(() => customerStore.customerInfo?.lastStoreId)
-const curWeek = ref(+new Date().getDay() + 1)
+const tw = +new Date().getDay()
+const curWeek = ref(tw === 0 ? 7 : tw)
 const instance = getCurrentInstance()
 const query = uni.createSelectorQuery().in(instance.proxy)
 const today = fd(+new Date())
@@ -90,6 +91,7 @@ async function init() {
     }
   }
 
+  console.log(curWeek.value, lastSelectableIndex, disabledIndexedFront)
   times.value = times.value.map((v, i) => {
     return {
       selected: v.selected,
@@ -99,6 +101,7 @@ async function init() {
       value: v.value,
     }
   })
+  console.log(times.value)
 }
 
 onMounted(() => {
