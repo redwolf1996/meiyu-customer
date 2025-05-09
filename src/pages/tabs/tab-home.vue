@@ -7,6 +7,7 @@ style:
 import type { AllItems, CatsItemsTree, ServiceList } from './types2'
 import { flatten } from 'lodash-es'
 import MyTabBar from './MyTabBar.vue'
+import { isNumber } from '@/utils'
 
 const active = ref<number>(0)
 const scrollTop = ref<number>(0)
@@ -132,9 +133,9 @@ function confirm() {
                   {{ itm.name }}
                 </view>
                 <view f12 c-#FF1919 mt6px>
-                  ￥{{ itm.price2 || itm.price }}
+                  ￥{{ itm.price2 ?? itm.price }}
                 </view>
-                <view v-if="itm.price2" f10 c-#D4D4D4 mt6px>
+                <view v-if="isNumber(itm.price2)" f10 c-#D4D4D4 mt6px>
                   <text line-through>
                     ￥{{ itm.price }}
                   </text>

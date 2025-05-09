@@ -239,9 +239,7 @@ export function isTimeExceeding(startTime, endTime, durationMinutes, mode = 1) {
 
   const start = parseTime(startTime)
   const end = parseTime(endTime)
-  console.log(start, end)
   const totalMinutes = start + durationMinutes
-  console.log(totalMinutes)
 
   // 判断是否跨天
   const isCrossDay = totalMinutes >= 1440 // 1440 分钟 = 24 小时
@@ -326,4 +324,13 @@ export function formatWorkTime(workWeek: number[] | null, workStime: string, wor
   const endTime = workEtime.slice(0, -3)
 
   return `${weekText} ${startTime}-${endTime}`
+}
+
+/**
+ * 判断一个变量是否是数字
+ * @param variable 需要判断的变量
+ * @returns boolean
+ */
+export function isNumber(variable: any): boolean {
+  return typeof variable === 'number'
 }
