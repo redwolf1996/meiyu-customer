@@ -29,31 +29,49 @@ async function getDetail() {
   detail.value = res.data
 }
 
-// function toPay() {
-//   const params = qs.stringify({
-//     orderId: id.value,
-//     createSource: detail.value?.createSource,
-//     repayAmount: detail.value?.amount,
-//     storeCustomerId: detail.value?.storeCustomerId,
-//   })
-//   uni.navigateTo({
-//     url: `/pagesA/billing/pay?${params}`,
-//   })
-// }
-async function toCancel() {
+function toRefundDetail() {
+  // uni.navigateTo({ url: `/pagesA/order/refund-detail?refundId=${detail?.value.refundId}` })
+}
+
+async function calcel() {
   await request.post('/customer/order/cancel', { orderId: id.value })
   uni.showToast({ title: '取消成功' })
   await sleep(1000)
   uni.navigateBack()
 }
-// async function toRefund() {
-//   uni.navigateTo({
-//     url: `/pagesA/order/refund?id=${id.value}`,
-//   })
-// }
 
-function toRefundDetail() {
-  // uni.navigateTo({ url: `/pagesA/order/refund-detail?refundId=${detail?.value.refundId}` })
+async function toPay() {
+  // 3 微信支付
+  const res = await request.get<any>('/customer/order/pay', { orderId: id.value, payType: 3 })
+
+  if (typeof window.WeixinJSBridge === 'undefined') {
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false)
+    }
+  }
+  else {
+    onBridgeReady(res.data.wxPay)
+  }
+}
+
+async function onBridgeReady(wxPay: any) {
+  const wx = window.WeixinJSBridge
+  wx.invoke('getBrandWCPayRequest', {
+    appId: wxPay.appId, // 公众号ID
+    timeStamp: wxPay.timestamp, // 时间戳
+    nonceStr: wxPay.nonceStr, // 随机串
+    package: wxPay.packageVal, // 预支付交易会话标识
+    signType: wxPay.signType, // 微信签名方式：
+    paySign: wxPay.paySign, // 微信签名
+  }, async (res) => {
+    if (res.err_msg == 'get_brand_wcpay_request:ok') {
+      // 使用以上方式判断前端返回,微信团队郑重提示：
+      // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠，商户需进一步调用后端查单确认支付结果。
+      toast.info('支付成功')
+      await sleep(1000)
+      uni.redirectTo({ url: `/pages/my/orders` })
+    }
+  })
 }
 </script>
 
@@ -227,19 +245,15 @@ function toRefundDetail() {
     </view>
   </view>
   <view class="h20px" />
-  <view v-if="detail?.payStatus === 1 || detail?.payStatus === 2" flex flex-cc gap12px>
-    <template v-if="detail?.payStatus === 1">
-      <MyButton
-        v-if="!detail?.amount"
-        :borderWidth="2" radius="8rpx" fontSize="32rpx"
-        bgColor="transparent"
-        color="#FF5A5F" borderColor="#FF5A5F"
-        @click="toCancel()"
-      >
-        取消
-      </MyButton>
-    </template>
+  <view v-if="detail?.payStatus === 1" flex flex-cc mt-16px px-60rpx gap10px>
+    <button class="my-btn cancel" @click="calcel()">
+      取消
+    </button>
+    <button class="my-btn theme" @click="toPay()">
+      支付
+    </button>
   </view>
+
   <view class="h50px" />
 </template>
 

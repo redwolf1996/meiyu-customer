@@ -26,9 +26,6 @@ bookInfo.value.payType = bookInfo.value.service[0].payType
 
 // 提交预约
 async function doSubmit() {
-  // if (!totalToPayAmount) { // 总金额为0直接预约成功，不需要支付
-  //   submitDirect()
-  // }
   bookInfo.value.amount = totalToPayAmount
   const res = await request.post<any>('/customer/booking', { ...bookInfo.value })
   orderId.value = res.data.orderId
@@ -43,15 +40,12 @@ async function doSubmit() {
     if (document.addEventListener) {
       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false)
     }
-    // attachEvent is deprecated and not supported in modern browsers
-    // We only need addEventListener for modern browsers
   }
   else {
     onBridgeReady(res.data.wxPay)
   }
 }
 function onBridgeReady(wxPay: any) {
-  console.log('wxPay', wxPay)
   const wx = window.WeixinJSBridge
   wx.invoke('getBrandWCPayRequest', {
     appId: wxPay.appId, // 公众号ID
@@ -69,43 +63,6 @@ function onBridgeReady(wxPay: any) {
     }
   })
 }
-
-// 待付款金额为0，不去结账，直接提交成功
-// async function submitDirect() {
-//   const res = await request.post<any>('/business/booking', { ...bookInfo.value, payType: 3 })
-//   toast.info('预约成功')
-//   const params = {
-//     orderId: res.data.orderId,
-//     mode: PayModeEnum.Booking, // mode  1 开单 2开卡 3充值 4预约
-//     amount: res.data.payAmount,
-//     points: res.data.gainIntegral,
-//   }
-//   await sleep(1000)
-//   uni.redirectTo({ url: `/pagesA/billing/pay-success?${qs.stringify(params)}` })
-// }
-
-// async function initJssdk() {
-//   const res = await request.get('/customer/jsapi-config', {
-//     url: window.location.origin + window.location.pathname + window.location.search,
-//   }) as any
-
-//   const configData: WX.ConfigOptions = {
-//     debug: false,
-//     appId: 'wx4523c84aefbd91d2',
-//     timestamp: res.data.timestamp.toString(),
-//     nonceStr: res.data.nonceStr,
-//     signature: res.data.signature,
-//     jsApiList: ['getLocation'], // WX.JsApi[]
-//     openTagList: [], // WX.OpenTag[]
-//   }
-//   weixin.config(configData)
-//   weixin.ready(() => {
-//     console.log('ready')
-//   })
-//   weixin.error((err: any) => {
-//     console.log('error', err)
-//   })
-// }
 </script>
 
 <template>
