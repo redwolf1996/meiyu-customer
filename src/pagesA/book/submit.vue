@@ -29,7 +29,6 @@ async function doSubmit() {
   // }
   bookInfo.value.amount = totalToPayAmount
   const res = await request.post<any>('/customer/booking', { ...bookInfo.value, payType: 3 })
-  console.log(res)
   orderId.value = res.data.orderId
 
   if (bookInfo.value.amount === 0) { // 总金额为0或者预约支付方式为到店支付时直接预约成功，不需要支付

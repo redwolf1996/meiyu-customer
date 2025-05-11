@@ -40,7 +40,7 @@ onShow(async () => {
     }
   })
 
-  changeCheck() // 初始化tmpCheckedServs
+  changeCheck(checkedServIds?.[0]) // 初始化tmpCheckedServs
 })
 
 onMounted(() => {
@@ -59,13 +59,26 @@ function handleChange({ value }) {
   })
 }
 
-function changeCheck() {
-  let servs = []
-  servs = categories.value.filter((v) => {
-    return v.items.length > 0 && v.id !== 0
-  }).map(v1 => toRaw(v1.items))
-  servs = flatten(toRaw(servs))
-  tmpCheckedServs.value = servs.filter(v => v.checked)
+function changeCheck(id: number) {
+  // 获取所有分类下的服务项
+  const allServices = categories.value
+    .filter(v => v.items.length > 0 && v.id !== 0)
+    .map(v1 => toRaw(v1.items))
+    .flat()
+
+  // 将所有服务项的checked设置为false
+  allServices.forEach((service) => {
+    service.checked = false
+  })
+
+  // 找到并选中当前点击的服务项
+  const currentService = allServices.find(service => service.id === id)
+  if (currentService) {
+    currentService.checked = true
+  }
+
+  // 更新已选中的服务列表
+  tmpCheckedServs.value = allServices.filter(v => v.checked)
 }
 
 function confirm() {
@@ -144,7 +157,7 @@ function confirm() {
               </view>
             </view>
             <view flex flex-cc>
-              <wd-checkbox v-model="itm.checked" size="large" @change="changeCheck" />
+              <wd-checkbox v-model="itm.checked" size="large" @change="changeCheck(itm.id)" />
             </view>
           </view>
         </view>
