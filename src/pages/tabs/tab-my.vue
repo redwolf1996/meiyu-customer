@@ -17,9 +17,14 @@ onLoad(async () => {
   })
 })
 
-function toMyOrders() {
+function toBookings() {
+  uni.navigateTo({ url: '/pages/my/bookings' })
+}
+
+function toOrders() {
   uni.navigateTo({ url: '/pages/my/orders' })
 }
+
 function toMyCards() {
   uni.navigateTo({ url: '/pages/my/cards' })
 }
@@ -126,7 +131,8 @@ function toProtocol(type: 1 | 2) {
     </view> -->
   </view>
   <MyCellGroup>
-    <MyCell label="我的预约" noBorder @myclick="toMyOrders()" />
+    <MyCell label="我的预约" noBorder @myclick="toBookings()" />
+    <MyCell label="我的订单" noBorder @myclick="toOrders()" />
     <MyCell label="我的卡项" noBorder @myclick="toMyCards()" />
     <!-- <MyCell label="积分记录" noBorder @myclick="toMyPoints()" /> -->
     <MyCell label="联系商家" noBorder @myclick="toCallBusiness()" />

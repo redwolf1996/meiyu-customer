@@ -1,6 +1,6 @@
 <route lang="yaml">
 style:
-  navigationBarTitleText: 会员购卡列表
+  navigationBarTitleText: 预约列表
 </route>
 
 <script lang="ts" setup>
@@ -40,7 +40,7 @@ const servMap = {
 
 const paging = ref<ZPagingInstance<BookListAll> | null>(null)
 const dataList = ref<BookListAll[]>([])
-const navHeight = getMenuButtonInfo().navHeight // 只能通过系统方法获取navHeight，通过dom获取不到
+// const navHeight = getMenuButtonInfo().navHeight // 只能通过系统方法获取navHeight，通过dom获取不到
 
 const reqParams = reactive({
   storeId: customerStoreId.value,
@@ -107,7 +107,7 @@ async function getCountsAll() {
     @query="queryList"
   >
     <template #top>
-      <view :style="{ height: `${navHeight}px` }" />
+      <!-- <view :style="{ height: `${navHeight}px` }" /> -->
       <wd-tabs v-model="tab" :lineHeight="2" :lineWidth="24" color="#FF5A5F" @click="tabClick">
         <block v-for="item in items" :key="`t${item.value}`">
           <wd-tab :title="`${item.label}(${item.count})`" />

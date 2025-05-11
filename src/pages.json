@@ -32,7 +32,7 @@
       "path": "pages/my/bookings",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "会员购卡列表"
+        "navigationBarTitleText": "预约列表"
       }
     },
     {
