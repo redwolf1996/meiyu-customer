@@ -82,6 +82,7 @@ function confirm() {
       prodType: 2,
     }
   })
+  bookStime.value = ''
   uni.navigateTo({
     url: '/pages/servs/add',
   })
