@@ -148,6 +148,7 @@ onShow(() => {
       amount: v?.amount || 0, // 商品优惠后总价
       cardReduceAmount: v?.cardReduceAmount || 0, // 卡项优惠金额
       cardShowName: v?.cardShowName || '', // 卡项展示的名称 例如：洗发次卡 -1次
+      payType: v?.payType,
     }
   })
   model.service.forEach((item: Partial<Service>) => {
