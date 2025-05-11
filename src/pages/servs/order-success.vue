@@ -45,7 +45,7 @@ function toOrderDetail() {
             预约时间
           </view>
           <view c-#3B3D3D fs-16px fb>
-            05-22 10:00
+            {{ bookStime }}
           </view>
         </view>
       </view>
