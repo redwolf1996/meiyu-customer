@@ -163,6 +163,7 @@ watch(() => checkedServs.value, () => {
       amount: v?.amount || 0, // 商品优惠后总价
       cardReduceAmount: v?.cardReduceAmount || 0, // 卡项优惠金额
       cardShowName: v?.cardShowName || '', // 卡项展示的名称 例如：洗发次卡 -1次
+      payType: v?.payType, // 支付方式 1 在线支付 2 到店支付
     }
   })
   model.service.forEach((item: Partial<Service>) => {
