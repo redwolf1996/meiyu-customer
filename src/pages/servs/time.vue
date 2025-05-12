@@ -94,7 +94,8 @@ async function init() {
   times.value = times.value.map((v, i) => {
     return {
       selected: v.selected,
-      disabled: !workWeeks.value.includes(curWeek.value) || (i >= lastSelectableIndex || disabledIndexedFront?.includes(i))
+      // disabled: !workWeeks.value.includes(curWeek.value) || (i >= lastSelectableIndex || disabledIndexedFront?.includes(i))
+      disabled: !workWeeks.value.includes(curWeek.value) || (i >= lastSelectableIndex)
         ? true
         : (!!employIndexes.includes(i)),
       value: v.value,

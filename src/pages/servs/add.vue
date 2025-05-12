@@ -82,9 +82,9 @@ function clickItem(item: ListStaff) {
   }
 }
 
-function toAddServ() {
-  uni.reLaunch({ url: '/pages/tabs/tab-home' })
-}
+// function toAddServ() {
+//   uni.reLaunch({ url: '/pages/tabs/tab-home' })
+// }
 
 function toSelServTime() {
   if (!checkedServs.value.length) {
@@ -129,10 +129,10 @@ function toSelCard(item, index: number) {
   uni.navigateTo({ url: `/pagesA/billing/select-card-billing?${params}` })
 }
 
-function delServ(index) {
-  model.service.splice(index, 1)
-  checkedServs.value.splice(index, 1)
-}
+// function delServ(index) {
+//   model.service.splice(index, 1)
+//   checkedServs.value.splice(index, 1)
+// }
 
 onShow(() => {
   model.service = checkedServs.value.map((v) => {
@@ -360,14 +360,14 @@ function handleChangeGoodsCount(item: Partial<Service>) {
     </wd-cell-group>
     <view v-if="checkedServs.length">
       <view v-for="(item, index) in model.service" :key="`serv-${index}`" flex flex-y gap10px>
-        <view flex flex-ac flex-bt f12 px20px py12px>
+        <!-- <view flex flex-ac flex-bt f12 px20px py12px>
           <view c-3D3D3D>
             预约服务{{ index + 1 }}
           </view>
           <view c-FF5A5F @click="delServ(index)">
             删除
           </view>
-        </view>
+        </view> -->
         <MyCellGroup>
           <view flex flex-ac flex-bt>
             <view theme-color fs-14px fb>
@@ -430,9 +430,9 @@ function handleChangeGoodsCount(item: Partial<Service>) {
         </MyCellGroup>
       </view>
     </view>
-    <view bg-white f14 c-FF5A5F tc pt10px pb20px style="border-top: 1px solid #EBEEF1;" @click="toAddServ()">
+    <!-- <view bg-white f14 c-FF5A5F tc pt10px pb20px style="border-top: 1px solid #EBEEF1;" @click="toAddServ()">
       +&nbsp;添加服务
-    </view>
+    </view> -->
 
     <view class="h10px" />
     <view bg-white f14 tc>
