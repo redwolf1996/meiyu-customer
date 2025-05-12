@@ -63,6 +63,7 @@ async function init() {
   const newIndexes = groupSortedConsecutive(employIndexes)
   const endTimeIndexes = newIndexes?.map(v => v?.[0]) // 结束时间点集合（每一段disabled的时间点的起始时间）
 
+  // 网格最后计算的disabled时间点index(从当前时间开始加上服务时长，如果超过结束时间，则该时间点包括以后的时间点都不可选)
   let lastSelectableIndex = 0
   // 从当前时间开始加上服务时长，如果超过结束时间，则该时间点包括以后的时间点都不可选
   for (let i = 0; i < times.value.length; i++) {
@@ -79,6 +80,7 @@ async function init() {
     }
   }
 
+  // 预约时间点之前的计算disabled时间点index(从当前时间开始加上服务时长，如果超过结束时间，则该时间点包括以后的时间点都不可选)
   const disabledIndexedFront = []
   for (let i0 = 0; i0 < times.value.length; i0++) {
     for (let i = 0; i < endTimes.length; i++) {
