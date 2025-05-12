@@ -27,6 +27,23 @@ onLoad(async () => {
 
   const code = new URLSearchParams(window.location.search).get('code')
   if (!code) {
+    location.href = `${baseHost}/kivi-beauty/customer/wxoauth`
+    // const url = `/kivi-beauty/customer/wxoauth`
+
+    // fetch(url)
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error('网络响应不正常')
+    //     }
+    //     return response.json() // 或者 response.text()
+    //   })
+    //   .then((data) => {
+    //     console.log('请求成功:', data)
+    //   })
+    //   .catch((error) => {
+    //     console.error('请求出错:', error)
+    //   })
+
     const appid = 'wx4523c84aefbd91d2'
     const redirect_uri = encodeURIComponent(`${baseHost}/#/pages/login/index`)
     location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
