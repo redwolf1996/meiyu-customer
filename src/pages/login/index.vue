@@ -44,9 +44,9 @@ onLoad(async () => {
     //     console.error('请求出错:', error)
     //   })
 
-    const appid = 'wx4523c84aefbd91d2'
-    const redirect_uri = encodeURIComponent(`${baseHost}/#/pages/login/index`)
-    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
+    // const appid = 'wx4523c84aefbd91d2'
+    // const redirect_uri = encodeURIComponent(`${baseHost}/#/pages/login/index`)
+    // location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
   }
   else {
     const res = await request.post<any>('/customer/wx-login', { code })

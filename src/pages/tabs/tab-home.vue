@@ -157,7 +157,11 @@ function confirm() {
               </view>
             </view>
             <view flex flex-cc>
-              <wd-checkbox v-model="itm.checked" size="large" @change="changeCheck(itm.id)" />
+              <wd-checkbox
+                :model-value="itm.checked"
+                size="large"
+                @change="changeCheck(itm.id)"
+              />
             </view>
           </view>
         </view>
