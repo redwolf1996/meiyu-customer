@@ -4,71 +4,18 @@ style:
 </route>
 
 <script lang="ts" setup>
-import { useCustomerStore } from '@/stores/modules/customer'
-
 const checked = ref(false)
 function select(e: UniHelper.CheckboxGroupOnChangeEvent) {
   checked.value = !!e.detail.value.includes('cb')
 }
-const customerStore = useCustomerStore()
-const token = computed(() => customerStore.customerInfo?.token)
-const baseHost = import.meta.env.VITE_HOST
-
-onLoad(async () => {
-  if (token.value) {
-    if (!customerStore.customerInfo?.lastStoreId) {
-      uni.reLaunch({ url: '/pages/login/store-list' })
-    }
-    else {
-      customerStoreId.value = customerStore.customerInfo.lastStoreId
-      return uni.reLaunch({ url: '/pages/tabs/tab-home' })
-    }
-  }
-
-  const code = new URLSearchParams(window.location.search).get('code')
-  if (!code) {
-    location.href = `${baseHost}/kivi-beauty/customer/wxoauth`
-    // const url = `/kivi-beauty/customer/wxoauth`
-
-    // fetch(url)
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error('网络响应不正常')
-    //     }
-    //     return response.json() // 或者 response.text()
-    //   })
-    //   .then((data) => {
-    //     console.log('请求成功:', data)
-    //   })
-    //   .catch((error) => {
-    //     console.error('请求出错:', error)
-    //   })
-
-    // const appid = 'wx4523c84aefbd91d2'
-    // const redirect_uri = encodeURIComponent(`${baseHost}/#/pages/login/index`)
-    // location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_userinfo&state=MYmy001#wechat_redirect`
-  }
-  else {
-    const res = await request.post<any>('/customer/wx-login', { code })
-    customerStore.setCustomerInfo(res.data)
-
-    if (!res.data?.phone) {
-      uni.reLaunch({ url: '/pages/login/info' })
-    }
-    else {
-      if (!res.data?.lastStoreId) {
-        uni.reLaunch({ url: '/pages/login/store-list' })
-      }
-      else {
-        uni.reLaunch({ url: '/pages/tabs/tab-home' })
-      }
-    }
-  }
-})
 
 // 1:服务协议 2:隐私政策
 function toProtocol(type: 1 | 2) {
   uni.navigateTo({ url: `/pagesA/protocol?type=${type}` })
+}
+
+function toLogin() {
+  uni.redirectTo({ url: `/pages/login/temp` })
 }
 </script>
 
@@ -88,7 +35,7 @@ function toProtocol(type: 1 | 2) {
       走近千家万户，共享轻松生活
     </view>
     <view mx-60rpx mt-112rpx color-white>
-      <wd-button :disabled="!checked" size="large" :block="true">
+      <wd-button :disabled="!checked" size="large" :block="true" @click="toLogin">
         <view flex flex-cc>
           <text i-tdesign-logo-wechat fs-36 />
           <text>&nbsp;微信一键登录</text>

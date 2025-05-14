@@ -28,7 +28,7 @@ function handleSubmit() {
           name: form.name,
           phone: form.phone,
         })
-        uni.redirectTo({ url: '/pages/login/index' })
+        uni.redirectTo({ url: '/pages/login/temp' })
       }
     })
     .catch((error) => {
