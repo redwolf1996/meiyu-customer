@@ -29,6 +29,13 @@
       }
     },
     {
+      "path": "pages/login/temp",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
       "path": "pages/my/bookings",
       "type": "page",
       "style": {

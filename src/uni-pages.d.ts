@@ -8,6 +8,7 @@ interface NavigateToOptions {
        "/pages/login/index" |
        "/pages/login/info" |
        "/pages/login/store-list" |
+       "/pages/login/temp" |
        "/pages/my/bookings" |
        "/pages/my/cards" |
        "/pages/my/minapp" |
