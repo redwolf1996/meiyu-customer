@@ -5,6 +5,8 @@ style:
 
 <script setup lang="ts">
 import { useCustomerStore } from '@/stores/modules/customer'
+import { computed, ref } from 'vue'
+import request from '@/utils/request'
 
 const customerStore = useCustomerStore()
 const token = computed(() => customerStore.customerInfo?.token)
@@ -23,7 +25,11 @@ onLoad(async () => {
 
   const code = new URLSearchParams(window.location.search).get('code')
   if (!code) {
-    location.href = `${baseHost}/kivi-beauty/customer/wxoauth`
+    const redirectUrl = baseHost.startsWith('http')
+      ? `${baseHost}/kivi-beauty/customer/wxoauth`
+      : `https://${baseHost}/kivi-beauty/customer/wxoauth`
+
+    window.location.href = redirectUrl
   }
   else {
     const res = await request.post<any>('/customer/wx-login', { code })
