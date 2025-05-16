@@ -10,7 +10,7 @@ import request from '@/utils/request'
 
 const customerStore = useCustomerStore()
 const token = computed(() => customerStore.customerInfo?.token)
-const baseHost = import.meta.env.VITE_HOST
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 onLoad(async () => {
   if (token.value) {
@@ -25,9 +25,9 @@ onLoad(async () => {
 
   const code = new URLSearchParams(window.location.search).get('code')
   if (!code) {
-    const redirectUrl = baseHost.startsWith('http')
-      ? `${baseHost}/kivi-beauty/customer/wxoauth`
-      : `https://${baseHost}/kivi-beauty/customer/wxoauth`
+    const redirectUrl = baseUrl.startsWith('http')
+      ? `${baseUrl}/customer/wxoauth`
+      : `https://${baseUrl}/customer/wxoauth`
 
     window.location.href = redirectUrl
   }
