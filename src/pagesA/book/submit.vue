@@ -18,8 +18,17 @@ const toast = useToast()
 // 商品优惠后合计
 const totalToPayAmount = sumArray(bookInfo.value.service.map(v => v.amount))
 const orderId = ref(0)
+console.log('bookInfo.value', bookInfo.value)
 
-bookInfo.value.payType = bookInfo.value.service[0].payType
+bookInfo.value.payType = 3 // 默认微信支付
+// 如果服务列表中存在卡项优惠
+if (bookInfo.value.service.some(v => v.cardReduceAmount)) {
+  bookInfo.value.payType = 6 // 充值卡支付
+}
+
+if (bookInfo.value.service[0].payType === 2) { // 2到店支付 1在线支付
+  bookInfo.value.payType = 0 // 充值卡支付
+}
 
 // 商品优惠金额合计
 // const discountAmount = func_sub(totalOriAmount, totalToPayAmount)
@@ -31,7 +40,7 @@ async function doSubmit() {
   orderId.value = res.data.orderId
 
   // payType 1 在线支付 2 到店支付
-  if (bookInfo.value.amount === 0 || bookInfo.value.payType === 2) { // 总金额为0或者预约支付方式为到店支付时直接预约成功，不需要支付
+  if (bookInfo.value.amount === 0 || bookInfo.value.payType === 0) { // 总金额为0或者预约支付方式为到店支付时直接预约成功，不需要支付
     toast.info('预约成功')
     return uni.redirectTo({ url: `/pages/servs/order-success?orderId=${orderId.value}` })
   }
