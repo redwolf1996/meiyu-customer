@@ -7,11 +7,13 @@ export default defineManifestConfig({
   'versionName': '1.0.0',
   'versionCode': '100',
   'transformPx': false,
-  // 'h5': {
-  //   router: {
-  //     base: '/myh5/',
-  //   },
-  // },
+  'h5': {
+    devServer: {
+      // https: true, // 直接启用 HTTPS[2,4](@ref)
+      // disableHostCheck: true,
+      // port: 80,
+    },
+  },
   'mp-weixin': {
     appid: 'wx208ed5b60f57b9bc',
     setting: { urlCheck: false },

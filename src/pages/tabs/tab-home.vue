@@ -18,6 +18,7 @@ const checkedCount = computed(() => {
 })
 
 onShow(async () => {
+  console.log('xxxxxx')
   const res = await request.get<AllItems>('/customer/store-goods-all')
   const serviceCats = res.data.serviceCategory!
   const services = res.data.serviceList
@@ -65,6 +66,8 @@ function changeCheck(id: number) {
     .filter(v => v.items.length > 0 && v.id !== 0)
     .map(v1 => toRaw(v1.items))
     .flat()
+
+  console.log('allServices', allServices)
 
   // 将所有服务项的checked设置为false
   allServices.forEach((service) => {
@@ -176,7 +179,7 @@ function confirm() {
     <view w120px>
       <wd-button size="large" custom-class="theme-bg" block @click="confirm()">
         <view flex flex-cc>
-          <text>选好了</text>
+          <text>选错了</text>
         </view>
       </wd-button>
     </view>

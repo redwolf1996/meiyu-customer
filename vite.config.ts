@@ -9,6 +9,7 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
 import { envParse } from 'vite-plugin-env-parse'
+import fs from 'node:fs'
 
 // 注意插件的加载顺序，unihelper的相关插件要放在uni前面
 export default defineConfig({
@@ -58,6 +59,10 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 80,
+    port: 443,
+    https: {
+      key: fs.readFileSync('./localhost-key.pem'),
+      cert: fs.readFileSync('./localhost.pem'),
+    },
   },
 })
