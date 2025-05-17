@@ -179,7 +179,7 @@ function confirm() {
     <view w120px>
       <wd-button size="large" custom-class="theme-bg" block @click="confirm()">
         <view flex flex-cc>
-          <text>选错了</text>
+          <text>选好了</text>
         </view>
       </wd-button>
     </view>
