@@ -61,27 +61,23 @@ function handleChange({ value }) {
 }
 
 function changeCheck(id: number) {
-  // 获取所有分类下的服务项
-  const allServices = categories.value
-    .filter(v => v.items.length > 0 && v.id !== 0)
-    .map(v1 => toRaw(v1.items))
-    .flat()
+  // 遍历所有分类，更新每个项目的checked属性
+  categories.value.forEach((category) => {
+    category.items.forEach((service) => {
+      // 将所有服务项的checked设置为false
+      service.checked = false
 
-  console.log('allServices', allServices)
-
-  // 将所有服务项的checked设置为false
-  allServices.forEach((service) => {
-    service.checked = false
+      // 找到并选中当前点击的服务项
+      if (service.id === id) {
+        service.checked = true
+      }
+    })
   })
 
-  // 找到并选中当前点击的服务项
-  const currentService = allServices.find(service => service.id === id)
-  if (currentService) {
-    currentService.checked = true
-  }
-
   // 更新已选中的服务列表
-  tmpCheckedServs.value = allServices.filter(v => v.checked)
+  tmpCheckedServs.value = flatten(
+    categories.value.map(category => category.items.filter(service => service.checked)),
+  )
 }
 
 function confirm() {
