@@ -44,7 +44,7 @@ const disabledIds = ref<number[]>([])
 async function queryList(page: number, pageSize: number) {
   reqParams.pageNum = page
   reqParams.pageSize = pageSize
-  const res = await request.get<CusRecord>('/business/store-customer-card/record', reqParams)
+  const res = await request.get<CusRecord>('/customer/store-customer-card/record', reqParams)
   total.value = res.data.total
   dataList.value = res.data.list
   countUse.value = res.data.use
@@ -95,7 +95,7 @@ watch(() => [checkedServs.value, checkedProds.value], () => {
 })
 
 async function getOriCardEquity() {
-  const res = await request.get<CardEquity[]>(`/business/store-customer-card/info/${id.value}`)
+  const res = await request.get<CardEquity[]>(`/customer/store-customer-card/info/${id.value}`)
   cusOriCardEquity.value = res.data.map((item) => {
     return {
       ...item,
@@ -107,7 +107,7 @@ async function getOriCardEquity() {
 }
 
 function getDetail() {
-  request.get<CusCardDetail>(`/business/store-customer-card/${id.value}`).then((res) => {
+  request.get<CusCardDetail>(`/customer/store-customer-card/${id.value}`).then((res) => {
     detail.value = res.data
     cardName.value = res.data.cardName || ''
     const s = dayjs(res.data.startTime).valueOf()
