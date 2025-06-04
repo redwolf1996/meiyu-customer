@@ -120,15 +120,6 @@ function getRecords() {
   paging.value?.reload()
 }
 
-function toEditName() {
-  visEditName.value = true
-}
-function toEditExpire() {
-  visEditExpire.value = true
-}
-async function toEditEquity() {
-  visEditEquity.value = true
-}
 async function confirmName() {
   await request.put('/business/store-customer-card/card-name', {
     id: id.value,
@@ -336,20 +327,6 @@ function toBilling() {
         </view>
         <view c-#818181 mt10px>
           购买时间：&nbsp;&nbsp;<text>{{ fdt(detail?.createTime) }}</text>
-        </view>
-      <!-- <view c-#818181>取消时间：<text>xxxxxxxx</text> </view> -->
-      </view>
-
-      <view class="menu" mt40px>
-        <view class="item" @click="toEditName()">
-          修改名称
-        </view>
-        <view class="item mid" @click="toEditExpire()">
-          修改有效期
-        </view>
-        <!-- 已使用则无法修改权益 v-if="!dataList.length" -->
-        <view v-if="!dataList.length" class="item" @click="toEditEquity()">
-          修改权益
         </view>
       </view>
     </view>

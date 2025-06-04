@@ -8,6 +8,7 @@ import type { PayRefundType } from '../billing/types'
 import type { Detail } from './types'
 import qs from 'qs'
 
+const toast = useToast()
 const id = ref(0)
 const detail = ref<Detail>(null)
 const PayTypesMap = ref<any>({
