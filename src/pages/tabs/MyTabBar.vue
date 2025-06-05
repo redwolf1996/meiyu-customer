@@ -27,18 +27,18 @@ function changeBar(index: number) {
   >
     <uv-tabbar-item text="预约">
       <template #active-icon>
-        <image class="icon" src="./icons/yuyue-red-act.png" />
-      </template>
-      <template #inactive-icon>
-        <image class="icon" src="./icons/yuyue-red.png" />
-      </template>
-    </uv-tabbar-item>
-    <uv-tabbar-item text="我的">
-      <template #active-icon>
         <image class="icon" src="./icons/wode-red-act.png" />
       </template>
       <template #inactive-icon>
         <image class="icon" src="./icons/wode-red.png" />
+      </template>
+    </uv-tabbar-item>
+    <uv-tabbar-item text="我的">
+      <template #active-icon>
+        <image class="icon" src="./icons/yuyue-red-act.png" />
+      </template>
+      <template #inactive-icon>
+        <image class="icon" src="./icons/yuyue-red.png" />
       </template>
     </uv-tabbar-item>
   </uv-tabbar>
