@@ -191,6 +191,7 @@ onShow(() => {
 
 // 选择卡项
 watch(() => curSelectedCardToCash.value, () => {
+  console.log('curSelectedCardToCash.value', curSelectedCardToCash.value)
   model.service.forEach((item: Partial<Service>, index: number) => {
     if (curIndex.value === index) {
       // 消费价格（有优惠价使用优惠价，没有则使用原价）
