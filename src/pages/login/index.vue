@@ -28,7 +28,7 @@ function toLogin() {
       <wd-img
         :width="72"
         :height="72"
-        :src="`${IMG_BASE}/logo.png`"
+        :src="`${IMG_BASE}/logo-red.png`"
       />
     </view>
     <view mt-80rpx>
