@@ -32,7 +32,10 @@ function toMyCards() {
 //   uni.navigateTo({ url: '/pages/my/points' })
 // }
 function toCallBusiness() {
-  uni.navigateTo({ url: '/pages/my/service' })
+  const number = '13263301397'
+  const telUrl = `tel:${number}`
+  window.location.href = telUrl
+  // uni.navigateTo({ url: '/pages/my/service' })
 }
 
 async function toQuit() {
