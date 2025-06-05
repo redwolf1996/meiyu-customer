@@ -464,7 +464,7 @@ function handleChangeGoodsCount(item: Partial<Service>) {
       <view mx-40rpx mt-64rpx color-white>
         <wd-button size="large" custom-class="theme-bg" block @click="save()">
           <view flex flex-cc>
-            <text>保存</text>
+            <text>提交</text>
           </view>
         </wd-button>
       </view>
