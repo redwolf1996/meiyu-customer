@@ -23,7 +23,16 @@ function toOrderDetail() {
 
 <template>
   <view p20px>
-    <view class="h40px" />
+    <view class="tc">
+      <wd-img
+        :width="120"
+        :height="120"
+        mode="aspectFit"
+        :src="`${IMG_BASE}/book-success.png`"
+        style="transform: translateX(10px)"
+      />
+    </view>
+    <view class="h20px" />
     <view tc fb fs-24px>
       预约成功
     </view>
