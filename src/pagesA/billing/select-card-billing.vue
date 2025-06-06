@@ -24,7 +24,6 @@ onLoad(async (option) => {
 
 function selectItem2(itm: any) {
   curSelectedCardToCash.value = itm
-  console.log('curSelectedCardToCash.value', curSelectedCardToCash.value)
   uni.navigateBack()
 }
 </script>

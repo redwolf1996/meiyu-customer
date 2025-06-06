@@ -6,7 +6,7 @@ style:
 
 <script lang="ts" setup>
 import { bookInfo } from '@/stores/book-info'
-import type { BookForm, CustomerDetail, ListStaff, Service } from './types'
+import type { ListStaff, Service } from './types'
 import qs from 'qs'
 import { useCustomerStore } from '@/stores/modules/customer'
 
@@ -82,10 +82,6 @@ function clickItem(item: ListStaff) {
   }
 }
 
-// function toAddServ() {
-//   uni.reLaunch({ url: '/pages/tabs/tab-home' })
-// }
-
 function toSelServTime() {
   if (!checkedServs.value.length) {
     return uni.showToast({
@@ -129,12 +125,7 @@ function toSelCard(item, index: number) {
   uni.navigateTo({ url: `/pagesA/billing/select-card-billing?${params}` })
 }
 
-// function delServ(index) {
-//   model.service.splice(index, 1)
-//   checkedServs.value.splice(index, 1)
-// }
-
-onShow(() => {
+function init() {
   model.service = checkedServs.value.map((v) => {
     return {
       storeServiceId: v.id,
@@ -160,34 +151,15 @@ onShow(() => {
       return func_mul(func_sub(cost, item.cardReduceAmount), item.goodsCount)
     })
   })
+}
+
+onLoad(() => {
+  init()
 })
 
-// watch(() => checkedServs.value, () => {
-//   model.service = checkedServs.value.map((v) => {
-//     return {
-//       storeServiceId: v.id,
-//       name: v.name,
-//       duration: v.duration,
-//       price: v.price,
-//       price2: v.price2,
-//       coverImg: v.coverImg,
-//       goodsCount: v?.goodsCount || 1, // 数量
-//       totalAmount: v?.totalAmount || 0, // 商品原价总价
-//       amount: v?.amount || 0, // 商品优惠后总价
-//       cardReduceAmount: v?.cardReduceAmount || 0, // 卡项优惠金额
-//       cardShowName: v?.cardShowName || '', // 卡项展示的名称 例如：洗发次卡 -1次
-//     }
-//   })
-//   model.service.forEach((item: Partial<Service>) => {
-//     const cost = item.price2 || item.price
-//     item.totalAmount = computed(() => {
-//       return func_mul(cost, item.goodsCount)
-//     })
-//     item.amount = computed(() => {
-//       return func_mul(func_sub(cost, item.cardReduceAmount), item.goodsCount)
-//     })
-//   })
-// })
+watch(() => checkedServs.value, () => {
+  init()
+})
 
 // 选择卡项
 watch(() => curSelectedCardToCash.value, () => {
@@ -320,19 +292,6 @@ function handleChangeGoodsCount(item: Partial<Service>) {
   </wd-popup>
   <wd-form :model="model">
     <wd-cell-group :border="true">
-      <!-- <wd-cell title="客户" required :is-link="!fromCustomer" @click="toSelCus()">
-        <view>
-          <text v-if="!curCustomer?.storeCustomerId" c-#B6BDBD>
-            请选择或添加
-          </text>
-          <text v-else>
-            {{ cusName }}
-          </text>
-        </view>
-        <template #icon>
-          <wd-icon name="user" size="16px" />
-        </template>
-      </wd-cell> -->
       <wd-picker
         v-model="model.storeServiceType"
         :rules="[{ required: true, message: '请选择服务方式' }]"
@@ -361,14 +320,6 @@ function handleChangeGoodsCount(item: Partial<Service>) {
     </wd-cell-group>
     <view v-if="checkedServs.length">
       <view v-for="(item, index) in model.service" :key="`serv-${index}`" flex flex-y gap10px>
-        <!-- <view flex flex-ac flex-bt f12 px20px py12px>
-          <view c-3D3D3D>
-            预约服务{{ index + 1 }}
-          </view>
-          <view c-FF5A5F @click="delServ(index)">
-            删除
-          </view>
-        </view> -->
         <MyCellGroup>
           <view flex flex-ac flex-bt>
             <view theme-color fs-14px fb>
@@ -378,7 +329,6 @@ function handleChangeGoodsCount(item: Partial<Service>) {
               <wd-input-number v-model="item.goodsCount" :min="1" @change="handleChangeGoodsCount(item)" />
             </view>
           </view>
-
           <view
             pt-20rpx
             flex flex-bt flex-ac
@@ -431,10 +381,6 @@ function handleChangeGoodsCount(item: Partial<Service>) {
         </MyCellGroup>
       </view>
     </view>
-    <!-- <view bg-white f14 c-FF5A5F tc pt10px pb20px style="border-top: 1px solid #EBEEF1;" @click="toAddServ()">
-      +&nbsp;添加服务
-    </view> -->
-
     <view class="h10px" />
     <view bg-white f14 tc>
       <wd-cell title="服务时间" required :is-link="true" @click="toSelServTime()">
@@ -449,7 +395,6 @@ function handleChangeGoodsCount(item: Partial<Service>) {
       </wd-cell>
     </view>
     <view class="h10px" />
-
     <view>
       <view px20px py12px font-size-14px>
         备注
