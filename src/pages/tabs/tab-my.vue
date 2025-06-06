@@ -39,7 +39,7 @@ function toCallBusiness() {
 }
 
 async function toQuit() {
-  await request.post(`/customer/current-store-id/0`)
+  // await request.post(`/customer/current-store-id/0`)
   useCustomerStore().clearCustomerInfo()
 
   // 修改重定向方式，使用完整的URL而不是相对路径
