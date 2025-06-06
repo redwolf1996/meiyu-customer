@@ -374,16 +374,6 @@ async function selectStore(store: any) {
 }
 
 function contactStore(store: any) {
-  // 联系门店
-  // uni.makePhoneCall({
-  //   phoneNumber: store.phone,
-  //   fail: () => {
-  //     uni.showToast({
-  //       title: '拨打电话失败',
-  //       icon: 'none',
-  //     })
-  //   },
-  // })
   window.location.href = `tel:${store.phone}`
 }
 </script>

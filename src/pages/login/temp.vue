@@ -34,6 +34,7 @@ onLoad(async () => {
   else {
     const res = await request.post<any>('/customer/wx-login', { code })
     customerStore.setCustomerInfo(res.data)
+    console.log(res.data)
 
     if (!res.data?.phone) {
       uni.reLaunch({ url: '/pages/login/info' })
