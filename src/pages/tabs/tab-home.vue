@@ -8,6 +8,7 @@ import type { AllItems, CatsItemsTree, ServiceList } from './types2'
 import { flatten } from 'lodash-es'
 import MyTabBar from './MyTabBar.vue'
 import { isNumber } from '@/utils'
+import { useCustomerStore } from '@/stores/modules/customer'
 
 const active = ref<number>(0)
 const scrollTop = ref<number>(0)
@@ -16,6 +17,9 @@ const tmpCheckedServs = ref<ServiceList[]>([])
 const checkedCount = computed(() => {
   return tmpCheckedServs.value.length
 })
+
+const customerStore = useCustomerStore()
+console.log(customerStore.customerInfo)
 
 onShow(async () => {
   const res = await request.get<AllItems>('/customer/store-goods-all')
