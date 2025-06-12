@@ -299,6 +299,7 @@ import MyNavBar from '@/components/MyNavBar.vue'
       padding: 0 24rpx !important;
       .wd-icon {
         color: #ff5a5f !important;
+        color: #ff5a5f !important;
         margin-right: 8rpx;
       }
     }
