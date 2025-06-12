@@ -378,6 +378,19 @@ function handleChangeGoodsCount(item: Partial<Service>) {
               </view>
             </view>
           </view>
+          <view
+            pt-20rpx
+            flex flex-bt flex-ac
+          >
+            <view c-848486 fs-12px>
+              <text>小计</text>
+            </view>
+            <view fs-12px flex flex-ac gap-6px style="max-width: 60%">
+              <text c-#FF1919>
+                ￥{{ item.amount }}
+              </text>
+            </view>
+          </view>
         </MyCellGroup>
       </view>
     </view>
