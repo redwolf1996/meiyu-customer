@@ -26,6 +26,7 @@ interface NavigateToOptions {
        "/pagesA/prod-servs" |
        "/pagesA/protocol" |
        "/pagesA/rich-edit" |
+       "/pagesA/billing/book-detail" |
        "/pagesA/billing/index" |
        "/pagesA/billing/pay-success" |
        "/pagesA/billing/pay" |

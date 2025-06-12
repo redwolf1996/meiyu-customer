@@ -182,6 +182,14 @@
           }
         },
         {
+          "path": "billing/book-detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "订单详情",
+            "navigationStyle": "custom"
+          }
+        },
+        {
           "path": "billing/index",
           "type": "page",
           "layout": false,
