@@ -1,10 +1,11 @@
 <route lang="yaml">
 style:
   navigationBarTitleText: 选择服务
+  navigationStyle: custom
 </route>
 
 <script lang="ts" setup>
-import type { AllItems, CatsItemsTree, ServiceList } from './types2'
+import type { AllItems, CatsItemsTree, ServiceList, StoreListJoin } from './types2'
 import { flatten } from 'lodash-es'
 import MyTabBar from './MyTabBar.vue'
 import { isNumber } from '@/utils'
@@ -17,8 +18,15 @@ const tmpCheckedServs = ref<ServiceList[]>([])
 const checkedCount = computed(() => {
   return tmpCheckedServs.value.length
 })
+const storeListJoin = ref<StoreListJoin[]>([])
+
+async function getStoreListJoin() {
+  const res = await request.get<ListRes<StoreListJoin>>('/customer/store-list-join')
+  storeListJoin.value = res.data.list
+}
 
 onShow(async () => {
+  await getStoreListJoin()
   const res = await request.get<AllItems>('/customer/store-goods-all')
   const serviceCats = res.data.serviceCategory!
   const services = res.data.serviceList
@@ -102,16 +110,18 @@ function confirm() {
 </script>
 
 <template>
-  <!-- <wd-navbar
+  <wd-navbar
     placeholder pr
     custom-class="custom-nav"
     :safeAreaInsetTop="true"
     :fixed="true"
   >
     <template #title>
-      <text>选择服务</text>
+      <text class="f14">
+        选择服务
+      </text>
     </template>
-  </wd-navbar> -->
+  </wd-navbar>
   <view class="wrapper">
     <wd-sidebar v-model="active" @change="handleChange">
       <wd-sidebar-item

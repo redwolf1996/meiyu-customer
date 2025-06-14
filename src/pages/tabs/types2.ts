@@ -688,3 +688,47 @@ export interface BookingData {
    */
   workWeek: number[]
 }
+
+export interface StoreListJoin {
+  /**
+   * 地址
+   */
+  address: string
+  /**
+   * 简介
+   */
+  desc: string
+  /**
+   * 门店id，storeId
+   */
+  id: number
+  /**
+   * 门店logo
+   */
+  logo: string
+  orgId: number
+  /**
+   * 联系方式
+   */
+  phone: string
+  /**
+   * 状态，1->营业中，2->停业；目前没有关店状态
+   */
+  status: number
+  /**
+   * 门店名称
+   */
+  storeName: string
+  /**
+   * 营业时间
+   */
+  workEtime: string
+  /**
+   * 营业时间
+   */
+  workStime: string
+  /**
+   * 营业时间
+   */
+  workWeek: number[] | null
+}

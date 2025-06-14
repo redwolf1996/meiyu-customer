@@ -115,7 +115,8 @@
       "path": "pages/tabs/tab-home",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "选择服务"
+        "navigationBarTitleText": "选择服务",
+        "navigationStyle": "custom"
       }
     },
     {
