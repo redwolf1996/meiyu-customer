@@ -94,7 +94,7 @@ import MyNavBar from '@/components/MyNavBar.vue'
         </view>
         <view class="contact-merchant">
           <wd-button custom-class="contact-btn">
-            <wd-icon name="phone" />
+            <wd-icon name="call" />
             联系商家
           </wd-button>
         </view>
@@ -349,7 +349,7 @@ import MyNavBar from '@/components/MyNavBar.vue'
   left: 0;
   right: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   gap: 24rpx;
   padding: 24rpx 32rpx;
   background-color: #fff;
@@ -366,7 +366,7 @@ import MyNavBar from '@/components/MyNavBar.vue'
   }
 
   :deep(.cancel-btn) {
-    border: 1rpx solid #e0e0e0 !important;
+    border: 1rpx solid #ddd !important;
     color: #333 !important;
     background-color: #fff !important;
   }
