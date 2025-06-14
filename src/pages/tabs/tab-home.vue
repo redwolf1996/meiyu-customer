@@ -18,7 +18,18 @@ const tmpCheckedServs = ref<ServiceList[]>([])
 const checkedCount = computed(() => {
   return tmpCheckedServs.value.length
 })
+const customerStore = useCustomerStore()
 const storeListJoin = ref<StoreListJoin[]>([])
+
+const columns = computed(() => {
+  return storeListJoin.value.map(v => ({
+    label: v.storeName,
+    value: v.id,
+  }))
+})
+
+const selectedStoreId = ref<number>(customerStore.customerInfo.lastStoreId)
+const selectedStoreName = ref<string>(customerStore.customerInfo.lastStoreName)
 
 async function getStoreListJoin() {
   const res = await request.get<ListRes<StoreListJoin>>('/customer/store-list-join')
@@ -26,7 +37,11 @@ async function getStoreListJoin() {
 }
 
 onShow(async () => {
-  await getStoreListJoin()
+  getStoreListJoin()
+  getPageInfo()
+})
+
+async function getPageInfo() {
   const res = await request.get<AllItems>('/customer/store-goods-all')
   const serviceCats = res.data.serviceCategory!
   const services = res.data.serviceList
@@ -50,7 +65,7 @@ onShow(async () => {
   })
 
   changeCheck(checkedServIds?.[0]) // 初始化tmpCheckedServs
-})
+}
 
 onMounted(() => {
   // 去掉uniapp左上角返回箭头
@@ -107,6 +122,13 @@ function confirm() {
     url: '/pages/servs/add',
   })
 }
+
+async function handleConfirm(e) {
+  const id = e.id
+  customerStoreId.value = id
+  await request.post(`/customer/current-store-id/${id}`) // 上报当前门店id
+  getPageInfo()
+}
 </script>
 
 <template>
@@ -116,12 +138,18 @@ function confirm() {
     :safeAreaInsetTop="true"
     :fixed="true"
   >
-    <template #title>
-      <text class="f14">
-        选择服务
-      </text>
+    <template #left>
+      <wd-select-picker v-model="selectedStoreId" type="radio" use-default-slot :columns="columns" @confirm="handleConfirm">
+        <view flex flex-ac gap6px>
+          <view class="f16 fb store-list">
+            {{ selectedStoreName }}
+          </view>
+          <wd-icon name="fill-arrow-down" size="22px" />
+        </view>
+      </wd-select-picker>
     </template>
   </wd-navbar>
+
   <view class="wrapper">
     <wd-sidebar v-model="active" @change="handleChange">
       <wd-sidebar-item
@@ -208,7 +236,10 @@ page {
 </style>
 
 <style lang='scss' scoped>
-  .wrapper {
+:deep(.wd-navbar__content) {
+  background-color: #fff !important;
+}
+.wrapper {
   display: flex;
   height: calc(100vh - 90px);
   overflow: hidden;
