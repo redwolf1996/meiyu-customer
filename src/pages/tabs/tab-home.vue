@@ -18,9 +18,6 @@ const checkedCount = computed(() => {
   return tmpCheckedServs.value.length
 })
 
-const customerStore = useCustomerStore()
-console.log(customerStore.customerInfo)
-
 onShow(async () => {
   const res = await request.get<AllItems>('/customer/store-goods-all')
   const serviceCats = res.data.serviceCategory!
