@@ -21,14 +21,14 @@ function handleSubmit() {
     .validate()
     .then(async ({ valid }) => {
       if (valid) {
-        await request.post<any>('/customer/info', form)
-        const originInfo = customerStore.customerInfo
-        customerStore.setCustomerInfo({
-          ...originInfo,
-          name: form.name,
-          phone: form.phone,
-        })
-        uni.redirectTo({ url: '/pages/login/temp' })
+        const res = await request.post<any>('/customer/info', form)
+        if (res.data.lastStoreId) {
+          customerStore.setCustomerInfo(res.data)
+          uni.reLaunch({ url: '/pages/tabs/tab-home' })
+        }
+        else {
+          uni.redirectTo({ url: '/pages/login/store-list' })
+        }
       }
     })
     .catch((error) => {
