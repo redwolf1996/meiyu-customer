@@ -21,7 +21,10 @@ const checkedCount = computed(() => {
 const customerStore = useCustomerStore()
 const storeListJoin = ref<StoreListJoin[]>([])
 
-const columns = computed(() => {
+const storeOptions = computed(() => {
+  if (!storeListJoin.value?.length) {
+    return []
+  }
   return storeListJoin.value.map(v => ({
     label: v.storeName,
     value: v.id,
@@ -123,9 +126,15 @@ function confirm() {
   })
 }
 
-async function handleConfirm(e) {
-  const id = e.id
+async function handleStoreChange() {
+  console.log('handleStoreChange', selectedStoreId.value)
+  const id = selectedStoreId.value
   customerStoreId.value = id
+  // 更新显示的门店名称
+  const selectedStore = storeListJoin.value.find(store => store.id === id)
+  if (selectedStore) {
+    selectedStoreName.value = selectedStore.storeName
+  }
   await request.post(`/customer/current-store-id/${id}`) // 上报当前门店id
   getPageInfo()
 }
@@ -139,14 +148,16 @@ async function handleConfirm(e) {
     :fixed="true"
   >
     <template #left>
-      <wd-select-picker v-model="selectedStoreId" type="radio" use-default-slot :columns="columns" @confirm="handleConfirm">
-        <view flex flex-ac gap6px>
-          <view class="f16 fb store-list">
-            {{ selectedStoreName }}
+      <wd-drop-menu custom-class="store-drop-menu">
+        <wd-drop-menu-item v-model="selectedStoreId" :options="storeOptions" @change="handleStoreChange">
+          <view flex flex-ac gap6px>
+            <view class="f16 fb store-list">
+              {{ selectedStoreName }}
+            </view>
+            <wd-icon name="fill-arrow-down" size="22px" />
           </view>
-          <wd-icon name="fill-arrow-down" size="22px" />
-        </view>
-      </wd-select-picker>
+        </wd-drop-menu-item>
+      </wd-drop-menu>
     </template>
   </wd-navbar>
 
@@ -236,8 +247,19 @@ page {
 </style>
 
 <style lang='scss' scoped>
+:deep(.wd-drop-menu__item-title) {
+  transform: translateX(-20px) !important;
+}
+:deep(.store-drop-menu) {
+  padding: 0 !important;
+  font-weight: bold !important;
+}
 :deep(.wd-navbar__content) {
   background-color: #fff !important;
+}
+:deep(.wd-drop-menu) {
+  height: auto;
+  line-height: normal;
 }
 .wrapper {
   display: flex;
