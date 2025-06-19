@@ -18,7 +18,7 @@ const httpInterceptor = {
     options.header = {
       ...options?.header,
       'envVersion': envVersion,
-      'C-Store-Id': customerStore.customerInfo?.lastStoreId || customerStoreId.value,
+      'C-Store-Id': customerStoreId.value,
     }
     const token = customerStore.customerInfo?.token
     if (token) {

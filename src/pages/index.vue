@@ -20,7 +20,7 @@ function toHome() {
 }
 
 function toLogin() {
-  uni.reLaunch({ url: '/pages/login/temp' })
+  uni.reLaunch({ url: '/pages/login/index' })
 }
 </script>
 

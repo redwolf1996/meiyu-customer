@@ -127,7 +127,6 @@ function confirm() {
 }
 
 async function handleStoreChange() {
-  console.log('handleStoreChange', selectedStoreId.value)
   const id = selectedStoreId.value
   customerStoreId.value = id
   // 更新显示的门店名称

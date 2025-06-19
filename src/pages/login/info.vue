@@ -23,6 +23,7 @@ function handleSubmit() {
       if (valid) {
         const res = await request.post<any>('/customer/info', form)
         if (res.data.lastStoreId) {
+          customerStoreId.value = res.data.lastStoreId
           customerStore.setCustomerInfo(res.data)
           uni.reLaunch({ url: '/pages/tabs/tab-home' })
         }
