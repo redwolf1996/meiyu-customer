@@ -226,7 +226,7 @@ function onBridgeReady(wxPay: any) {
       {{ fdt(bookInfo?.startTime) }}&nbsp;{{ bookInfo.storeServiceType === 1 ? '到店' : '上门' }}
     </view>
     <MyButton width="200rpx" @click="doSubmit()">
-      {{ totalToPayAmount ? '立即支付' : '提交预约' }}
+      {{ (totalToPayAmount || bookInfo.storeServiceType !== 1) ? '立即支付' : '提交预约' }}
     </MyButton>
   </view>
 </template>
