@@ -15,7 +15,12 @@ const baseUrl = import.meta.env.VITE_BASE_URL
 onLoad(async () => {
   // 登录过后本地有token的情况
   if (token.value) {
-    const res = await request.get('/customer/info')
+    const res = await request.get<any>('/customer/info')
+
+    if (!res.data?.phone) {
+      return uni.reLaunch({ url: '/pages/login/info' })
+    }
+
     customerStore.setCustomerInfo(res.data)
     customerStoreId.value = customerStore.customerInfo.lastStoreId
     return uni.reLaunch({ url: '/pages/tabs/tab-home' })
