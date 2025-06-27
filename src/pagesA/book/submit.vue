@@ -70,6 +70,11 @@ function onBridgeReady(wxPay: any) {
       toast.info('预约成功')
       uni.redirectTo({ url: `/pages/servs/order-success?orderId=${orderId.value}` })
     }
+    else { // 支付失败
+      uni.redirectTo({
+        url: `/pagesA/order/detail?id=${orderId.value}`,
+      })
+    }
   })
 }
 </script>

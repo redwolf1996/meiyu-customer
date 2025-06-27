@@ -13,6 +13,8 @@ const id = ref(0)
 const detail = ref<Detail>(null)
 const PayTypesMap = ref<any>({
 })
+const countdownTime = ref('') // 倒计时时间
+let timer: any = null // 倒计时定时器
 
 onLoad(async (option) => {
   request.get<PayRefundType>('/pay-type-conf').then((res) => {
@@ -25,9 +27,53 @@ onLoad(async (option) => {
   getDetail()
 })
 
+onUnload(() => {
+  // 页面卸载时清除定时器
+  if (timer) {
+    clearInterval(timer)
+  }
+})
+
 async function getDetail() {
   const res = await request.get<Detail>(`/customer/order/${id.value}`)
   detail.value = res.data
+
+  // 如果是待支付状态，启动倒计时
+  if (detail.value?.searchStatus === 101) {
+    startCountdown()
+  }
+}
+
+// 计算倒计时
+function startCountdown() {
+  if (timer)
+    clearInterval(timer)
+
+  // 计算剩余时间
+  const createTime = new Date(detail.value.createTime).getTime()
+  const expireTime = createTime + 30 * 60 * 1000 // 30分钟后过期
+
+  updateCountdown(expireTime)
+
+  timer = setInterval(() => {
+    updateCountdown(expireTime)
+  }, 1000)
+}
+
+function updateCountdown(expireTime: number) {
+  const now = new Date().getTime()
+  const diff = expireTime - now
+
+  if (diff <= 0) {
+    clearInterval(timer)
+    countdownTime.value = '00分00秒 系统将自动关闭订单'
+    return
+  }
+
+  const minutes = Math.floor(diff / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+  countdownTime.value = `${String(minutes).padStart(2, '0')}分${String(seconds).padStart(2, '0')}秒 系统将自动关闭订单`
 }
 
 function toRefundDetail() {
@@ -102,6 +148,12 @@ async function onBridgeReady(wxPay: any) {
           已取消
         </view>
       </view>
+
+      <!-- 添加倒计时提示 -->
+      <view v-if="detail?.searchStatus === 101 && countdownTime" class="countdown-tip">
+        <text>还剩 {{ countdownTime }}</text>
+      </view>
+
       <view class="h20px" />
       <view v-if="detail?.payStatus === 4">
         <MyCell label="退款金额" @myclick="toRefundDetail">
@@ -132,12 +184,6 @@ async function onBridgeReady(wxPay: any) {
           <view>订单备注</view>
           <view>{{ detail?.notes }}</view>
         </view>
-        <!-- TODO 剩余支付时间 -->
-        <!-- <view flex flex-ac flex-bt mt12px v-if="detail?.payStatus === 1">
-          <view c-FF5B05>
-            剩余支付时间: 12:23:12（用户端线上支付时再考虑）
-          </view>
-        </view> -->
       </view>
     </view>
     <view>
@@ -248,14 +294,24 @@ async function onBridgeReady(wxPay: any) {
   <view class="h20px" />
   <view v-if="detail?.payStatus === 1" flex flex-cc mt-16px px-60rpx gap10px>
     <button class="my-btn cancel" @click="calcel()">
-      取消
+      取消订单
     </button>
     <button class="my-btn theme" @click="toPay()">
-      支付
+      去支付
     </button>
   </view>
 
   <view class="h50px" />
 </template>
 
-<style lang='scss' scoped></style>
+<style lang='scss' scoped>
+.countdown-tip {
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #fce8e9;
+  color: #ff5a5f;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 4px;
+}
+</style>
