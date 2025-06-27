@@ -284,8 +284,9 @@ page {
   position: fixed;
   padding: 0 20px;
   width: 100%;
-  bottom: 72px;
+  bottom: calc(50px + var(--window-bottom));
   background-color: #fff;
+  box-sizing: border-box;
 }
 .this-tab {
   padding: 0 100rpx;
