@@ -200,7 +200,7 @@ async function save() {
   border-left: 1px solid #eaeaea;
   border-top: 1px solid #eaeaea;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(16, 43px);
+  grid-auto-rows: 43px;
   height: 300px;
   overflow-y: scroll;
   .item {
