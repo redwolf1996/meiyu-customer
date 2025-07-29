@@ -1,6 +1,6 @@
 <route lang="yaml">
 style:
-  navigationBarTitleText: 我的
+  navigationBarTitleText: 我的111
   navigationStyle: "custom"
 </route>
 

@@ -5,6 +5,9 @@ style:
 
 <script lang="ts" setup>
 import type { BookCount, BookListAll } from './types'
+import { useCustomerStore } from '@/stores/modules/customer'
+
+const customerStore = useCustomerStore()
 
 // 预约列表各状态数量
 const bookCountsAll = ref({
@@ -44,11 +47,8 @@ const dataList = ref<BookListAll[]>([])
 
 const reqParams = reactive({
   storeId: customerStoreId.value,
+  storeCustomerId: customerStore.customerInfo?.id,
   status: 1, // 1待服务，2服务中，3已完成，4已取消
-  artisanId: null, // 手艺人id
-  sDate: null, // 服务开始日期
-  eDate: null, // 服务开始日期
-  keyword: '', // 关键字
   pageNum: 1,
   pageSize: 10,
 })
@@ -80,6 +80,7 @@ onShow(() => {
 async function getBookCount(cDate?: string) {
   if (cDate) {
     const res = await request.get<BookCount>('/customer/booking-count', {
+      storeCustomerId: customerStore.customerInfo?.id,
       storeId: customerStoreId.value,
       cDate,
     })
@@ -92,6 +93,7 @@ async function getBookCount(cDate?: string) {
 
 async function getCountsAll() {
   const res = await request.get<BookCount>('/customer/booking-count', {
+    storeCustomerId: customerStore.customerInfo?.id,
     storeId: customerStoreId.value,
   })
   bookCountsAll.value = res.data

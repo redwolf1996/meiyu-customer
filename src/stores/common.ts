@@ -103,4 +103,5 @@ export const payTypesStore = ref<PayRefundType['payType']>([])
 /** 退款方式列表 */
 export const refundTypesStore = ref<PayRefundType['refundType']>([])
 
+/** 当前选中的门店id */
 export const customerStoreId = ref<number>(null)
