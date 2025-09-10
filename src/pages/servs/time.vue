@@ -94,11 +94,38 @@ async function init() {
   }
   disabledIndexedFront.shift()
 
+  // 计算当前时间之前的时间格子索引（只在选择今天时生效）
+  let currentTimeDisabledIndexes: number[] = []
+  if (day.value === today) {
+    const now = new Date()
+    const currentHours = now.getHours()
+    const currentMinutes = now.getMinutes()
+    const currentTimeString = `${String(currentHours).padStart(2, '0')}:${String(Math.floor(currentMinutes / 15) * 15).padStart(2, '0')}`
+
+    // 如果当前分钟数不是15的倍数，说明当前时间段已经开始，应该禁用
+    const shouldDisableCurrentSlot = currentMinutes % 15 !== 0
+
+    // 找到当前时间对应的时间格子索引
+    let currentTimeIndex = times.value.findIndex(t => t.value >= currentTimeString)
+
+    // 如果当前时间段已经开始，那么这个时间段也应该被禁用
+    if (shouldDisableCurrentSlot && currentTimeIndex >= 0) {
+      currentTimeIndex++
+    }
+
+    // 当前时间之前的所有格子都应该禁用
+    if (currentTimeIndex > 0) {
+      currentTimeDisabledIndexes = Array.from({ length: currentTimeIndex }, (_, index) => index)
+    }
+  }
+
   times.value = times.value.map((v, i) => {
     return {
       selected: v.selected,
       // disabled: !workWeeks.value.includes(curWeek.value) || (i > lastSelectableIndex || disabledIndexedFront?.includes(i))
-      disabled: !workWeeks.value.includes(curWeek.value) || (i > lastSelectableIndex)
+      disabled: !workWeeks.value.includes(curWeek.value)
+      || (i > lastSelectableIndex)
+      || currentTimeDisabledIndexes.includes(i)
         ? true
         : (!!employIndexes.includes(i)),
       value: v.value,
