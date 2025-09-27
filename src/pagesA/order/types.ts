@@ -81,6 +81,10 @@ export interface Detail {
   searchStatus?: number
   adviserId: number
   /**
+   * 支付方式，1到店付，0在线付款
+   */
+  payIsToStore: number
+  /**
    * 销售
    */
   adviserName: number

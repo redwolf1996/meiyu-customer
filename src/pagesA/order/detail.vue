@@ -37,9 +37,8 @@ onUnload(() => {
 async function getDetail() {
   const res = await request.get<Detail>(`/customer/order/${id.value}`)
   detail.value = res.data
-
   // 如果是待支付状态，启动倒计时
-  if (detail.value?.searchStatus === 101) {
+  if (detail.value?.searchStatus === 101 && detail.value?.payIsToStore === 0) {
     startCountdown()
   }
 }
@@ -150,7 +149,7 @@ async function onBridgeReady(wxPay: any) {
       </view>
 
       <!-- 添加倒计时提示 -->
-      <view v-if="detail?.searchStatus === 101 && countdownTime" class="countdown-tip">
+      <view v-if="detail?.searchStatus === 101 && countdownTime && detail?.payIsToStore === 0" class="countdown-tip">
         <text>还剩 {{ countdownTime }}</text>
       </view>
 
