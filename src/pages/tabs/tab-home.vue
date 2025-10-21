@@ -180,7 +180,7 @@ async function handleStoreChange() {
         :scroll-top="scrollTop"
         :throttle="false"
       >
-        <view p12px>
+        <view p12px pb140px>
           <view v-for="(itm, idx) in item.items" :key="`itm-${idx}`" flex flex-ac flex-bt pb14px mb14px style="border-bottom: 1px solid #EBEEF1">
             <view flex gap12px>
               <wd-img
