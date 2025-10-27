@@ -51,6 +51,26 @@ export function http<T>(options: UniApp.RequestOptions) {
             })
             if ([20001, 20002, 20005, 10002].includes(data.code)) { // 需要重新登录的错误码
               setTimeout(() => {
+                // 获取当前页面路径，用于登录后跳转回来
+                const pages = getCurrentPages()
+                const currentPage = pages[pages.length - 1]
+                if (currentPage) {
+                  const route = currentPage.route
+                  const options = (currentPage as any).options || {}
+                  // 构造完整的页面路径（包含参数）
+                  let fullPath = `/${route}`
+                  const queryString = Object.keys(options)
+                    .map(key => `${key}=${options[key]}`)
+                    .join('&')
+                  if (queryString) {
+                    fullPath += `?${queryString}`
+                  }
+                  // 保存重定向路径，但排除登录相关页面
+                  if (!fullPath.includes('/pages/login/') && !fullPath.includes('/pagesA/login/')) {
+                    customerStore.setRedirectPath(fullPath)
+                  }
+                }
+
                 customerStore.clearCustomerInfo()
                 uni.navigateTo({ url: '/pages/login/index' })
               }, 1000)

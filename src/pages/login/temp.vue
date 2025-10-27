@@ -23,6 +23,14 @@ onLoad(async () => {
 
     customerStore.setCustomerInfo(res.data)
     customerStoreId.value = customerStore.customerInfo.lastStoreId
+
+    // 如果有保存的重定向路径，跳转回原页面
+    const redirectPath = customerStore.redirectPath
+    if (redirectPath) {
+      customerStore.clearRedirectPath() // 清除保存的路径
+      return uni.reLaunch({ url: redirectPath })
+    }
+
     return uni.reLaunch({ url: '/pages/tabs/tab-home' })
   }
 
@@ -44,7 +52,13 @@ onLoad(async () => {
       uni.reLaunch({ url: '/pages/login/info' })
     }
     else {
-      if (!res.data?.lastStoreId) {
+      // 如果有保存的重定向路径，优先跳转回原页面
+      const redirectPath = customerStore.redirectPath
+      if (redirectPath) {
+        customerStore.clearRedirectPath() // 清除保存的路径
+        uni.reLaunch({ url: redirectPath })
+      }
+      else if (!res.data?.lastStoreId) {
         uni.reLaunch({ url: '/pages/login/store-list' })
       }
       else {

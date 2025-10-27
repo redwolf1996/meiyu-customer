@@ -6,6 +6,9 @@ export const useCustomerStore = defineStore(
     const customerInfo = ref<any>({
     })
 
+    // 保存重新登录前的页面路径，用于登录后跳转回原页面
+    const redirectPath = ref<string>('')
+
     function setCustomerInfo(val: any) {
       customerInfo.value = val
     }
@@ -13,10 +16,21 @@ export const useCustomerStore = defineStore(
       customerInfo.value = {}
     }
 
+    function setRedirectPath(path: string) {
+      redirectPath.value = path
+    }
+
+    function clearRedirectPath() {
+      redirectPath.value = ''
+    }
+
     return {
       customerInfo,
+      redirectPath,
       setCustomerInfo,
       clearCustomerInfo,
+      setRedirectPath,
+      clearRedirectPath,
     }
   },
   {
