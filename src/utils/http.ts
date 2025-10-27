@@ -43,17 +43,18 @@ export function http<T>(options: UniApp.RequestOptions) {
         const statusCode = res.statusCode
         if (statusCode >= 200 && statusCode < 300) {
           const data = res.data as Data<T>
-          if (data.code === 20001) {
-            customerStore.clearCustomerInfo()
-            uni.navigateTo({ url: '/pages/login/index' })
-            return reject(res)
-          }
-          else if (data.code !== 200) {
+          if (data.code !== 200) {
             uni.showToast({
               icon: 'none',
               title: data.code === 500 ? '服务端错误' : (res.data as Data<T>).msg,
               duration: 2000,
             })
+            if ([20001, 20002, 20005, 10002].includes(data.code)) { // 需要重新登录的错误码
+              setTimeout(() => {
+                customerStore.clearCustomerInfo()
+                uni.navigateTo({ url: '/pages/login/index' })
+              }, 1000)
+            }
             return reject(res)
           }
           resolve(data)
