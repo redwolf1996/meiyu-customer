@@ -18,8 +18,10 @@ async function queryList(page: number, pageSize: number) {
   reqParams.pageNum = page
   reqParams.pageSize = pageSize
   const res = await request.get<ListRes<List>>('/customer/card', reqParams)
-  total.value = res.data.total
-  paging.value.complete(res.data.list)
+  // 过滤掉待支付(isValid=2)和已取消(isValid=3)的卡
+  const filteredList = res.data.list.filter(item => item.isValid !== 2 && item.isValid !== 3)
+  total.value = filteredList.length
+  paging.value.complete(filteredList)
 }
 
 function toDetail(id: number) {

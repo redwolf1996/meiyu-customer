@@ -166,7 +166,7 @@ function delEquity(item: CardEquity) {
 
 function toBilling() {
   resetGoods()
-  uni.navigateTo({ url: `/pagesA/billing/index?customerId=${detail.value.storeCustomerId}` })
+  uni.navigateTo({ url: `/pages/tabs/tab-home` })
 }
 </script>
 
