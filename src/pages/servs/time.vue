@@ -60,74 +60,43 @@ async function init() {
 
   setTotalDuration()
 
-  const newIndexes = groupSortedConsecutive(employIndexes)
-  const endTimeIndexes = newIndexes?.map(v => v?.[0]) // 结束时间点集合（每一段disabled的时间点的起始时间）
-
-  // 网格最后计算的disabled时间点index(从当前时间开始加上服务时长，如果超过结束时间，则该时间点包括以后的时间点都不可选)
-  let lastSelectableIndex = 0
-  // 从当前时间开始加上服务时长，如果超过结束时间，则该时间点包括以后的时间点都不可选
-  for (let i = 0; i < times.value.length; i++) {
-    if (isTimeExceeding(times.value[i].value, workEtime.value, duration.value)) {
-      lastSelectableIndex = i
-      break
-    }
-  }
-
-  const endTimes = []
-  for (let i = 0; i < times.value.length; i++) {
-    if (endTimeIndexes.includes(i)) {
-      endTimes.push(times.value[i].value)
-    }
-  }
-
-  // 预约时间点之前的计算disabled时间点index(从当前时间开始加上服务时长，如果超过结束时间，则该时间点包括以后的时间点都不可选)
-  const disabledIndexedFront = []
-  for (let i0 = 0; i0 < times.value.length; i0++) {
-    for (let i = 0; i < endTimes.length; i++) {
-      if (isTimeExceeding(times.value[i0].value, endTimes[i], duration.value, 2)) {
-        const disSindex = i0
-        const disEindex = endTimeIndexes[i]
-        const arr = generateArray(disSindex, disEindex)
-        disabledIndexedFront.push(...arr)
-      }
-    }
-  }
-  disabledIndexedFront.shift()
-
   // 计算当前时间之前的时间格子索引（只在选择今天时生效）
   let currentTimeDisabledIndexes: number[] = []
   if (day.value === today) {
     const now = new Date()
     const currentHours = now.getHours()
     const currentMinutes = now.getMinutes()
-    const currentTimeString = `${String(currentHours).padStart(2, '0')}:${String(Math.floor(currentMinutes / 15) * 15).padStart(2, '0')}`
 
-    // 如果当前分钟数不是15的倍数，说明当前时间段已经开始，应该禁用
-    const shouldDisableCurrentSlot = currentMinutes % 15 !== 0
+    // 计算当前时间所在的时间段（向上取整到下一个15分钟）
+    // 例如：8:24 -> 应该禁用到 8:30 之前（即 8:15 及之前可禁用，8:30 开始可选）
+    const nextSlotMinutes = Math.ceil(currentMinutes / 15) * 15
+    let nextSlotHours = currentHours
+    let finalMinutes = nextSlotMinutes
 
-    // 找到当前时间对应的时间格子索引
-    let currentTimeIndex = times.value.findIndex(t => t.value >= currentTimeString)
-
-    // 如果当前时间段已经开始，那么这个时间段也应该被禁用
-    if (shouldDisableCurrentSlot && currentTimeIndex >= 0) {
-      currentTimeIndex++
+    // 如果分钟数达到60，则进入下一个小时
+    if (nextSlotMinutes >= 60) {
+      nextSlotHours = currentHours + 1
+      finalMinutes = 0
     }
 
-    // 当前时间之前的所有格子都应该禁用
-    if (currentTimeIndex > 0) {
-      currentTimeDisabledIndexes = Array.from({ length: currentTimeIndex }, (_, index) => index)
+    const nextAvailableTimeString = `${String(nextSlotHours).padStart(2, '0')}:${String(finalMinutes).padStart(2, '0')}`
+
+    // 找到第一个可用的时间格子索引（大于等于 nextAvailableTimeString）
+    const firstAvailableIndex = times.value.findIndex(t => t.value >= nextAvailableTimeString)
+
+    // 将这个索引之前的所有格子都禁用
+    if (firstAvailableIndex > 0) {
+      currentTimeDisabledIndexes = Array.from({ length: firstAvailableIndex }, (_, index) => index)
     }
   }
 
   times.value = times.value.map((v, i) => {
     return {
       selected: v.selected,
-      // disabled: !workWeeks.value.includes(curWeek.value) || (i > lastSelectableIndex || disabledIndexedFront?.includes(i))
+      // 禁用逻辑：1. 不在营业周 2. 当前时间之前（仅今天） 3. 已被占用的时间
       disabled: !workWeeks.value.includes(curWeek.value)
-      || (i > lastSelectableIndex)
       || currentTimeDisabledIndexes.includes(i)
-        ? true
-        : (!!employIndexes.includes(i)),
+      || employIndexes.includes(i),
       value: v.value,
     }
   })
