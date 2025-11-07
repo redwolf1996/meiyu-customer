@@ -23,10 +23,6 @@ const orderId = ref(0)
 
 // 外层的payType代表预约支付方式，内层的payType代表服务支付方式（1在线支付 2到店支付）
 bookInfo.value.payType = 3 // 默认微信支付
-// 如果服务列表中存在卡项优惠
-if (bookInfo.value.service.some(v => v.cardReduceAmount)) {
-  bookInfo.value.payType = 6 // 充值卡支付
-}
 
 if (bookInfo.value.service[0].payType === 2) { // 1在线支付 2到店支付
   bookInfo.value.payType = 0 // 上门服务，稍后付款
@@ -35,9 +31,27 @@ if (bookInfo.value.service[0].payType === 2) { // 1在线支付 2到店支付
 // 商品优惠金额合计
 // const discountAmount = func_sub(totalOriAmount, totalToPayAmount)
 
+onLoad(() => {
+  getUserValueCardsInfo()
+})
+
+const valueCards = ref<any[]>([])
+async function getUserValueCardsInfo() {
+  const res = await request.get<any>('/customer/store-customer-value-card')
+  // 可用充值卡赋值（充值卡类型，且金额小于等于用户可用充值卡金额 ）
+  valueCards.value = res.data.filter(v => (v.cardType === 2 && totalToPayAmount <= v.totalAmount))
+}
+
 // 提交预约
 async function doSubmit() {
   bookInfo.value.amount = totalToPayAmount
+
+  // 如果有可用充值卡，则跳转到充值卡支付页面, 不管该服务是在线支付还是到店支付
+  if (valueCards.value.length > 0) {
+    bookInfo.value.payType = 6 // 充值卡支付
+    return uni.navigateTo({ url: '/pagesA/book/card-pay' })
+  }
+
   const res = await request.post<any>('/customer/booking', { ...bookInfo.value })
   orderId.value = res.data.orderId
 

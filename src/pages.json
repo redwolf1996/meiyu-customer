@@ -228,6 +228,10 @@
           }
         },
         {
+          "path": "book/card-pay",
+          "type": "page"
+        },
+        {
           "path": "book/detail",
           "type": "page",
           "style": {

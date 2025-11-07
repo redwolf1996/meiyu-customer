@@ -32,6 +32,7 @@ interface NavigateToOptions {
        "/pagesA/billing/pay" |
        "/pagesA/billing/select-card-billing" |
        "/pagesA/book/add" |
+       "/pagesA/book/card-pay" |
        "/pagesA/book/detail" |
        "/pagesA/book/servs" |
        "/pagesA/book/submit" |
