@@ -164,6 +164,12 @@ watch(() => checkedServs.value, () => {
       cardReduceAmount: v?.cardReduceAmount || 0, // 卡项优惠金额
       cardShowName: v?.cardShowName || '', // 卡项展示的名称 例如：洗发次卡 -1次
       payType: v?.payType, // 支付方式 1 在线支付 2 到店支付
+      customerCardId: v?.customerCardId, // 客户卡项id
+      cardId: v?.cardId, // 卡项id
+      cardType: v?.cardType, // 卡类别 1->次卡，2->充值卡，3->折扣卡
+      cardSecondType: v?.cardSecondType, // 卡二级分类
+      cardName: v?.cardName, // 卡项名称
+      equity: v?.equity, // 可用次数
     }
   })
   model.service.forEach((item: Partial<Service>) => {
@@ -221,6 +227,18 @@ watch(() => curSelectedCardToCash.value, () => {
         }
         return func_mul(func_sub(cost, item.cardReduceAmount), item.goodsCount)
       })
+
+      // 同步卡项信息到 checkedServs，确保数据一致性
+      if (checkedServs.value[index]) {
+        checkedServs.value[index].customerCardId = item.customerCardId
+        checkedServs.value[index].cardId = item.cardId
+        checkedServs.value[index].equity = item.equity
+        checkedServs.value[index].cardSecondType = item.cardSecondType
+        checkedServs.value[index].cardName = item.cardName
+        checkedServs.value[index].cardType = item.cardType
+        checkedServs.value[index].cardReduceAmount = item.cardReduceAmount
+        checkedServs.value[index].cardShowName = item.cardShowName
+      }
     }
   })
 })
@@ -264,6 +282,11 @@ function handleChangeGoodsCount(item: Partial<Service>) {
   checkedServs.value.forEach((v) => {
     if (v.id === item.storeServiceId) {
       v.goodsCount = item.goodsCount
+      // 同步卡项扣减信息
+      if (item.cardName) {
+        v.cardReduceAmount = item.cardReduceAmount
+        v.cardShowName = item.cardShowName
+      }
     }
   })
 }
