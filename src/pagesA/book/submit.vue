@@ -35,11 +35,10 @@ onLoad(() => {
   getUserValueCardsInfo()
 })
 
-const valueCards = ref<any[]>([])
 async function getUserValueCardsInfo() {
   const res = await request.get<any>('/customer/store-customer-value-card')
   // 可用充值卡赋值（充值卡类型，且金额小于等于用户可用充值卡金额 ）
-  valueCards.value = res.data.filter(v => (v.cardType === 2 && totalToPayAmount <= v.totalAmount))
+  cashCardsStore.value = res.data.filter(v => (v.cardType === 2 && totalToPayAmount <= v.totalAmount))
 }
 
 // 提交预约
@@ -47,7 +46,7 @@ async function doSubmit() {
   bookInfo.value.amount = totalToPayAmount
 
   // 如果有可用充值卡，则跳转到充值卡支付页面, 不管该服务是在线支付还是到店支付
-  if (valueCards.value.length > 0) {
+  if (cashCardsStore.value.length > 0) {
     bookInfo.value.payType = 6 // 充值卡支付
     return uni.navigateTo({ url: '/pagesA/book/card-pay' })
   }

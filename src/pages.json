@@ -229,7 +229,10 @@
         },
         {
           "path": "book/card-pay",
-          "type": "page"
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "会员充值卡支付"
+          }
         },
         {
           "path": "book/detail",

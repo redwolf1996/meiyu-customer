@@ -1,4 +1,4 @@
-import type { Service } from '@/pagesA/book/types'
+import type { CashCard, Service } from '@/pagesA/book/types'
 
 interface BookTempInfo {
   /**
@@ -66,3 +66,6 @@ export const bookInfo = ref<Partial<BookTempInfo>>({
   service: [],
   amount: 0,
 })
+
+// 当前用户可用充值卡
+export const cashCardsStore = ref<CashCard[]>([])
