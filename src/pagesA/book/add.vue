@@ -42,6 +42,7 @@ const artName = ref('')
 const listStaff = ref<ListStaff[]>([])
 const visibleStaff = ref(false)
 const fromCustomer = ref(false)
+// oxlint-disable-next-line no-constant-binary-expression
 const cusName = computed(() => `${curCustomer.value?.name} ${curCustomer.value?.phone}` || '')
 
 watch(
@@ -204,10 +205,12 @@ watch(() => curSelectedCardToCash.value, () => {
         else { // 通卡和有限次卡
           item.cardReduceAmount = item.goodsCount <= item.equity ? item.goodsCount : item.equity
         }
+        // oxlint-disable-next-line no-useless-escape
         item.cardShowName = `${item.cardName}\u00A0\u00A0\u00A0\u00A0\-${item.cardReduceAmount}次`
       }
       else { // 折扣卡、充值卡(当折扣卡使用)
         item.cardReduceAmount = func_mul(cost, func_sub(1, func_div(curSelectedCardToCash.value?.equity, 10)))
+        // oxlint-disable-next-line no-useless-escape
         item.cardShowName = `${item.cardName}\u00A0\u00A0\u00A0\u00A0\-￥${item.cardReduceAmount}`
       }
 
@@ -255,9 +258,11 @@ function handleChangeGoodsCount(item: Partial<Service>) {
         item.cardReduceAmount = item.goodsCount <= item.equity ? item.goodsCount : item.equity
       }
 
+      // oxlint-disable-next-line no-useless-escape
       item.cardShowName = `${item.cardName}\u00A0\u00A0\u00A0\u00A0\-${item.cardReduceAmount}次`
     }
     else {
+      // oxlint-disable-next-line no-useless-escape
       item.cardShowName = `${item.cardName}\u00A0\u00A0\u00A0\u00A0\-￥${item.cardReduceAmount}`
     }
 

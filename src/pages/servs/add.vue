@@ -13,18 +13,32 @@ import { useCustomerStore } from '@/stores/modules/customer'
 const customerStore = useCustomerStore()
 const customerStoreId = computed(() => customerStore.customerInfo?.lastStoreId)
 const curIndex = ref(0) // 预约服务列表当前选择项的索引
-const columns = ref<SelItem[]>([
-  {
-    label: '到店',
-    value: 1,
-  },
-  {
-    label: '上门',
-    value: 2,
-  },
-])
+
+// 根据选中的服务动态生成服务方式选项
+const columns = computed<SelItem[]>(() => {
+  const result: SelItem[] = []
+  if (checkedServs.value.length > 0) {
+    const firstServ = checkedServs.value[0]
+    // 如果支持到店服务
+    if (firstServ.isToStore === 1) {
+      result.push({
+        label: '到店',
+        value: 1,
+      })
+    }
+    // 如果支持上门服务
+    if (firstServ.isToDoor === 1) {
+      result.push({
+        label: '上门',
+        value: 2,
+      })
+    }
+  }
+  return result
+})
+
 const model = reactive<any>({
-  storeServiceType: 1,
+  storeServiceType: computed(() => columns.value.length > 0 ? columns.value[0].value : 1),
   customerAddress: null,
   startTime: computed(() => `${bookStime.value}:00`),
   artisanId: null,
@@ -47,14 +61,9 @@ watch(
 )
 
 onLoad(async () => {
+  console.log('checkedServs', checkedServs.value)
   getStaff()
-  recordStoreJoin()
 })
-
-// 进入店铺记录一条记录
-function recordStoreJoin() {
-  request.post(`/customer/store-join/${customerStoreId.value}`)
-}
 
 async function getStaff() {
   // jobCode 职务,1店长，2手艺人，3销售
