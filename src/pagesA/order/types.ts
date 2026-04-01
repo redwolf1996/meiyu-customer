@@ -163,6 +163,10 @@ export interface Detail {
    */
   storeCustomerId: number
   storeId: number
+  /**
+   * 核销码
+   */
+  redeemCode?: string
 }
 
 export interface RefundDetail {
