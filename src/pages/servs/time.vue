@@ -84,8 +84,12 @@ async function init() {
     // 找到第一个可用的时间格子索引（大于等于 nextAvailableTimeString）
     const firstAvailableIndex = times.value.findIndex(t => t.value >= nextAvailableTimeString)
 
-    // 将这个索引之前的所有格子都禁用
-    if (firstAvailableIndex > 0) {
+    // disable all slots before firstAvailableIndex
+    // if firstAvailableIndex === -1 (current time beyond all slots), disable ALL slots
+    if (firstAvailableIndex === -1) {
+      currentTimeDisabledIndexes = Array.from({ length: times.value.length }, (_, index) => index)
+    }
+    else if (firstAvailableIndex > 0) {
       currentTimeDisabledIndexes = Array.from({ length: firstAvailableIndex }, (_, index) => index)
     }
   }
