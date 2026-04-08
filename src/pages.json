@@ -150,6 +150,7 @@
       ]
     }
   },
+  "__esModule": true,
   "subPackages": [
     {
       "root": "pagesA",
