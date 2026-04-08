@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "uni",
     "build": "uni build",
+    "build:staging": "uni build --mode staging",
     "dev-weixin": "uni -p mp-weixin",
     "dev-tools": "uni -p mp-weixin --devtools",
     "build-weixin": "uni build -p mp-weixin",
