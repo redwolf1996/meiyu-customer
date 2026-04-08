@@ -15,6 +15,7 @@ const PayTypesMap = ref<any>({
 })
 const countdownTime = ref('') // 倒计时时间
 let timer: any = null // 倒计时定时器
+const showQrcode = ref(false) // 控制二维码弹窗显示
 
 onLoad(async (option) => {
   request.get<PayRefundType>('/pay-type-conf').then((res) => {
@@ -196,7 +197,7 @@ async function onBridgeReady(wxPay: any) {
               {{ detail?.redeemCode?.replace(/(\d{4})(?=\d)/g, '$1 ') }}
             </view>
           </view>
-          <ikun-qrcode width="100" height="100" unit="rpx" :data="detail?.redeemCode" />
+          <ikun-qrcode width="100" height="100" unit="rpx" :data="detail?.redeemCode" @click="showQrcode = true" />
         </view>
       </view>
     </view>
@@ -316,6 +317,22 @@ async function onBridgeReady(wxPay: any) {
   </view>
 
   <view class="h50px" />
+
+  <!-- 二维码放大弹窗 -->
+  <view v-if="showQrcode" class="qrcode-modal" @click="showQrcode = false">
+    <view class="qrcode-modal-content" @click.stop>
+      <view class="qrcode-modal-title">
+        核销码
+      </view>
+      <view class="qrcode-modal-code">
+        {{ detail?.redeemCode?.replace(/(\d{4})(?=\d)/g, '$1 ') }}
+      </view>
+      <ikun-qrcode width="300" height="300" unit="rpx" :data="detail?.redeemCode" />
+      <view class="qrcode-modal-tip">
+        点击空白处关闭
+      </view>
+    </view>
+  </view>
 </template>
 
 <style lang='scss' scoped>
@@ -327,5 +344,47 @@ async function onBridgeReady(wxPay: any) {
   font-size: 12px;
   text-align: center;
   border-radius: 4px;
+}
+
+.qrcode-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.qrcode-modal-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qrcode-modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.qrcode-modal-code {
+  font-size: 20px;
+  color: #333;
+  letter-spacing: 2px;
+  margin-bottom: 30rpx;
+}
+
+.qrcode-modal-tip {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20rpx;
 }
 </style>
