@@ -187,7 +187,7 @@ async function onBridgeReady(wxPay: any) {
       </view>
 
       <!-- 核销码 -->
-      <view v-if="detail?.redeemCode" mt20px>
+      <view v-if="detail?.redeemStatus === 1" mt20px>
         <view style="border-top: 1px solid #eee; padding-top: 20px;gap: 50px;" flex flex-ac>
           <view>
             <view f16 c-434343>
@@ -198,6 +198,15 @@ async function onBridgeReady(wxPay: any) {
             </view>
           </view>
           <ikun-qrcode width="100" height="100" unit="rpx" :data="detail?.redeemCode" @click="showQrcode = true" />
+        </view>
+      </view>
+
+      <view v-else style="border-top: 1px solid #eee; padding-top: 20px;">
+        <view f16 c-434343>
+          已核销 {{ fdt(detail?.redeemTime) }}
+        </view>
+        <view line-through f20 c-333 mt8px>
+          {{ detail?.redeemCode?.replace(/(\d{4})(?=\d)/g, '$1 ') }}
         </view>
       </view>
     </view>

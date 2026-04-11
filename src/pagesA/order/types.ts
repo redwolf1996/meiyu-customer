@@ -167,6 +167,14 @@ export interface Detail {
    * 核销码
    */
   redeemCode?: string
+  /**
+   * 核销状态，1待核销，2已核销
+   */
+  redeemStatus?: number
+  /**
+   * 核销时间
+   */
+  redeemTime?: string
 }
 
 export interface RefundDetail {
