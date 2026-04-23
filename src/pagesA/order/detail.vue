@@ -186,8 +186,8 @@ async function onBridgeReady(wxPay: any) {
         </view>
       </view>
 
-      <!-- 核销码 -->
-      <view v-if="detail?.redeemStatus === 1" mt20px>
+      <!-- 核销码: 已支付并且待核销状态才显示 -->
+      <view v-if="detail?.redeemStatus === 1 && detail?.payStatus === 2" mt20px>
         <view style="border-top: 1px solid #eee; padding-top: 20px;gap: 50px;" flex flex-ac>
           <view>
             <view f16 c-434343>
@@ -201,7 +201,7 @@ async function onBridgeReady(wxPay: any) {
         </view>
       </view>
 
-      <view v-else style="border-top: 1px solid #eee; padding-top: 20px;">
+      <view v-if="detail?.redeemStatus === 2" style="border-top: 1px solid #eee; padding-top: 20px;">
         <view f16 c-434343>
           已核销 {{ fdt(detail?.redeemTime) }}
         </view>
